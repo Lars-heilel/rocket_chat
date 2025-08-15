@@ -3,22 +3,22 @@ import { FRONTEND_PATHS } from "@/shared/constants/all-path";
 import { Link } from "react-router";
 import { BaseAuthForm } from "../ui/elements/base-auth-form";
 import { useLogin } from "../hooks/useLogin";
-import { loginFormFields } from "../model/const/form-fields-config";
-export function LoginForm({
+import { registerFormFields } from "../model/const/form-fields-config";
+export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { form, onSubmit } = useLogin();
   return (
     <AuthCard
-      title="Sign in to your account"
-      errorTitle="Login error occurred"
+      title="Sign up new account"
+      errorTitle="Register error occurred"
       className={className}
       footerContent={
         <>
-          <span>Need an account?</span>
-          <Link className="hover:underline" to={FRONTEND_PATHS.REGISTER}>
-            {"Register"}
+          <span>Return to login?</span>
+          <Link className="hover:underline" to={FRONTEND_PATHS.LOGIN}>
+            {"Login"}
           </Link>
         </>
       }
@@ -27,8 +27,8 @@ export function LoginForm({
       <BaseAuthForm
         form={form}
         onSubmit={onSubmit}
-        fields={loginFormFields}
-        btnTitle="Login"
+        fields={registerFormFields}
+        btnTitle="Sign up"
       ></BaseAuthForm>
     </AuthCard>
   );
