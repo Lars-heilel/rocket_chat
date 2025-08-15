@@ -1,9 +1,11 @@
-import type { JSX } from "react";
-import { FRONTEND_PATHS, FRONTEND_PROTECTED_PATH } from "./all-path";
-
-interface IRouter {
+import { LoginForm } from "@/feature/auth/components/login-form";
+import { FRONTEND_PATHS } from "@/shared/constants/all-path";
+import type { ComponentType } from "react";
+interface AppRoute {
   path: string;
-  component: JSX.Element;
+  component: ComponentType;
 }
-export const publicRoutes = [];
-export const privateRoutes = [];
+
+export const publicRoutes: AppRoute[] = [
+  { path: FRONTEND_PATHS.LOGIN, component: LoginForm },
+];
