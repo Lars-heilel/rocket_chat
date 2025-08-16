@@ -1,5 +1,6 @@
+import { FRONTEND_PATHS } from "@/app/router/all-path";
 import { AuthCard } from "../ui/elements/auth-card";
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
+
 import { Link } from "react-router";
 export function ConfirmEmailPage({
   className,

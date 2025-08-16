@@ -1,6 +1,13 @@
 import { Link } from "react-router";
-import type { FormFieldProps } from "../types/formField.type";
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
+
+export interface FormFieldProps {
+  name: "email" | "password" | "confirmPassword" | "userName";
+  label: string;
+  placeholder: "example@mail.com" | "*******";
+  type: React.HTMLInputTypeAttribute;
+  formLabelChildren?: React.ReactNode;
+}
 
 const loginFormFields: FormFieldProps[] = [
   {

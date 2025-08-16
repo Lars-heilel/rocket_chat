@@ -1,4 +1,4 @@
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
 import { Link } from "react-router";
 import { Button } from "./button";
 

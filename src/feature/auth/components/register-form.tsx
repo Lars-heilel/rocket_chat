@@ -1,14 +1,27 @@
 import { AuthCard } from "../ui/elements/auth-card";
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
 import { Link } from "react-router";
 import { BaseAuthForm } from "../ui/elements/base-auth-form";
-import { useLogin } from "../hooks/useLogin";
+
 import { registerFormFields } from "../model/const/form-fields-config";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
+import { useCreateForms } from "@/shared/hooks/useCreateForms";
+import { registerSchema } from "../model/schemas/register.schema";
+import { useLogin } from "../model/hooks/useLogin";
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { form, onSubmit } = useLogin();
+  const { onSubmit } = useLogin();
+  const form = useCreateForms({
+    schema: registerSchema,
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      userName: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
   return (
     <AuthCard
       title="Sign up new account"

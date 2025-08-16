@@ -7,7 +7,7 @@ export const FRONTEND_PATHS = {
   RESEND_CONFIRMATION: "/resend-confirmation",
 };
 export const FRONTEND_PROTECTED_PATH = {
-  TEST: "/test",
+  MESSENGER: "/messenger",
 };
 
 // backend paths

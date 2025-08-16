@@ -1,13 +1,7 @@
 import * as React from "react";
-import { User, Bell, Users, UserPlus } from "lucide-react";
+import { User, Users, UserPlus } from "lucide-react";
 import { SearchForm } from "@/feature/messenger/ui/elements/search-form";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuItem,
-} from "@components/sidebar";
+import { Sidebar, SidebarContent, SidebarHeader } from "@components/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/avatar";
 import { Button } from "@components/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/tabs";

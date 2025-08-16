@@ -1,14 +1,21 @@
 import { AuthCard } from "../ui/elements/auth-card";
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
 import { Link } from "react-router";
 import { BaseAuthForm } from "../ui/elements/base-auth-form";
-import { useLogin } from "../hooks/useLogin";
 import { resendConfirmationEmailFormFields } from "../model/const/form-fields-config";
+import { useLogin } from "../model/hooks/useLogin";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
+import { resendConfirmationSchema } from "../model/schemas/resendConfirmation.schema";
+import { useCreateForms } from "@/shared/hooks/useCreateForms";
 export function ResendConfirmEmailForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { form, onSubmit } = useLogin();
+  const { onSubmit } = useLogin();
+  const form = useCreateForms({
+    schema: resendConfirmationSchema,
+    mode: "onChange",
+    defaultValues: { email: "" },
+  });
   return (
     <AuthCard
       title="Resend confirmation email"

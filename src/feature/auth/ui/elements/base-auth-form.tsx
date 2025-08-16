@@ -9,10 +9,11 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import type { UseFormReturn } from "react-hook-form";
-import type { FormFieldProps } from "../../model/types/formField.type";
+import type { FormFieldProps } from "../../model/const/form-fields-config";
 
 interface BaseAuthFormProps {
-  form: UseFormReturn<any>;
+  form: UseFormReturn;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (values: any) => void;
   btnTitle: string;
   fields: FormFieldProps[];

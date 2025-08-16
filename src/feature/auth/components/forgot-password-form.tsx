@@ -1,14 +1,22 @@
 import { AuthCard } from "../ui/elements/auth-card";
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
 import { Link } from "react-router";
 import { BaseAuthForm } from "../ui/elements/base-auth-form";
-import { useLogin } from "../hooks/useLogin";
 import { forgotPasswordFormFields } from "../model/const/form-fields-config";
+import { useLogin } from "../model/hooks/useLogin";
+import { useCreateForms } from "@/shared/hooks/useCreateForms";
+import { forgotPasswordSchema } from "../model/schemas/forgotPassword.schema";
+
 export function ForgotPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { form, onSubmit } = useLogin();
+  const { onSubmit } = useLogin();
+  const form = useCreateForms({
+    schema: forgotPasswordSchema,
+    mode: "onChange",
+    defaultValues: { email: "" },
+  });
   return (
     <AuthCard
       title="Password recovery request"

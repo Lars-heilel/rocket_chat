@@ -1,14 +1,21 @@
 import { AuthCard } from "../ui/elements/auth-card";
-import { FRONTEND_PATHS } from "@/shared/constants/all-path";
 import { Link } from "react-router";
 import { BaseAuthForm } from "../ui/elements/base-auth-form";
-import { useLogin } from "../hooks/useLogin";
 import { resetPasswordFormFields } from "../model/const/form-fields-config";
+import { useLogin } from "../model/hooks/useLogin";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
+import { resetPasswordSchema } from "../model/schemas/resetPassword.schema";
+import { useCreateForms } from "@/shared/hooks/useCreateForms";
 export function ResetPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { form, onSubmit } = useLogin();
+  const { onSubmit } = useLogin();
+  const form = useCreateForms({
+    schema: resetPasswordSchema,
+    mode: "onChange",
+    defaultValues: { password: "", confirmPassword: "" },
+  });
   return (
     <AuthCard
       title="Enter new password"
