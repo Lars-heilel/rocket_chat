@@ -1,6 +1,9 @@
-import type {LoginFormData, LoginResponse,} from "@/feature/auth/schemas/loginFromSchema";
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {AUTH_PATH} from "@/app/router/all-path";
+import type {
+  LoginFormData,
+  LoginResponse,
+} from "@/feature/auth/schemas/loginFromSchema";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { AUTH_PATH } from "@/app/router/all-path";
 
 export const apiService = createApi({
   reducerPath: "apiService",

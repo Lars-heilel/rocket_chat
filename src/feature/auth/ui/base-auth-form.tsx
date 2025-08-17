@@ -1,22 +1,28 @@
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/shared/components/ui/form";
-import {Input} from "@/shared/components/ui/input";
-import {Button} from "@/shared/components/ui/button";
-import type {UseFormReturn} from "react-hook-form";
-import type {FormFieldProps} from "../const/form-fields-config";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/shared/components/ui/form";
+import { Input } from "@/shared/components/ui/input";
+import { Button } from "@/shared/components/ui/button";
+import type { FieldValues, UseFormReturn } from "react-hook-form";
+import type { FormFieldProps } from "../config/form-fields-config";
 
-interface BaseAuthFormProps {
-  form: UseFormReturn;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSubmit: (values: any) => void;
+interface BaseAuthFormProps<T extends FieldValues> {
+  form: UseFormReturn<T>;
+  onSubmit: (values: T) => void;
   btnTitle: string;
-  fields: FormFieldProps[];
+  fields: FormFieldProps<T>[];
 }
-export function BaseAuthForm({
+export function BaseAuthForm<T extends FieldValues>({
   form,
   onSubmit,
   btnTitle,
   fields,
-}: BaseAuthFormProps) {
+}: BaseAuthFormProps<T>) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

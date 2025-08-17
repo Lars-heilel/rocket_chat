@@ -1,6 +1,12 @@
-import {Card, CardContent, CardFooter, CardHeader, CardTitle,} from "@/shared/components/ui/card";
-import {AuthApiError} from "./elements/authApiError";
-import {cn} from "@/shared/lib/utils";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import { cn } from "@/shared/lib/utils";
+import { AuthApiError } from "./authApiError";
 
 interface AuthCardProps extends React.ComponentProps<"div"> {
   title: string;

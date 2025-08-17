@@ -1,11 +1,11 @@
-import {AuthCard} from "../ui/auth-card";
-import {FRONTEND_PATHS} from "@/app/router/all-path";
-import {Link} from "react-router";
-import {BaseAuthForm} from "../ui/base-auth-form";
-import {forgotPasswordFormFields} from "../const/form-fields-config";
-import {useLogin} from "../hooks/useLogin";
-import {useCreateForms} from "@/shared/hooks/useCreateForms";
-import {forgotPasswordSchema} from "../schemas/forgotPassword.schema";
+import { AuthCard } from "../ui/auth-card";
+import { FRONTEND_PATHS } from "@/app/router/all-path";
+import { Link } from "react-router";
+import { BaseAuthForm } from "../ui/base-auth-form";
+import { forgotPasswordFormFields } from "../config/form-fields-config";
+import { useLogin } from "../hooks/useLogin";
+import { useCreateForms } from "@/shared/hooks/useCreateForms";
+import { forgotPasswordSchema } from "../schemas/forgotPassword.schema";
 
 export function ForgotPasswordForm({
   className,

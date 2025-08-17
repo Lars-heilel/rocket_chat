@@ -1,6 +1,6 @@
-import {AppSidebar} from "@/feature/messenger/components/app-sidebar";
-import {SidebarProvider} from "@components/sidebar";
-import {ChatWindow} from "../../components/chat";
+import { AppSidebar } from "@/feature/messenger/components/app-sidebar";
+import { ChatWindow } from "@/feature/messenger/components/chat";
+import { SidebarProvider } from "@components/sidebar";
 
 export default function MessengerLayout() {
   return (
