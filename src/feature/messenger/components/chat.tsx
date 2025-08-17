@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@components/avatar";
-import { Button } from "@components/button";
-import { Input } from "@components/input";
-import { Paperclip, SendHorizonal } from "lucide-react";
-import { ScrollArea } from "@components/scroll-area";
-import { SidebarTrigger } from "@/shared/components/ui/sidebar";
+import {Avatar, AvatarFallback, AvatarImage} from "@components/avatar";
+import {Button} from "@components/button";
+import {Input} from "@components/input";
+import {Paperclip, SendHorizonal} from "lucide-react";
+import {ScrollArea} from "@components/scroll-area";
+import {SidebarTrigger} from "@/shared/components/ui/sidebar";
 
 const messages = [
   {

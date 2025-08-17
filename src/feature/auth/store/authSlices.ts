@@ -1,5 +1,5 @@
-import type { User } from "@/shared/lib/zod/schemas/userSchema";
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type {User} from "@/shared/lib/zod/schemas/userSchema";
+import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
 
 interface AuthSliceI {
   user: User | null;

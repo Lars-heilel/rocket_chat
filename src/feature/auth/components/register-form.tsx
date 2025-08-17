@@ -1,12 +1,13 @@
-import { AuthCard } from "../ui/elements/auth-card";
-import { Link } from "react-router";
-import { BaseAuthForm } from "../ui/elements/base-auth-form";
+import {AuthCard} from "../ui/auth-card";
+import {Link} from "react-router";
+import {BaseAuthForm} from "../ui/base-auth-form";
 
-import { registerFormFields } from "../model/const/form-fields-config";
-import { FRONTEND_PATHS } from "@/app/router/all-path";
-import { useCreateForms } from "@/shared/hooks/useCreateForms";
-import { registerSchema } from "../model/schemas/register.schema";
-import { useLogin } from "../model/hooks/useLogin";
+import {registerFormFields} from "../const/form-fields-config";
+import {FRONTEND_PATHS} from "@/app/router/all-path";
+import {useCreateForms} from "@/shared/hooks/useCreateForms";
+import {registerSchema} from "../schemas/register.schema";
+import {useLogin} from "../hooks/useLogin";
+
 export function RegisterForm({
   className,
   ...props

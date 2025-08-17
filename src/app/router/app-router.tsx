@@ -1,14 +1,14 @@
-import { Route, Routes } from "react-router";
-import { privateRoutes, publicRoutes } from "./routes";
-import { AuthLayout } from "../../feature/auth/ui/layout/authLayout";
-import { LoginForm } from "@/feature/auth/components/login-form";
-import { NotFoundPage } from "@/shared/components/ui/notFoundPage";
+import {Route, Routes} from "react-router";
+import {privateRoutes, publicRoutes} from "./routes";
+import {AuthLayout} from "../layouts/authLayout";
+import {NotFoundPage} from "@/shared/components/ui/notFoundPage";
+import {LoginPage} from "@/pages/auth/loginPage";
 
 export function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<AuthLayout />}>
-        <Route index element={<LoginForm />} />
+        <Route index element={<LoginPage />} />
         {publicRoutes.map((route) => (
           <Route
             key={route.path}

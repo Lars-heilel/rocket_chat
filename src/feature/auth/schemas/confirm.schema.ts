@@ -1,6 +1,6 @@
 import z from "zod";
-import { TokenZodSchema } from "./reusedSchemas";
-import { UserSchema } from "@/shared/lib/zod/schemas/userSchema";
+import {TokenZodSchema} from "./reusedSchemas";
+import {UserSchema} from "@/shared/lib/zod/schemas/userSchema";
 
 export const ConfirmEmailResponseSchema = z.object({
   token: TokenZodSchema,

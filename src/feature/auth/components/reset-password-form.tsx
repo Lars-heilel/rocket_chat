@@ -1,11 +1,12 @@
-import { AuthCard } from "../ui/elements/auth-card";
-import { Link } from "react-router";
-import { BaseAuthForm } from "../ui/elements/base-auth-form";
-import { resetPasswordFormFields } from "../model/const/form-fields-config";
-import { useLogin } from "../model/hooks/useLogin";
-import { FRONTEND_PATHS } from "@/app/router/all-path";
-import { resetPasswordSchema } from "../model/schemas/resetPassword.schema";
-import { useCreateForms } from "@/shared/hooks/useCreateForms";
+import {AuthCard} from "../ui/auth-card";
+import {Link} from "react-router";
+import {BaseAuthForm} from "../ui/base-auth-form";
+import {resetPasswordFormFields} from "../const/form-fields-config";
+import {useLogin} from "../hooks/useLogin";
+import {FRONTEND_PATHS} from "@/app/router/all-path";
+import {resetPasswordSchema} from "../schemas/resetPassword.schema";
+import {useCreateForms} from "@/shared/hooks/useCreateForms";
+
 export function ResetPasswordForm({
   className,
   ...props

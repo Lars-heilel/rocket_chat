@@ -1,8 +1,5 @@
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/shared/components/ui/alert";
+import {Alert, AlertDescription, AlertTitle,} from "@/shared/components/ui/alert";
+
 interface AuthApiErrorProps {
   title: string;
   description: string;

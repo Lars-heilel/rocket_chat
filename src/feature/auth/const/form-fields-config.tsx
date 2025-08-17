@@ -1,5 +1,5 @@
-import { Link } from "react-router";
-import { FRONTEND_PATHS } from "@/app/router/all-path";
+import {Link} from "react-router";
+import {FRONTEND_PATHS} from "@/app/router/all-path";
 
 export interface FormFieldProps {
   name: "email" | "password" | "confirmPassword" | "userName";

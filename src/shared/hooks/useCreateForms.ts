@@ -1,6 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type Mode, type UseFormReturn } from "react-hook-form";
-import type { ZodObject } from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {type Mode, useForm, type UseFormReturn} from "react-hook-form";
+import type {ZodObject} from "zod";
 
 interface IUseFormConfig {
   schema: ZodObject;

@@ -1,5 +1,6 @@
 import z from "zod";
-import { PasswordRegex } from "../const/regex-const";
+import {PasswordRegex} from "../const/regex-const";
+
 const EmailZodSchema = z.email("Invalid email");
 const PasswordZodSchema = z
   .string()

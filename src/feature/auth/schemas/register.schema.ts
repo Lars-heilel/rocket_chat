@@ -1,9 +1,5 @@
-import { z } from "zod";
-import {
-  EmailZodSchema,
-  NameZodSchema,
-  PasswordZodSchema,
-} from "./reusedSchemas";
+import {z} from "zod";
+import {EmailZodSchema, NameZodSchema, PasswordZodSchema,} from "./reusedSchemas";
 
 export const registerSchema = z
   .object({

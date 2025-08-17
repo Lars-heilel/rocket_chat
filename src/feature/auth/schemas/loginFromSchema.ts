@@ -1,6 +1,6 @@
 import z from "zod";
-import { EmailZodSchema, TokenZodSchema } from "./reusedSchemas";
-import { UserSchema } from "@/shared/lib/zod/schemas/userSchema";
+import {EmailZodSchema, TokenZodSchema} from "./reusedSchemas";
+import {UserSchema} from "@/shared/lib/zod/schemas/userSchema";
 
 export const LoginSchema = z.object({
   email: EmailZodSchema,

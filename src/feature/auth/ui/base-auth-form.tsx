@@ -1,15 +1,8 @@
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
-import { Button } from "@/shared/components/ui/button";
-import type { UseFormReturn } from "react-hook-form";
-import type { FormFieldProps } from "../../model/const/form-fields-config";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/shared/components/ui/form";
+import {Input} from "@/shared/components/ui/input";
+import {Button} from "@/shared/components/ui/button";
+import type {UseFormReturn} from "react-hook-form";
+import type {FormFieldProps} from "../const/form-fields-config";
 
 interface BaseAuthFormProps {
   form: UseFormReturn;

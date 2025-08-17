@@ -1,9 +1,9 @@
-import { AuthCard } from "../ui/elements/auth-card";
-import { Link } from "react-router";
-import { BaseAuthForm } from "../ui/elements/base-auth-form";
-import { FRONTEND_PATHS } from "@/app/router/all-path";
-import { loginFormFields } from "../model/const/form-fields-config";
-import { useLogin } from "../model/hooks/useLogin";
+import {AuthCard} from "../ui/auth-card";
+import {Link} from "react-router";
+import {BaseAuthForm} from "../ui/base-auth-form";
+import {FRONTEND_PATHS} from "@/app/router/all-path";
+import {loginFormFields} from "../const/form-fields-config";
+import {useLogin} from "../hooks/useLogin";
 
 export function LoginForm({
   className,

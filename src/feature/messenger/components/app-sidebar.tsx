@@ -1,12 +1,12 @@
 import * as React from "react";
-import { User, Users, UserPlus } from "lucide-react";
-import { SearchForm } from "@/feature/messenger/ui/elements/search-form";
-import { Sidebar, SidebarContent, SidebarHeader } from "@components/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "@components/avatar";
-import { Button } from "@components/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/tabs";
-import { ScrollArea } from "@components/scroll-area";
-import { Link } from "react-router";
+import {User, UserPlus, Users} from "lucide-react";
+import {SearchForm} from "@/feature/messenger/ui/elements/search-form";
+import {Sidebar, SidebarContent, SidebarHeader} from "@components/sidebar";
+import {Avatar, AvatarFallback, AvatarImage} from "@components/avatar";
+import {Button} from "@components/button";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@components/tabs";
+import {ScrollArea} from "@components/scroll-area";
+import {Link} from "react-router";
 
 // Моковые данные для примера
 const friends = [

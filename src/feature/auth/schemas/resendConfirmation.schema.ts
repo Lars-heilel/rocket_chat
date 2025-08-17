@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { EmailZodSchema } from "./reusedSchemas";
+import {z} from "zod";
+import {EmailZodSchema} from "./reusedSchemas";
 
 export const resendConfirmationSchema = z.object({
   email: EmailZodSchema,

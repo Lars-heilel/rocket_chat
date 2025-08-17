@@ -1,6 +1,6 @@
-import { FRONTEND_PATHS } from "@/app/router/all-path";
-import { Link } from "react-router";
-import { Button } from "./button";
+import {FRONTEND_PATHS} from "@/app/router/all-path";
+import {Link} from "react-router";
+import {Button} from "./button";
 
 export function NotFoundPage() {
   return (
