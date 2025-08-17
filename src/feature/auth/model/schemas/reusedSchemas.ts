@@ -6,5 +6,5 @@ const PasswordZodSchema = z
   .min(PasswordRegex.MIN_LENGTH, "Minimum 8 characters")
   .regex(PasswordRegex.REGEX, PasswordRegex.MESSAGE);
 const NameZodSchema = z.string().min(2, "Name must be at least two characters");
-const TokenZodSchema = z.string().jwt();
+const TokenZodSchema = z.jwt();
 export { EmailZodSchema, PasswordZodSchema, NameZodSchema, TokenZodSchema };

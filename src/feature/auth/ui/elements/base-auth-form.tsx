@@ -29,6 +29,7 @@ export function BaseAuthForm({
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {fields.map((fieldsConfig) => (
           <FormField
+            key={fieldsConfig.name}
             control={form.control}
             name={fieldsConfig.name}
             render={({ field }) => (
