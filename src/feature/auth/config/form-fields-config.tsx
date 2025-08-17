@@ -57,7 +57,7 @@ const registerFormFields: FormFieldProps<RegisterFormData>[] = [
   },
   {
     name: "confirmPassword",
-    label: "ConfirmPassword",
+    label: "Confirm Password",
     placeholder: "*******",
     type: "password",
   },
@@ -71,7 +71,7 @@ const resetPasswordFormFields: FormFieldProps<ResetPasswordFormData>[] = [
   },
   {
     name: "confirmPassword",
-    label: "ConfirmPassword",
+    label: "Confirm Password",
     placeholder: "*******",
     type: "password",
   },

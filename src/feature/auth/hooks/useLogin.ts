@@ -1,11 +1,15 @@
-import {type LoginFormData, LoginResponseSchema, LoginSchema,} from "../schemas/loginFromSchema";
-import {useLoginMutation} from "@/shared/api/api-service";
-import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router";
-import {setCredentials} from "../store/authSlices";
-import {FRONTEND_PROTECTED_PATH} from "@/app/router/all-path";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
+import {
+  type LoginFormData,
+  LoginResponseSchema,
+  LoginSchema,
+} from "../schemas/loginFromSchema";
+import { useLoginMutation } from "@/shared/api/api-service";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { setCredentials } from "../store/authSlices";
+import { FRONTEND_PROTECTED_PATH } from "@/app/router/all-path";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 export function useLogin() {
   const form = useForm<LoginFormData>({
@@ -16,7 +20,7 @@ export function useLogin() {
       password: "",
     },
   });
-  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
+  const [login, { error, isError, isLoading, isSuccess }] = useLoginMutation();
   const nav = useNavigate();
   const dispatch = useDispatch();
   async function onSubmit(data: LoginFormData) {
@@ -35,5 +39,5 @@ export function useLogin() {
       }
     }
   }
-  return { form, isError, isLoading, isSuccess, onSubmit };
+  return { form, isError, isLoading, isSuccess, onSubmit, error };
 }

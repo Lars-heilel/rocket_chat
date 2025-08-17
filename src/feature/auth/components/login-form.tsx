@@ -9,12 +9,12 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { form, onSubmit } = useLogin();
+  const { form, onSubmit, error } = useLogin();
 
   return (
     <AuthCard
       title="Sign in to your account"
-      errorTitle="Login error occurred"
+      errorTitle={error}
       className={className}
       footerContent={
         <>
