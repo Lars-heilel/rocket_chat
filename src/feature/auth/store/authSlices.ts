@@ -1,31 +1,25 @@
-import type {User} from "@/shared/lib/zod/schemas/userSchema";
-import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthSliceI {
-  user: User | null;
   token: string | null;
+  isAuth: boolean;
 }
 const initialState: AuthSliceI = {
-  user: null,
-  token: localStorage.getItem("token") || null,
+  token: null,
+  isAuth: false,
 };
 const authSlice = createSlice({
   name: "Auth",
   initialState,
   reducers: {
-    setCredentials: (
-      state,
-      action: PayloadAction<{ user: User; token: string }>
-    ) => {
-      const { user, token } = action.payload;
-      state.user = user;
+    setCredentials: (state, action: PayloadAction<{ token: string }>) => {
+      const { token } = action.payload;
       state.token = token;
-      localStorage.setItem("token", token);
+      state.isAuth = true;
     },
     logOut: (state) => {
       state.token = null;
-      state.user = null;
-      localStorage.removeItem("token");
+      state.isAuth = false;
     },
   },
 });

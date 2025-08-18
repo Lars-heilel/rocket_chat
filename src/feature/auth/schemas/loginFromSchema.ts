@@ -1,6 +1,5 @@
 import z from "zod";
-import {EmailZodSchema, TokenZodSchema} from "./reusedSchemas";
-import {UserSchema} from "@/shared/lib/zod/schemas/userSchema";
+import { EmailZodSchema, TokenZodSchema } from "./reusedSchemas";
 
 export const LoginSchema = z.object({
   email: EmailZodSchema,
@@ -11,7 +10,6 @@ export type LoginFormData = z.infer<typeof LoginSchema>;
 
 export const LoginResponseSchema = z.object({
   token: TokenZodSchema,
-  user: UserSchema,
 });
 
 export type LoginResponse = z.infer<typeof LoginResponseSchema>;

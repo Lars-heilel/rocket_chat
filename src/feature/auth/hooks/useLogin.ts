@@ -20,7 +20,7 @@ export function useLogin() {
       password: "",
     },
   });
-  const [login, { error, isError, isLoading, isSuccess }] = useLoginMutation();
+  const [login, { isError, isLoading, isSuccess }] = useLoginMutation();
   const nav = useNavigate();
   const dispatch = useDispatch();
   async function onSubmit(data: LoginFormData) {
@@ -39,5 +39,5 @@ export function useLogin() {
       }
     }
   }
-  return { form, isError, isLoading, isSuccess, onSubmit, error };
+  return { form, isError, isLoading, isSuccess, onSubmit };
 }
