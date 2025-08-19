@@ -1,22 +1,12 @@
-import { AuthCard } from "../ui/auth-card";
-import { Link } from "react-router";
-import { BaseAuthForm } from "../ui/base-auth-form";
-import { resetPasswordFormFields } from "../config/form-fields-config";
-import { useLogin } from "../hooks/useLogin";
-import { FRONTEND_PATHS } from "@/app/router/all-path";
-import { resetPasswordSchema } from "../schemas/resetPassword.schema";
-import { useCreateForms } from "@/shared/hooks/useCreateForms";
+import { AuthCard } from '../ui/auth-card';
+import { Link } from 'react-router';
+import { BaseAuthForm } from '../ui/base-auth-form';
+import { resetPasswordFormFields } from '../config/form-fields-config';
+import { FRONTEND_PATHS } from '@/app/router/all-path';
+import { useResetPassword } from '../hooks/useResetPassword';
 
-export function ResetPasswordForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const { onSubmit } = useLogin();
-  const form = useCreateForms({
-    schema: resetPasswordSchema,
-    mode: "onChange",
-    defaultValues: { password: "", confirmPassword: "" },
-  });
+export function ResetPasswordForm({ className, ...props }: React.ComponentProps<'div'>) {
+  const { form, onSubmit, isSuccess, resMessage } = useResetPassword();
   return (
     <AuthCard
       title="Enter new password"
@@ -26,18 +16,22 @@ export function ResetPasswordForm({
         <>
           <span>Return to login?</span>
           <Link className="hover:underline" to={FRONTEND_PATHS.LOGIN}>
-            {"Sign in"}
+            {'Sign in'}
           </Link>
         </>
       }
       {...props}
     >
-      <BaseAuthForm
-        form={form}
-        onSubmit={onSubmit}
-        fields={resetPasswordFormFields}
-        btnTitle="Reset"
-      ></BaseAuthForm>
+      {isSuccess ? (
+        <div className="text-3xl">{resMessage}</div>
+      ) : (
+        <BaseAuthForm
+          form={form}
+          onSubmit={onSubmit}
+          fields={resetPasswordFormFields}
+          btnTitle="Reset"
+        ></BaseAuthForm>
+      )}
     </AuthCard>
   );
 }

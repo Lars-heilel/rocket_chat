@@ -1,10 +1,6 @@
-import {z} from "zod";
-import {EmailZodSchema} from "./reusedSchemas";
-
+import { z } from 'zod';
 export const resendConfirmationSchema = z.object({
-  email: EmailZodSchema,
+  email: z.email('example@email.com'),
 });
 
-export type ResendConfirmationFormData = z.infer<
-  typeof resendConfirmationSchema
->;
+export type ResendConfirmationFormData = z.infer<typeof resendConfirmationSchema>;

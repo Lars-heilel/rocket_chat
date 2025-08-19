@@ -1,22 +1,12 @@
-import { AuthCard } from "../ui/auth-card";
-import { Link } from "react-router";
-import { BaseAuthForm } from "../ui/base-auth-form";
-import { resendConfirmationEmailFormFields } from "../config/form-fields-config";
-import { useLogin } from "../hooks/useLogin";
-import { FRONTEND_PATHS } from "@/app/router/all-path";
-import { resendConfirmationSchema } from "../schemas/resendConfirmation.schema";
-import { useCreateForms } from "@/shared/hooks/useCreateForms";
+import { AuthCard } from '../ui/auth-card';
+import { Link } from 'react-router';
+import { BaseAuthForm } from '../ui/base-auth-form';
+import { resendConfirmationEmailFormFields } from '../config/form-fields-config';
+import { FRONTEND_PATHS } from '@/app/router/all-path';
+import useResendConfirmEmail from '../hooks/useResendConfirmEmail';
 
-export function ResendConfirmEmailForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  const { onSubmit } = useLogin();
-  const form = useCreateForms({
-    schema: resendConfirmationSchema,
-    mode: "onChange",
-    defaultValues: { email: "" },
-  });
+export function ResendConfirmEmailForm({ className, ...props }: React.ComponentProps<'div'>) {
+  const { onSubmit, form, isSuccess, resMessage } = useResendConfirmEmail();
   return (
     <AuthCard
       title="Resend confirmation email"
@@ -26,18 +16,22 @@ export function ResendConfirmEmailForm({
         <>
           <span>Return to login?</span>
           <Link className="hover:underline" to={FRONTEND_PATHS.LOGIN}>
-            {"Sign in"}
+            {'Sign in'}
           </Link>
         </>
       }
       {...props}
     >
-      <BaseAuthForm
-        form={form}
-        onSubmit={onSubmit}
-        fields={resendConfirmationEmailFormFields}
-        btnTitle="Resend"
-      ></BaseAuthForm>
+      {isSuccess ? (
+        <div className="text-3xl">{resMessage}</div>
+      ) : (
+        <BaseAuthForm
+          form={form}
+          onSubmit={onSubmit}
+          fields={resendConfirmationEmailFormFields}
+          btnTitle="Resend"
+        ></BaseAuthForm>
+      )}
     </AuthCard>
   );
 }

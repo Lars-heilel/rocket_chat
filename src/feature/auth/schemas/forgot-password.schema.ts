@@ -1,7 +1,6 @@
-import {z} from "zod";
-import {EmailZodSchema} from "./reusedSchemas";
+import { z } from 'zod';
 
 export const forgotPasswordSchema = z.object({
-  email: EmailZodSchema,
+  email: z.email('example@email.com'),
 });
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
