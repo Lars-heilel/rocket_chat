@@ -1,32 +1,36 @@
 import { FRONTEND_PATHS, FRONTEND_PROTECTED_PATH } from '@/app/router/all-path';
-import type { ComponentType } from 'react';
-import {
-  VerifyEmailPage,
-  ForgotPasswordPage,
-  LoginPage,
-  RegisterPage,
-  ResendConfirmationEmailPage,
-  ResetPasswordPage,
-} from '@/pages';
-import MessengerLayout from '../layouts/messenger-layout';
+import type { RouteObject } from 'react-router';
 
-interface AppRoute {
-  path: string;
-  component: ComponentType;
-}
-
-export const publicRoutes: AppRoute[] = [
-  { path: FRONTEND_PATHS.LOGIN, component: LoginPage },
-  { path: FRONTEND_PATHS.REGISTER, component: RegisterPage },
-  { path: FRONTEND_PATHS.FORGOT_PASSWORD, component: ForgotPasswordPage },
-  { path: FRONTEND_PATHS.RESET_PASSWORD, component: ResetPasswordPage },
-  { path: FRONTEND_PATHS.CONFIRM_EMAIL, component: VerifyEmailPage },
+export const publicRoutes: RouteObject[] = [
+  {
+    path: FRONTEND_PATHS.LOGIN,
+    lazy: () => import('@/pages/auth/loginPage'),
+  },
+  {
+    path: FRONTEND_PATHS.REGISTER,
+    lazy: () => import('@/pages/auth/registerPage'),
+  },
+  {
+    path: FRONTEND_PATHS.FORGOT_PASSWORD,
+    lazy: () => import('@/pages/mails/forgotPasswordPage'),
+  },
+  {
+    path: FRONTEND_PATHS.RESET_PASSWORD,
+    lazy: () => import('@/pages/mails/resetPasswordPage'),
+  },
+  {
+    path: FRONTEND_PATHS.CONFIRM_EMAIL,
+    lazy: () => import('@/pages/mails/verifyEmailPage'),
+  },
   {
     path: FRONTEND_PATHS.RESEND_CONFIRMATION,
-    component: ResendConfirmationEmailPage,
+    lazy: () => import('@/pages/mails/resendConfirmationEmailPage'),
   },
 ];
 
-export const privateRoutes: AppRoute[] = [
-  { path: FRONTEND_PROTECTED_PATH.MESSENGER, component: MessengerLayout },
+export const privateRoutes: RouteObject[] = [
+  {
+    path: FRONTEND_PROTECTED_PATH.MESSENGER,
+    lazy: () => import('../layouts/messengerLayout'),
+  },
 ];
