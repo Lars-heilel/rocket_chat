@@ -4,33 +4,46 @@ import { BaseAuthForm } from '../ui/base-auth-form';
 import { registerFormFields } from '../config/form-fields-config';
 import { FRONTEND_PATHS } from '@/app/router/all-path';
 import { useRegister } from '../hooks/useRegister';
+import { AuthSuccessDisplay } from '../ui/auth-success-display';
 
 export function RegisterForm({ className, ...props }: React.ComponentProps<'div'>) {
-    const { form, onSubmit, isSuccess, resMessage } = useRegister();
+    const { form, onSubmit, isSuccess, data, isError, isLoading, errorMessage } = useRegister();
+
     return (
         <AuthCard
-            title="Sign up new account"
-            errorTitle="Register error occurred"
+            isError={isError}
+            errorMessage={errorMessage}
+            title={isSuccess ? 'Success!' : 'Sign up new account'}
             className={className}
             footerContent={
-                <>
-                    <span>Return to login?</span>
-                    <Link className="hover:underline" to={FRONTEND_PATHS.LOGIN}>
-                        {'Login'}
-                    </Link>
-                </>
+                isSuccess ? null : (
+                    <>
+                        <span>Return to login?</span>
+                        <Link className="hover:underline" to={FRONTEND_PATHS.LOGIN}>
+                            {'Login'}
+                        </Link>
+                    </>
+                )
             }
             {...props}
         >
-            {isSuccess ? (
-                <div className="text-3xl">{resMessage}</div>
+            {isSuccess && data?.message ? (
+                <AuthSuccessDisplay
+                    title="Registration was successful!"
+                    description={data.message}
+                    actionLink={{
+                        to: FRONTEND_PATHS.LOGIN,
+                        label: 'Return to login',
+                    }}
+                />
             ) : (
                 <BaseAuthForm
+                    isLoading={isLoading}
                     form={form}
                     onSubmit={onSubmit}
                     fields={registerFormFields}
-                    btnTitle="Sign up"
-                ></BaseAuthForm>
+                    btnTitle="Register"
+                />
             )}
         </AuthCard>
     );

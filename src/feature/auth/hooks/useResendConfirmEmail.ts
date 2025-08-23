@@ -1,27 +1,25 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { forgotPasswordSchema, type ResendConfirmationFormData } from '../schemas';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { useResendConfirmEmailMutation } from '@/shared/api/api-service';
+import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 
 export default function useResendConfirmEmail() {
-  const form = useForm<ResendConfirmationFormData>({
-    resolver: zodResolver(forgotPasswordSchema),
-    mode: 'onChange',
-    defaultValues: { email: '' },
-  });
-  const [resMessage, setResMessage] = useState('');
-  const [request, { isSuccess, isLoading, error }] = useResendConfirmEmailMutation();
-  async function onSubmit(data: ResendConfirmationFormData) {
-    const response = await request(data).unwrap();
-    setResMessage(response.message);
-  }
-  return {
-    form,
-    onSubmit,
-    resMessage,
-    isLoading,
-    isSuccess,
-    error,
-  };
+    const form = useForm<ResendConfirmationFormData>({
+        resolver: zodResolver(forgotPasswordSchema),
+        mode: 'onSubmit',
+        defaultValues: { email: '' },
+    });
+
+    const [request, { ...mutationProps }] = useResendConfirmEmailMutation();
+    const errorMessage = rtkQueryTypeguard(mutationProps.error);
+    async function onSubmit(data: ResendConfirmationFormData) {
+        await request(data).unwrap();
+    }
+    return {
+        form,
+        onSubmit,
+        ...mutationProps,
+        errorMessage,
+    };
 }

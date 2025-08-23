@@ -5,35 +5,32 @@ import { setCredentials } from '../store/authSlices';
 import { FRONTEND_PROTECTED_PATH } from '@/app/router/all-path';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { JwtTokenSchema, LoginSchema, type LoginFormData } from '../schemas';
+import { LoginSchema, type LoginFormData } from '../schemas';
+import { Logger } from '@/shared/lib/logger';
+import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 
 export function useLogin() {
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(LoginSchema),
-    mode: 'onChange',
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-  const [requset, { isError, isLoading, isSuccess }] = useLoginMutation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  async function onSubmit(data: LoginFormData) {
-    try {
-      const response = await requset(data).unwrap();
-      const parseResult = await JwtTokenSchema.safeParseAsync(response);
-      if (!parseResult.success) {
-        throw new Error(`${parseResult.error}`);
-      } else {
-        dispatch(setCredentials(parseResult.data));
-        navigate(`${FRONTEND_PROTECTED_PATH.MESSENGER}`);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new Error(error.message);
-      }
+    const logger = new Logger('useLogin');
+    const form = useForm<LoginFormData>({
+        resolver: zodResolver(LoginSchema),
+        mode: 'onSubmit',
+        defaultValues: {
+            email: '',
+            password: '',
+        },
+    });
+    const [login, { ...mutationProps }] = useLoginMutation();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const errorMessage = rtkQueryTypeguard(mutationProps.error);
+    async function onSubmit(data: LoginFormData) {
+        logger.debug(`Попытка входа `);
+        const response = await login(data).unwrap();
+        if (response.token) {
+            logger.log(`Вход успешен`);
+            dispatch(setCredentials(response));
+            navigate(FRONTEND_PROTECTED_PATH.MESSENGER);
+        }
     }
-  }
-  return { form, isError, isLoading, isSuccess, onSubmit };
+    return { form, onSubmit, ...mutationProps, errorMessage };
 }

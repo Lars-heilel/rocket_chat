@@ -5,23 +5,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/components/ui/form";
-import { Input } from "@/shared/components/ui/input";
-import { Button } from "@/shared/components/ui/button";
-import type { FieldValues, UseFormReturn } from "react-hook-form";
-import type { FormFieldProps } from "../config/form-fields-config";
+} from '@/shared/components/ui/form';
+import { Input } from '@/shared/components/ui/input';
+import { Button } from '@/shared/components/ui/button';
+import type { FieldValues, UseFormReturn } from 'react-hook-form';
+import type { FormFieldProps } from '../config/form-fields-config';
+import { BtnLoader } from './btn-loader';
 
 interface BaseAuthFormProps<T extends FieldValues> {
   form: UseFormReturn<T>;
   onSubmit: (values: T) => void;
   btnTitle: string;
   fields: FormFieldProps<T>[];
+  isLoading: boolean;
 }
 export function BaseAuthForm<T extends FieldValues>({
   form,
   onSubmit,
   btnTitle,
   fields,
+  isLoading,
 }: BaseAuthFormProps<T>) {
   return (
     <Form {...form}>
@@ -49,8 +52,8 @@ export function BaseAuthForm<T extends FieldValues>({
             )}
           />
         ))}
-        <Button size={"lg"} className="w-full" type="submit">
-          {btnTitle}
+        <Button disabled={isLoading} size={'lg'} className="w-full" type="submit">
+          {isLoading ? <BtnLoader></BtnLoader> : btnTitle}
         </Button>
       </form>
     </Form>

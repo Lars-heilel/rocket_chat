@@ -1,33 +1,41 @@
-import { JwtTokenSchema, MailParamsTokenSchema } from '../schemas';
-import { useNavigate, useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router';
 import { useVerifyAccountMutation } from '@/shared/api/api-service';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/authSlices';
-import { FRONTEND_PROTECTED_PATH } from '@/app/router/all-path';
+import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
+import { useEffect, useState } from 'react';
 
 export function useVerifyAccount() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const paramsData = searchParams.get('token');
-  const [request, { isSuccess }] = useVerifyAccountMutation();
-  const dispatch = useDispatch();
-  async function handleVarify() {
-    const validate = await MailParamsTokenSchema.safeParseAsync(paramsData);
-    if (validate.success) {
-      const response = await request({ token: validate.data }).unwrap();
-      const parseResult = await JwtTokenSchema.safeParseAsync(response);
-      if (!parseResult.success) {
-        throw new Error(`${parseResult.error}`);
-      } else {
-        dispatch(setCredentials(parseResult.data));
-        navigate(`${FRONTEND_PROTECTED_PATH.MESSENGER}`);
-      }
-    } else {
-      console.error('Ошибка валидации токена:', validate.error.message);
+    const [searchParams] = useSearchParams();
+    const [tokenError, setTokenError] = useState<boolean>(false);
+    const [tokenErrorMessage, setTokenErrorMessage] = useState<string>('');
+    const token = searchParams.get('token');
+    useEffect(() => {
+        const validate = async () => {
+            if (!token) {
+                setTokenErrorMessage('token not found, request not possible');
+                setTokenError(true);
+                return;
+            }
+        };
+        validate();
+    }, [token]);
+    const [request, { ...mutationProps }] = useVerifyAccountMutation();
+    const errorMessage = rtkQueryTypeguard(mutationProps.error);
+    const dispatch = useDispatch();
+    async function handleVerify() {
+        if (!token) {
+            return;
+        } else {
+            const response = await request({ token: token }).unwrap();
+            dispatch(setCredentials(response));
+        }
     }
-  }
-  return {
-    handleVarify,
-    isSuccess,
-  };
+    return {
+        ...mutationProps,
+        errorMessage,
+        tokenError,
+        tokenErrorMessage,
+        handleVerify,
+    };
 }
