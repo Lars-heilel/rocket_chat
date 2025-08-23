@@ -1,13 +1,17 @@
-import { BrowserRouter } from "react-router";
-import { AppRouter } from "./router/app-router";
-import { ThemeProvider } from "./provider/theme-provider";
-import "./styles/index.css";
+import { RouterProvider } from 'react-router';
+import { ThemeProvider } from './providers/theme-provider';
+import { store } from './store/reduxStore';
+import { Provider } from 'react-redux';
+
+import './styles/index.css';
+import { routerProvider } from './providers/router-provider';
+
 export function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AppRouter />
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <Provider store={store}>
+        <RouterProvider router={routerProvider} />
+      </Provider>
+    </ThemeProvider>
   );
 }
