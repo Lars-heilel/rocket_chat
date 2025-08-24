@@ -24,7 +24,7 @@ export const MAILS_PATH_BACKEND = {
     VERIFY_ACCOUNT: '/mails/verify-account',
 };
 const USER_PATH_BACKEND = {
-    USER: '/users',
+    MY_PROFILE: '/users/profile',
 };
 const FRIENDSHIP_PATH_BACKEND = {
     FRIENDSHIP: '/friendship',

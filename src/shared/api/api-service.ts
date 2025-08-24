@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AUTH_PATH_BACKEND, MAILS_PATH_BACKEND } from '@/app/router/all-path';
+import { AUTH_PATH_BACKEND, MAILS_PATH_BACKEND, USER_PATH_BACKEND } from '@/app/router/all-path';
 import type { RootState } from '@/app/store/reduxStore';
 import {
     JwtTokenSchema,
@@ -11,6 +11,7 @@ import {
     type ResetPasswordApiData,
 } from '@/feature/auth/schemas';
 import { Logger } from '../lib/logger';
+import type { User } from '../schemas/userSchema';
 const logger = new Logger('apiService');
 export const apiService = createApi({
     reducerPath: 'apiService',
@@ -26,6 +27,7 @@ export const apiService = createApi({
         },
     }),
     endpoints: (builder) => ({
+        // Auth
         register: builder.mutation<{ message: string }, RegisterFormData>({
             query: (credentials) => ({
                 url: AUTH_PATH_BACKEND.REGISTER,
@@ -47,7 +49,7 @@ export const apiService = createApi({
                     return validation.data;
                 }
                 logger.error(`${validation.error}`);
-                throw new Error('Неверный ответа от сервера');
+                throw new Error('Неверный ответа от сервера при обновлении токена');
             },
         }),
         refresh: builder.mutation<JwtTokenResponse, void>({
@@ -55,7 +57,15 @@ export const apiService = createApi({
                 url: AUTH_PATH_BACKEND.REFRESH,
                 method: 'POST',
             }),
+            transformResponse: (response: JwtTokenResponse) => {
+                const validation = JwtTokenSchema.safeParse(response);
+                if (validation.success) {
+                    return validation.data;
+                }
+                throw new Error('Неверный ответа от сервера при обновлении токена');
+            },
         }),
+        // MAILS
         forgotPassword: builder.mutation<{ message: string }, ForgotPasswordFormData>({
             query: (credentials) => ({
                 url: MAILS_PATH_BACKEND.FORGOT_PASSWORD,
@@ -95,6 +105,10 @@ export const apiService = createApi({
                 body: credentials,
             }),
         }),
+        // PROFILE
+        getMyProfile: builder.query<User, void>({
+            query: () => USER_PATH_BACKEND.MY_PROFILE,
+        }),
     }),
 });
 export const {
@@ -105,4 +119,5 @@ export const {
     useResetPasswordMutation,
     useVerifyAccountMutation,
     useResendConfirmEmailMutation,
+    useGetMyProfileQuery,
 } = apiService;

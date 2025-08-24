@@ -1,4 +1,4 @@
-import { FRONTEND_PATHS, FRONTEND_PROTECTED_PATH } from '@/app/router/all-path';
+import { FRONTEND_PATHS } from '@/app/router/all-path';
 import type { RouteObject } from 'react-router';
 
 export const publicRoutes: RouteObject[] = [
@@ -30,7 +30,7 @@ export const publicRoutes: RouteObject[] = [
 
 export const privateRoutes: RouteObject[] = [
     {
-        path: FRONTEND_PROTECTED_PATH.MESSENGER,
+        index: true,
         lazy: () => import('../layouts/messengerLayout'),
     },
 ];
