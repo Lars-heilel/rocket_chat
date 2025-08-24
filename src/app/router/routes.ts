@@ -31,6 +31,6 @@ export const publicRoutes: RouteObject[] = [
 export const privateRoutes: RouteObject[] = [
     {
         index: true,
-        lazy: () => import('../layouts/messengerLayout'),
+        lazy: () => import('@/pages/messenger/messenger-page'),
     },
 ];

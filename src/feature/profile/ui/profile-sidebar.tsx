@@ -10,6 +10,7 @@ import {
 } from '@components/command';
 import { Button } from '@/shared/components/ui/button';
 import { ArrowLeft, Edit, LogOut, Palette } from 'lucide-react';
+import { ModeToggle } from '@/shared/components/ui/mode-toggle';
 interface ProfileSidebarI {
     userData: Users;
     onClose: () => void;
@@ -43,6 +44,7 @@ export function ProfileSidebar({ userData, onClose }: ProfileSidebarI) {
                                     <LogOut className="mr-2 h-4 w-4" />
                                     <span>LogOut</span>
                                 </CommandItem>
+                                <ModeToggle />
                             </CommandGroup>
                         </CommandList>
                     </Command>
