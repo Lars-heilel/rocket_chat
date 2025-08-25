@@ -1,15 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../store/reduxStore';
 import { useRefreshMutation } from '@/shared/api/api-service';
 import { useEffect, type ReactNode } from 'react';
-import { logOut, setCredentials } from '@/feature/auth/store/authSlices';
-import { JwtTokenSchema } from '@/feature/auth/schemas';
+import { logOut, setCredentials } from '@/entities/session/store/sessionSlice';
 import { Spiner } from '@/shared/components/ui/spiner';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-redux-hooks';
+import { JwtTokenSchema } from '@/entities/session/schema/jwt-token.schema';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-    const { token } = useSelector((state: RootState) => state.auth);
+    const token = useAppSelector((state) => state.session.token);
     const [refresh, { isLoading }] = useRefreshMutation();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     useEffect(() => {
         const refreshSession = async () => {
             try {

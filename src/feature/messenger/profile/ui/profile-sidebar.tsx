@@ -1,6 +1,6 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from '@components/sidebar';
 import { ProfileHeader } from './profile-header';
-import type { Users } from '@/shared/schemas/userSchema';
+import type { Users } from '@/entities/user/schema/userSchema';
 import {
     Command,
     CommandGroup,

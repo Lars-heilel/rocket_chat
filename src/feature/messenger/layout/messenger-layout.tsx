@@ -1,12 +1,9 @@
 import * as React from 'react';
-
-import { SearchForm } from '@/feature/search/search-form';
+import { SearchForm } from '@/feature/messenger/search/search-form';
 import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider } from '@components/sidebar';
-
-import { MyProfileComponent } from '@/feature/profile/components/profile-component';
-
-import { ChatWindow } from '@/feature/chat/components/chat';
-import { FirendsSwitch } from '@/feature/friends/friends-switch';
+import { MyProfileComponent } from '@/feature/messenger/profile/components/profile-component';
+import { FirendsSwitch } from '../friends/friends-switch';
+import { ChatWindow } from '../chat/components/chat';
 
 export function MessengerLayout({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (

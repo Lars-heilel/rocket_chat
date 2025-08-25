@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useForgotPasswordMutation } from '@/shared/api/api-service';
 import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 
-export default function useForgotPassword() {
+export function useForgotPassword() {
     const form = useForm<ForgotPasswordFormData>({
         resolver: zodResolver(forgotPasswordSchema),
         mode: 'onSubmit',

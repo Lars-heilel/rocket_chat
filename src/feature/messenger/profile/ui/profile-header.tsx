@@ -1,4 +1,4 @@
-import type { Users } from '@/shared/schemas/userSchema';
+import type { Users } from '@/entities/user/schema/userSchema';
 import { Avatar, AvatarFallback, AvatarImage } from '@components/avatar';
 import { User } from 'lucide-react';
 interface ProfileHeaderI {

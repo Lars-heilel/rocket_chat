@@ -1,12 +1,12 @@
 import { apiService } from '@/shared/api/api-service';
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '@/feature/auth/store/authSlices';
-import profileReducer from '@/feature/profile/store/profileSlice';
+import sessionReducer from '@/entities/session/store/sessionSlice';
+import userReducer from '@/entities/user/store/userSlice';
 export const store = configureStore({
     reducer: {
         [apiService.reducerPath]: apiService.reducer,
-        auth: authReducer,
-        profile: profileReducer,
+        session: sessionReducer,
+        user: userReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiService.middleware),
 });

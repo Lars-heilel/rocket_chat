@@ -1,5 +1,5 @@
-import { LoginForm } from '@/feature/auth/components/login-form';
+import { LoginForm } from '@/feature/auth/ui/components/login-form';
 
 export function Component() {
-  return <LoginForm />;
+    return <LoginForm />;
 }

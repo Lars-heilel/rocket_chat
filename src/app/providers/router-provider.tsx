@@ -7,7 +7,7 @@ import { RouteErrorPage } from '@/pages/other/errorElement';
 export const routerProvider = createBrowserRouter([
     {
         path: '/',
-        lazy: () => import('@/feature/auth/layouts/authLayout'),
+        lazy: () => import('@/widgets/layouts/authLayout'),
         children: [...publicRoutes],
         errorElement: <RouteErrorPage />,
     },

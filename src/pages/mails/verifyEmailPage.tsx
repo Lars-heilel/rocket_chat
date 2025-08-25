@@ -1,5 +1,5 @@
-import { VerifyEmailFeature } from '@/feature/auth/components/verify-email-feature';
+import { VerifyEmailFeature } from '@/feature/auth/ui/components/verify-email-feature';
 
 export function Component() {
-  return <VerifyEmailFeature />;
+    return <VerifyEmailFeature />;
 }

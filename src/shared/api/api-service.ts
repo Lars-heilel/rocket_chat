@@ -2,24 +2,21 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { AUTH_PATH_BACKEND, MAILS_PATH_BACKEND, USER_PATH_BACKEND } from '@/app/router/all-path';
 import type { RootState } from '@/app/store/reduxStore';
 import {
-    JwtTokenSchema,
     type ForgotPasswordFormData,
-    type JwtTokenResponse,
     type LoginFormData,
     type RegisterFormData,
     type ResendConfirmationFormData,
     type ResetPasswordApiData,
-} from '@/feature/auth/schemas';
-import { Logger } from '../lib/logger';
-import type { User } from '../schemas/userSchema';
-const logger = new Logger('apiService');
+} from '@/feature/auth/model/schemas';
+import { JwtTokenSchema, type JwtTokenResponse } from '@/entities/session/schema/jwt-token.schema';
+import type { Users } from '@/entities/user/schema/userSchema';
 export const apiService = createApi({
     reducerPath: 'apiService',
     baseQuery: fetchBaseQuery({
         baseUrl: import.meta.env.VITE_BACKEND_URL,
         credentials: 'include',
         prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).auth.token;
+            const token = (getState() as RootState).session.token;
             if (token) {
                 headers.set('authorization', `Bearer ${token}`);
             }
@@ -43,13 +40,10 @@ export const apiService = createApi({
             }),
             transformResponse: (response: JwtTokenResponse) => {
                 const validation = JwtTokenSchema.safeParse(response);
-                logger.debug(`Проверка токена:${JSON.stringify(response).slice(1, 36)}`);
                 if (validation.success) {
-                    logger.debug(`Валидация успешна`);
                     return validation.data;
                 }
-                logger.error(`${validation.error}`);
-                throw new Error('Неверный ответа от сервера при обновлении токена');
+                throw new Error('invalid server response');
             },
         }),
         refresh: builder.mutation<JwtTokenResponse, void>({
@@ -62,7 +56,7 @@ export const apiService = createApi({
                 if (validation.success) {
                     return validation.data;
                 }
-                throw new Error('Неверный ответа от сервера при обновлении токена');
+                throw new Error('invalid server response');
             },
         }),
         // MAILS
@@ -89,12 +83,11 @@ export const apiService = createApi({
             }),
             transformResponse: (response: JwtTokenResponse) => {
                 const validation = JwtTokenSchema.safeParse(response);
-                logger.debug(`Проверка токена:${JSON.stringify(response).slice(1, 36)}`);
+
                 if (validation.success) {
-                    logger.debug(`Валидация успешна`);
                     return validation.data;
                 }
-                logger.error(`${validation.error}`);
+
                 throw new Error('Неверный ответа от сервера');
             },
         }),
@@ -106,7 +99,7 @@ export const apiService = createApi({
             }),
         }),
         // PROFILE
-        getMyProfile: builder.query<User, void>({
+        getMyProfile: builder.query<Users, void>({
             query: () => USER_PATH_BACKEND.MY_PROFILE,
         }),
     }),
