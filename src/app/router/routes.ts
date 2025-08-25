@@ -1,4 +1,4 @@
-import { FRONTEND_PATHS } from '@/app/router/all-path';
+import { AUTH_FRONTEND_PATH, MAILS_FRONTEND_PATH } from '@/feature/auth/model/const';
 import type { RouteObject } from 'react-router';
 
 export const publicRoutes: RouteObject[] = [
@@ -7,23 +7,23 @@ export const publicRoutes: RouteObject[] = [
         lazy: () => import('@/pages/auth/loginPage'),
     },
     {
-        path: FRONTEND_PATHS.REGISTER,
+        path: AUTH_FRONTEND_PATH.REGISTER,
         lazy: () => import('@/pages/auth/registerPage'),
     },
     {
-        path: FRONTEND_PATHS.FORGOT_PASSWORD,
+        path: MAILS_FRONTEND_PATH.FORGOT_PASSWORD,
         lazy: () => import('@/pages/mails/forgotPasswordPage'),
     },
     {
-        path: FRONTEND_PATHS.RESET_PASSWORD,
+        path: MAILS_FRONTEND_PATH.RESET_PASSWORD,
         lazy: () => import('@/pages/mails/resetPasswordPage'),
     },
     {
-        path: FRONTEND_PATHS.VERIFY_ACCOUNT,
+        path: MAILS_FRONTEND_PATH.VERIFY_ACCOUNT,
         lazy: () => import('@/pages/mails/verifyEmailPage'),
     },
     {
-        path: FRONTEND_PATHS.RESEND_CONFIRMATION,
+        path: MAILS_FRONTEND_PATH.RESEND_CONFIRMATION,
         lazy: () => import('@/pages/mails/resendConfirmationEmailPage'),
     },
 ];

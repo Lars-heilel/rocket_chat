@@ -1,4 +1,6 @@
-import { FRONTEND_PATHS, FRONTEND_PROTECTED_PATH } from '@/app/router/all-path';
+import { FRONTEND_PROTECTED_PATH } from '@/app/router/all-path';
+import { AUTH_FRONTEND_PATH, MAILS_FRONTEND_PATH } from '../model/const';
+
 export const AUTH_CONTENT_CONFIG = {
     login: {
         form: {
@@ -6,7 +8,7 @@ export const AUTH_CONTENT_CONFIG = {
             buttonText: 'Login',
             footerText: 'Need an account?',
             footerLink: {
-                to: FRONTEND_PATHS.REGISTER,
+                to: AUTH_FRONTEND_PATH.REGISTER,
                 label: 'Register',
             },
         },
@@ -17,7 +19,7 @@ export const AUTH_CONTENT_CONFIG = {
             buttonText: 'Register',
             footerText: 'Return to login?',
             footerLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Login',
             },
         },
@@ -25,7 +27,7 @@ export const AUTH_CONTENT_CONFIG = {
             title: 'Registration was successful!',
             description: (data: { message: string }) => data.message,
             actionLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Return to login',
             },
         },
@@ -36,7 +38,7 @@ export const AUTH_CONTENT_CONFIG = {
             buttonText: 'Continue',
             footerText: 'Return to sign in',
             footerLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Sign in',
             },
         },
@@ -44,7 +46,7 @@ export const AUTH_CONTENT_CONFIG = {
             title: 'Success!',
             description: (data: { message: string }) => data.message,
             actionLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Return to login',
             },
         },
@@ -55,7 +57,7 @@ export const AUTH_CONTENT_CONFIG = {
             buttonText: 'Reset',
             footerText: 'Return to login?',
             footerLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Sign in',
             },
         },
@@ -63,7 +65,7 @@ export const AUTH_CONTENT_CONFIG = {
             title: 'Success!',
             description: (data: { message: string }) => data.message,
             actionLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Return to login',
             },
         },
@@ -72,7 +74,7 @@ export const AUTH_CONTENT_CONFIG = {
                 title: 'Link Invalid',
                 description: (error: { tokenErrorMessage: string }) => error.tokenErrorMessage,
                 actionLink: {
-                    to: FRONTEND_PATHS.FORGOT_PASSWORD,
+                    to: MAILS_FRONTEND_PATH.FORGOT_PASSWORD,
                     label: 'Request a new link',
                 },
             },
@@ -84,7 +86,7 @@ export const AUTH_CONTENT_CONFIG = {
             buttonText: 'Continue',
             footerText: 'Return to login?',
             footerLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Sign in',
             },
         },
@@ -92,7 +94,7 @@ export const AUTH_CONTENT_CONFIG = {
             title: 'Success!',
             description: (data: { message: string }) => data.message,
             actionLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Return to login',
             },
         },
@@ -105,7 +107,7 @@ export const AUTH_CONTENT_CONFIG = {
             buttonText: 'Confirm Account',
             footerText: 'Something went wrong?',
             footerLink: {
-                to: FRONTEND_PATHS.LOGIN,
+                to: AUTH_FRONTEND_PATH.LOGIN,
                 label: 'Return to home',
             },
         },
@@ -122,7 +124,7 @@ export const AUTH_CONTENT_CONFIG = {
                 description: (error: { errorMessage?: string; tokenErrorMessage?: string }) =>
                     error.errorMessage || error.tokenErrorMessage || 'An unknown error occurred.',
                 actionLink: {
-                    to: FRONTEND_PATHS.RESEND_CONFIRMATION,
+                    to: MAILS_FRONTEND_PATH.RESEND_CONFIRMATION,
                     label: 'Request a new link',
                 },
             },

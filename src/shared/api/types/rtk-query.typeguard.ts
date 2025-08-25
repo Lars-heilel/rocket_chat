@@ -17,7 +17,7 @@ function rtkQueryTypeguard(error: FetchBaseQueryError | SerializedError | undefi
         }
         return `${error.status}`;
     } else {
-        return error.message ?? 'Произошла непредвиденная ошибка';
+        return error.message ?? 'unknown server error';
     }
 }
 export { rtkQueryTypeguard };

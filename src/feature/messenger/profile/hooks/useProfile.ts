@@ -1,4 +1,4 @@
-import { useGetMyProfileQuery } from '@/shared/api/api-service';
+import { useGetMyProfileQuery } from '@/entities/user/model';
 import { useCallback, useState } from 'react';
 export function useProfile() {
     const { data, isLoading } = useGetMyProfileQuery();

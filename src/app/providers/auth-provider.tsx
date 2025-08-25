@@ -1,9 +1,9 @@
-import { useRefreshMutation } from '@/shared/api/api-service';
 import { useEffect, type ReactNode } from 'react';
 import { logOut, setCredentials } from '@/entities/session/store/sessionSlice';
 import { Spiner } from '@/shared/components/ui/spiner';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-redux-hooks';
 import { JwtTokenSchema } from '@/entities/session/schema/jwt-token.schema';
+import { useRefreshMutation } from '@/feature/auth/model/store/auth-api-slice';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const token = useAppSelector((state) => state.session.token);

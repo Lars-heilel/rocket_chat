@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-import { FRONTEND_PATHS } from '@/app/router/all-path';
 import type { Path } from 'react-hook-form';
 import type {
     ForgotPasswordFormData,
@@ -8,6 +7,7 @@ import type {
     ResendConfirmationFormData,
     ResetPasswordFormData,
 } from '@/feature/auth/model/schemas';
+import { MAILS_FRONTEND_PATH } from '../model/const';
 
 export interface FormFieldProps<T> {
     name: Path<T>;
@@ -30,7 +30,7 @@ const loginFormFields: FormFieldProps<LoginFormData>[] = [
         placeholder: '*******',
         type: 'password',
         formLabelChildren: (
-            <Link className="hover:underline" to={FRONTEND_PATHS.FORGOT_PASSWORD}>
+            <Link className="hover:underline" to={MAILS_FRONTEND_PATH.FORGOT_PASSWORD}>
                 Forgot password?
             </Link>
         ),

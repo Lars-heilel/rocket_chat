@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { resetPasswordSchema, type ResetPasswordFormData } from '../schemas';
 import { useSearchParams } from 'react-router';
-import { useResetPasswordMutation } from '@/shared/api/api-service';
 import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 import { useEffect, useState } from 'react';
+import { useResetPasswordMutation } from '../store/mails-api-slice';
 
 export function useResetPassword() {
     const form = useForm<ResetPasswordFormData>({

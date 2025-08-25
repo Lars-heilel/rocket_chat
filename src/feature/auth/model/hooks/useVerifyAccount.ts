@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router';
-import { useVerifyAccountMutation } from '@/shared/api/api-service';
 import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/hooks/use-redux-hooks';
 import { setCredentials } from '@/entities/session/store/sessionSlice';
+import { useVerifyAccountMutation } from '../store/mails-api-slice';
 
 export function useVerifyAccount() {
     const [searchParams] = useSearchParams();

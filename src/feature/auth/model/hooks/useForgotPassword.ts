@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { forgotPasswordSchema, type ForgotPasswordFormData } from '../schemas';
 import { useForm } from 'react-hook-form';
-import { useForgotPasswordMutation } from '@/shared/api/api-service';
 import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
+import { useForgotPasswordMutation } from '../store/mails-api-slice';
 
 export function useForgotPassword() {
     const form = useForm<ForgotPasswordFormData>({

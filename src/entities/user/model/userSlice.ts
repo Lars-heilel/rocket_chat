@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Users } from '../schema/userSchema';
+import type { Users } from '../model/userSchema';
 
 interface userSliceI {
     me: Users | null;

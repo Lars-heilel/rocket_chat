@@ -1,6 +1,4 @@
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from '@components/sidebar';
-import { ProfileHeader } from './profile-header';
-import type { Users } from '@/entities/user/schema/userSchema';
 import {
     Command,
     CommandGroup,
@@ -11,6 +9,8 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { ArrowLeft, Edit, LogOut, Palette } from 'lucide-react';
 import { ModeToggle } from '@/shared/components/ui/mode-toggle';
+import type { Users } from '@/entities/user/model';
+import { UsersContainer } from '@/entities/user/ui';
 interface ProfileSidebarI {
     userData: Users;
     onClose: () => void;
@@ -23,7 +23,7 @@ export function ProfileSidebar({ userData, onClose }: ProfileSidebarI) {
                     <Button variant="ghost" size="icon" onClick={onClose} className="mr-2">
                         <ArrowLeft className="h-4 w-4" />
                     </Button>
-                    <ProfileHeader userData={userData} />
+                    <UsersContainer userData={userData} />
                 </SidebarHeader>
                 <SidebarContent>
                     <Command>

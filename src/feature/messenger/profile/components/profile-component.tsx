@@ -1,13 +1,15 @@
 import { Button } from '@/shared/components/ui/button';
 import { useProfile } from '../hooks/useProfile';
-import { MyProfileSkeleton } from '../ui/profile-skeleton';
 import { ProfileSidebar } from '../ui/profile-sidebar';
-import { ProfileHeader } from '../ui/profile-header';
+import { UsersContainer, UsersContainerSkeleton } from '@/entities/user/ui';
 
 export function MyProfileComponent() {
     const { data, isOpen, toggleOpen, isLoading } = useProfile();
     if (isLoading) {
-        return <MyProfileSkeleton />;
+        return <UsersContainerSkeleton />;
+    }
+    if (!data) {
+        return;
     }
     return (
         <>
@@ -16,7 +18,7 @@ export function MyProfileComponent() {
                 variant="ghost"
                 className="h-auto w-full justify-start p-2"
             >
-                <ProfileHeader userData={data} />
+                <UsersContainer userData={data} />
             </Button>
             {isOpen && <ProfileSidebar onClose={toggleOpen} userData={data} />}
         </>

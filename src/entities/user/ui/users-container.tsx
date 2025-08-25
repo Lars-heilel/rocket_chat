@@ -1,10 +1,10 @@
-import type { Users } from '@/entities/user/schema/userSchema';
+import type { Users } from '@/entities/user/model/userSchema';
 import { Avatar, AvatarFallback, AvatarImage } from '@components/avatar';
 import { User } from 'lucide-react';
-interface ProfileHeaderI {
+interface UsersContainerProps {
     userData: Users;
 }
-export function ProfileHeader({ userData }: ProfileHeaderI) {
+export function UsersContainer({ userData }: UsersContainerProps) {
     return (
         <div className="flex items-center">
             <Avatar className="mr-2 h-8 w-8">

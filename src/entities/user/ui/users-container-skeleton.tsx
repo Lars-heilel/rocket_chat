@@ -1,6 +1,6 @@
 import { Skeleton } from '@/shared/components/ui/skeleton';
 
-export function MyProfileSkeleton() {
+export function UsersContainerSkeleton() {
     return (
         <div className="flex w-full items-center p-2">
             <Skeleton className="mr-2 h-8 w-8 rounded-full" />

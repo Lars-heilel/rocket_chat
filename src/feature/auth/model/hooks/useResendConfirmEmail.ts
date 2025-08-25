@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { forgotPasswordSchema, type ResendConfirmationFormData } from '../schemas';
 import { useForm } from 'react-hook-form';
-import { useResendConfirmEmailMutation } from '@/shared/api/api-service';
 import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
+import { useResendConfirmEmailMutation } from '../store/mails-api-slice';
 
 export default function useResendConfirmEmail() {
     const form = useForm<ResendConfirmationFormData>({
