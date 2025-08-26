@@ -1,7 +1,7 @@
 import type { SerializedError } from '@reduxjs/toolkit';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-function rtkQueryTypeguard(error: FetchBaseQueryError | SerializedError | undefined): string {
+function rtkErrorParser(error: FetchBaseQueryError | SerializedError | undefined): string {
     if (!error) {
         return '';
     }
@@ -20,4 +20,4 @@ function rtkQueryTypeguard(error: FetchBaseQueryError | SerializedError | undefi
         return error.message ?? 'unknown server error';
     }
 }
-export { rtkQueryTypeguard };
+export { rtkErrorParser };

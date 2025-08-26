@@ -1,9 +1,10 @@
 import { useSearchParams } from 'react-router';
-import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
+
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/shared/hooks/use-redux-hooks';
-import { setCredentials } from '@/entities/session/store/sessionSlice';
+import { setCredentials } from '@/entities/session/model/slice/sessionSlice';
 import { useVerifyAccountMutation } from '../store/mails-api-slice';
+import { rtkErrorParser } from '@/shared/lib/RTK/rtkErrorParser';
 
 export function useVerifyAccount() {
     const [searchParams] = useSearchParams();
@@ -21,7 +22,7 @@ export function useVerifyAccount() {
         validate();
     }, [token]);
     const [request, { ...mutationProps }] = useVerifyAccountMutation();
-    const errorMessage = rtkQueryTypeguard(mutationProps.error);
+    const errorMessage = rtkErrorParser(mutationProps.error);
     const dispatch = useAppDispatch();
     async function handleVerify() {
         if (!token) {

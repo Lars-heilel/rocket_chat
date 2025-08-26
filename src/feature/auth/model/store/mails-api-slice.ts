@@ -5,7 +5,10 @@ import type {
     ResetPasswordApiData,
 } from '../schemas';
 import { MAILS_PATH_BACKEND } from '../const';
-import { JwtTokenSchema, type JwtTokenResponse } from '@/entities/session/schema/jwt-token.schema';
+import {
+    JwtTokenSchema,
+    type JwtTokenResponse,
+} from '@/entities/session/model/schema/jwt-token.schema';
 const mailsApi = apiService.injectEndpoints({
     endpoints: (builder) => ({
         forgotPassword: builder.mutation<{ message: string }, ForgotPasswordFormData>({

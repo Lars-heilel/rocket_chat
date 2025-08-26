@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { forgotPasswordSchema, type ForgotPasswordFormData } from '../schemas';
 import { useForm } from 'react-hook-form';
-import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 import { useForgotPasswordMutation } from '../store/mails-api-slice';
+import { rtkErrorParser } from '@/shared/lib/RTK/rtkErrorParser';
 
 export function useForgotPassword() {
     const form = useForm<ForgotPasswordFormData>({
@@ -11,7 +11,7 @@ export function useForgotPassword() {
         defaultValues: { email: '' },
     });
     const [request, { isSuccess, ...mutationProps }] = useForgotPasswordMutation();
-    const errorMessage = rtkQueryTypeguard(mutationProps.error);
+    const errorMessage = rtkErrorParser(mutationProps.error);
     async function onSubmit(data: ForgotPasswordFormData) {
         await request(data).unwrap();
     }

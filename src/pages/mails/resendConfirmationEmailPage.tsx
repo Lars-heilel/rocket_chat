@@ -1,4 +1,4 @@
-import { ResendConfirmEmailForm } from '@/feature/auth/ui/components/resend-confirm-email-form';
+import { ResendConfirmEmailForm } from '@/feature/auth';
 
 export function Component() {
     return <ResendConfirmEmailForm />;

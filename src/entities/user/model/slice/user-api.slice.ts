@@ -1,6 +1,6 @@
 import { apiService } from '@/shared/api/api-service';
-import type { Users } from './userSchema';
 import { USER_PATH_BACKEND } from '@/app/router/all-path';
+import type { Users } from '../schemas/userSchema';
 
 const userApi = apiService.injectEndpoints({
     endpoints: (builder) => ({

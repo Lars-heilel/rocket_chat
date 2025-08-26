@@ -1,6 +1,9 @@
 import { apiService } from '@/shared/api/api-service';
 import type { LoginFormData, RegisterFormData } from '@/feature/auth/model/schemas';
-import { JwtTokenSchema, type JwtTokenResponse } from '@/entities/session/schema/jwt-token.schema';
+import {
+    JwtTokenSchema,
+    type JwtTokenResponse,
+} from '@/entities/session/model/schema/jwt-token.schema';
 import { AUTH_PATH_BACKEND } from '../const';
 const authApi = apiService.injectEndpoints({
     endpoints: (builder) => ({

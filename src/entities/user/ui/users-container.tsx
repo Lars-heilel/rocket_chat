@@ -1,4 +1,4 @@
-import type { Users } from '@/entities/user/model/userSchema';
+import type { Users } from '@/entities/user/model/schemas/userSchema';
 import { Avatar, AvatarFallback, AvatarImage } from '@components/avatar';
 import { User } from 'lucide-react';
 interface UsersContainerProps {

@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { registerSchema, type RegisterFormData } from '../schemas';
-import { rtkQueryTypeguard } from '@/shared/api/types/rtk-query.typeguard';
 import { useRegisterMutation } from '../store/auth-api-slice';
 import { useCallback } from 'react';
+import { rtkErrorParser } from '@/shared/lib/RTK/rtkErrorParser';
 export function useRegister() {
     const form = useForm<RegisterFormData>({
         mode: 'onSubmit',
@@ -16,7 +16,7 @@ export function useRegister() {
         },
     });
     const [request, { ...mutationProps }] = useRegisterMutation();
-    const errorMessage = rtkQueryTypeguard(mutationProps.error);
+    const errorMessage = rtkErrorParser(mutationProps.error);
     const onSubmit = useCallback(
         async (data: RegisterFormData) => {
             await request(data).unwrap();

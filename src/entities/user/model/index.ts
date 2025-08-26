@@ -1,3 +1,5 @@
-export * from './userApiSlice';
-export * from './userSchema';
-export * from './userSlice';
+export * from './slice/user-api.slice';
+export { setUser, clearUser } from './slice/users.store';
+export { default as userReducer } from './slice/users.store';
+export * from './schemas/userSchema';
+export * from './const/userPath';

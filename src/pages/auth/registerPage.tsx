@@ -1,4 +1,4 @@
-import { RegisterForm } from '@/feature/auth/ui/components/register-form';
+import { RegisterForm } from '@/feature/auth';
 
 export function Component() {
     return <RegisterForm />;

@@ -1,7 +1,8 @@
 import { apiService } from '@/shared/api/api-service';
 import { configureStore } from '@reduxjs/toolkit';
-import sessionReducer from '@/entities/session/store/sessionSlice';
-import userReducer from '@/entities/user/model/userSlice';
+import { sessionReducer } from '@/entities/session';
+import { userReducer } from '@/entities/user';
+
 export const store = configureStore({
     reducer: {
         [apiService.reducerPath]: apiService.reducer,

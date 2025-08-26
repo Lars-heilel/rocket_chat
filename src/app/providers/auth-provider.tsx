@@ -1,8 +1,8 @@
 import { useEffect, type ReactNode } from 'react';
-import { logOut, setCredentials } from '@/entities/session/store/sessionSlice';
+import { logOut, setCredentials } from '@/entities/session/model/slice/sessionSlice';
 import { Spiner } from '@/shared/components/ui/spiner';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-redux-hooks';
-import { JwtTokenSchema } from '@/entities/session/schema/jwt-token.schema';
+import { JwtTokenSchema } from '@/entities/session/model/schema/jwt-token.schema';
 import { useRefreshMutation } from '@/feature/auth/model/store/auth-api-slice';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
