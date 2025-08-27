@@ -1,10 +1,10 @@
 import { UsersContainer, UsersContainerSkeleton } from '@/entities/user';
 import { Button } from '@/shared/components/ui/button';
-import { ProfileSidebar } from '../elements/profile-sidebar';
-import { useProfile } from '../../model/hooks/useProfile';
+import { useViewProfile } from '../../model';
+import { ProfileSidebar } from '../elements';
 
 export function ViewProfile() {
-    const { data, isOpen, toggleOpen, isLoading } = useProfile();
+    const { data, isOpen, toggleOpen, isLoading } = useViewProfile();
     if (isLoading) {
         return <UsersContainerSkeleton />;
     }

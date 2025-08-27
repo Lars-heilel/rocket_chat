@@ -1,49 +1,45 @@
-import { Button } from '@components/button';
+import { Button } from '@/shared/components/ui/button';
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
-} from '@components/dialog';
-import { Input } from '@components/input';
-import { Label } from '@components/label';
+} from '@/shared/components/ui/dialog';
+import { Input } from '@/shared/components/ui/input';
+import { Label } from '@/shared/components/ui/label';
+import type { Users } from '@/entities/user';
 
-export function EditProfileModal() {
+interface EditProfileModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    userData: Users;
+}
+
+export function EditProfileModal({ isOpen, onClose, userData }: EditProfileModalProps) {
     return (
-        <Dialog>
-            <form>
-                <DialogTrigger asChild>
-                    <Button variant="outline">Open Dialog</Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>Edit profile</DialogTitle>
-                        <DialogDescription>
-                            Make changes to your profile here. Click save when you&apos;re done.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-4">
-                        <div className="grid gap-3">
-                            <Label htmlFor="name-1">Name</Label>
-                            <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-                        </div>
-                        <div className="grid gap-3">
-                            <Label htmlFor="username-1">Username</Label>
-                            <Input id="username-1" name="username" defaultValue="@peduarte" />
-                        </div>
+        <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogDescription>Work in progress</DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                            Name
+                        </Label>
+                        <Input id="name" defaultValue={userData.name} className="col-span-3" />
                     </div>
-                    <DialogFooter>
-                        <DialogClose asChild>
-                            <Button variant="outline">Cancel</Button>
-                        </DialogClose>
-                        <Button type="submit">Save changes</Button>
-                    </DialogFooter>
-                </DialogContent>
-            </form>
+                </div>
+                <DialogFooter>
+                    <Button type="button" variant="outline" onClick={onClose}>
+                        Cancel
+                    </Button>
+                    <Button type="submit">Save changes</Button>
+                </DialogFooter>
+            </DialogContent>
         </Dialog>
     );
 }
