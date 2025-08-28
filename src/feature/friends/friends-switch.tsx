@@ -1,6 +1,6 @@
 import { UserPlus, Users } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/tabs';
-import { ContactList } from '@/feature/messenger/friends/contacts';
+import { ContactList } from './contacts';
 // Моковые данные для примера
 const friends = [
     { id: 1, name: 'Иван Иванов', avatar: 'https://github.com/ivan.png' },
