@@ -1,7 +1,6 @@
 import { UserList } from '@/entities/user';
 import { Button } from '@/shared/components/ui/button';
 import { Card, CardContent } from '@/shared/components/ui/card';
-import { ScrollArea } from '@/shared/components/ui/scroll-area';
 import { Frown, Search, X } from 'lucide-react';
 import type { UseUserSearchResult } from '../model';
 import { Spiner } from '@/shared/components/ui/spiner';
@@ -48,11 +47,9 @@ export function SearchResultsContainer({
         if (isSuccess) {
             if (users && users.length > 0) {
                 return (
-                    <ScrollArea className="h-[400px]">
-                        <div className="p-1">
-                            <UserList users={users} />
-                        </div>
-                    </ScrollArea>
+                    <div className="p-1">
+                        <UserList users={users} />
+                    </div>
                 );
             }
             return (
