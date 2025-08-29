@@ -11,7 +11,7 @@ interface ProfileSidebarHeaderProps {
 
 export function ProfileSidebarHeader({ userData, onClose }: ProfileSidebarHeaderProps) {
     return (
-        <SidebarHeader className="flex items-center border-b p-2">
+        <SidebarHeader>
             <Button variant="ghost" size="icon" onClick={onClose} className="mr-2">
                 <ArrowLeft className="h-4 w-4" />
             </Button>

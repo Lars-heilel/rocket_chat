@@ -1,4 +1,4 @@
-import { FirendsSwitch } from '@/feature/friends/friends-switch';
+import { FirendsSwitch } from '@/feature/friends/ui/friends-switch';
 import { SearchForm, useUserSearch } from '@/feature/search';
 import { SearchResultsContainer } from '@/feature/search/users-by-query/ui/search-results-container';
 import { useDisclosure } from '@/shared/hooks/use-disclosure';

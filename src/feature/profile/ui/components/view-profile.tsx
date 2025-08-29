@@ -13,11 +13,7 @@ export function ViewProfile() {
     }
     return (
         <>
-            <Button
-                onClick={toggleOpen}
-                variant="ghost"
-                className="h-auto w-full justify-start p-2"
-            >
+            <Button onClick={toggleOpen} variant="ghost">
                 <UsersContainer userData={data} />
             </Button>
             {isOpen && <ProfileSidebar onClose={toggleOpen} userData={data} />}
