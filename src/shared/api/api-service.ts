@@ -15,4 +15,5 @@ export const apiService = createApi({
         },
     }),
     endpoints: () => ({}),
+    tagTypes: ['Friends', 'Requests'],
 });

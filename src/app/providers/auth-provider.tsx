@@ -4,6 +4,8 @@ import { Spiner } from '@/shared/components/ui/spiner';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-redux-hooks';
 import { JwtTokenSchema } from '@/entities/session/model/schema/jwt-token.schema';
 import { useRefreshMutation } from '@/feature/auth/model/store/auth-api-slice';
+import { socketService } from '@/shared/api/socket';
+import { store } from '../store/reduxStore';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const token = useAppSelector((state) => state.session.token);
@@ -26,7 +28,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         };
 
         if (!token) {
+            socketService.disconnect();
             refreshSession();
+        }
+        if (token) {
+            socketService.connect(() => store.getState());
         }
     }, [dispatch, refresh, token]);
 

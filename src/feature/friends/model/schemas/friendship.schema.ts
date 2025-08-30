@@ -17,7 +17,7 @@ export const FriendshipWithUsersSchema = FriendshipSchema.extend({
 });
 
 export const SendFriendRequestSchema = z.object({
-    userId: z.string().uuid({ message: 'Неверный формат ID пользователя' }),
+    userId: z.uuid({ message: 'Неверный формат ID пользователя' }),
 });
 
 export const UpdateFriendshipStatusSchema = z.object({

@@ -1,6 +1,7 @@
 import { io, Socket } from 'socket.io-client';
 import type { RootState } from '@/app/store/reduxStore';
 import { Logger } from '../lib/logger';
+import { SOCKET_EVENTS } from './socket-events.const';
 
 const logger = new Logger('SocketService');
 
@@ -21,9 +22,9 @@ export const socketService = {
 
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-        logger.log(`Connecting to ${VITE_BACKEND_URL}/chat...`);
+        logger.log(`Connecting to ${VITE_BACKEND_URL}chat...`);
 
-        socket = io(`${VITE_BACKEND_URL}/chat`, {
+        socket = io(`${VITE_BACKEND_URL}chat`, {
             auth: {
                 token: token,
             },
@@ -35,19 +36,19 @@ export const socketService = {
                 },
             },
         });
-        socket.on('connect', () => {
+        socket.on(SOCKET_EVENTS.SERVER.CONNECT, () => {
             logger.log(`Socket connected with id: ${socket?.id}`);
         });
 
-        socket.on('disconnect', (reason) => {
+        socket.on(SOCKET_EVENTS.SERVER.DISCONNECT, (reason) => {
             logger.warn(`Socket disconnected: ${reason}`);
         });
 
-        socket.on('connection_error', (error) => {
+        socket.on(SOCKET_EVENTS.SERVER.CONNECTION_ERROR, (error) => {
             logger.error('Connection error:', error.message, error.data);
         });
 
-        socket.on('connection_success', (data) => {
+        socket.on(SOCKET_EVENTS.SERVER.CONNECTION_SUCCESS, (data) => {
             logger.log('Connection successful:', data);
         });
 
