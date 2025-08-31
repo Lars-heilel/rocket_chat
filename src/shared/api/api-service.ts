@@ -1,19 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { RootState } from '@/app/store/reduxStore';
-
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { reauthBaseQueryWrapper } from './reauthBaseQueryWrapper';
 export const apiService = createApi({
     reducerPath: 'apiService',
-    baseQuery: fetchBaseQuery({
-        baseUrl: import.meta.env.VITE_BACKEND_URL,
-        credentials: 'include',
-        prepareHeaders: (headers, { getState }) => {
-            const token = (getState() as RootState).session.token;
-            if (token) {
-                headers.set('authorization', `Bearer ${token}`);
-            }
-            return headers;
-        },
-    }),
+    baseQuery: reauthBaseQueryWrapper,
     endpoints: () => ({}),
-    tagTypes: ['Friends', 'Requests'],
+    tagTypes: ['Friends', 'Requests', 'Users'],
 });

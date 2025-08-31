@@ -1,22 +1,25 @@
-import { UsersContainer, UsersContainerSkeleton } from '@/entities/user';
+import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
 import { Button } from '@/shared/components/ui/button';
-import { useViewProfile } from '../../model';
 import { ProfileSidebar } from '../elements';
+import { useDisclosure } from '@/shared/hooks/use-disclosure';
 
 export function ViewProfile() {
-    const { data, isOpen, toggleOpen, isLoading } = useViewProfile();
-    if (isLoading) {
-        return <UsersContainerSkeleton />;
-    }
-    if (!data) {
-        return;
-    }
-    return (
-        <>
-            <Button onClick={toggleOpen} variant="ghost">
-                <UsersContainer userData={data} />
-            </Button>
-            {isOpen && <ProfileSidebar onClose={toggleOpen} userData={data} />}
-        </>
-    );
+    const { data, isLoading, isSuccess } = useGetMyProfileQuery();
+    const { toggle: toggleOpen, isOpen } = useDisclosure();
+    const renderContent = () => {
+        if (isLoading) {
+            return <UsersContainerSkeleton />;
+        }
+        if (isSuccess) {
+            return (
+                <>
+                    <Button onClick={toggleOpen} variant="ghost">
+                        <UsersContainer userData={data} />
+                    </Button>
+                    {isOpen && <ProfileSidebar onClose={toggleOpen} userData={data} />}
+                </>
+            );
+        }
+    };
+    return renderContent();
 }

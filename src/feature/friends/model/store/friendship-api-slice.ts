@@ -3,7 +3,9 @@ import { FRIENDSHIP_PATH_BACKEND } from '../const/friendship-path';
 import type { FriendshipWithUsers, SendFriendRequestDto, UpdateFriendshipStatusDto } from '../schemas/friendship.schema';
 import { socketService } from '@/shared/api/socket';
 import { SOCKET_EVENTS } from '@/shared/api/socket-events.const';
-import { notificationService } from '@/shared/lib/notifications';
+import { toast } from 'sonner';
+import { Logger } from '@/shared/lib/logger';
+const logger = new Logger('friendshipApiSlice');
 const friendshipApiSlice = apiService.injectEndpoints({
     endpoints: (builder) => ({
         getFriendList: builder.query<FriendshipWithUsers[], void>({
@@ -27,7 +29,8 @@ const friendshipApiSlice = apiService.injectEndpoints({
                     updateCachedData((draft) => {
                         draft.push(newFriendship);
                     });
-                    notificationService.success(`Пользователь ${newFriendship.addressee.name} принял вашу заявку в друзья.`);
+                    logger.debug(`Пользователь ${newFriendship.addressee.name} принял заявку `);
+                    toast.success(`Пользователь принял вашу заявку в друзья.`);
                 };
 
                 const deletedListener = (event: { friendshipId: string }) => {
@@ -66,7 +69,8 @@ const friendshipApiSlice = apiService.injectEndpoints({
                     updateCachedData((draft) => {
                         draft.push(newRequest);
                     });
-                    notificationService.info(`Новая заявка в друзья от ${newRequest.requester.name}!`);
+                    logger.debug(`у вас новая заявка от пользователя ${newRequest.requester.name}`);
+                    toast.success(`Новая заявка в друзья!`);
                 };
 
                 socket.on(SOCKET_EVENTS.SERVER.FRIENDSHIP_REQUEST_RECEIVED, receivedListener);

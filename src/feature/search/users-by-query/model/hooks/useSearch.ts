@@ -1,9 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useLazySearchUsersQuery, type Users } from '@/entities/user';
+import { useGetMyProfileQuery, useLazySearchUsersQuery, type Users } from '@/entities/user';
 import { useDebounce } from '@/shared/hooks/use-debounce';
 import { SearchQuerySchema } from '../schemas/searchQuerySchema';
 import { Logger } from '@/shared/lib/logger';
-import { useAppSelector } from '@/shared/hooks/use-redux-hooks';
 export function isNotMe(value: string, me: Users): boolean {
     const logger = new Logger('isNotMe');
     logger.debug(`Входные значения для проверки value:${value},me:${JSON.stringify(me)}`);
@@ -20,7 +19,7 @@ export function useUserSearch() {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const debouncedSearchQuery = useDebounce(searchQuery, 1000);
     const [triggerSearch, queryResult] = useLazySearchUsersQuery();
-    const me = useAppSelector((state) => state.user.me);
+    const { data: me } = useGetMyProfileQuery();
     useEffect(() => {
         if (!me) {
             logger.error(` данные не получены из стора ${me}`);

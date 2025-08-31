@@ -3,7 +3,6 @@ import { useLogoutMutation } from '../store/auth-api-slice';
 import { AUTH_FRONTEND_PATH } from '../const';
 import { useAppDispatch } from '@/shared/hooks/use-redux-hooks';
 import { logOut } from '@/entities/session/model/slice/sessionSlice';
-import { clearUser } from '@/entities/user/model';
 import { useCallback } from 'react';
 import { rtkErrorParser } from '@/shared/lib/RTK/rtkErrorParser';
 
@@ -16,7 +15,6 @@ export function useLogout() {
         await logout()
             .unwrap()
             .then(() => {
-                dispatch(clearUser());
                 dispatch(logOut());
                 navigate(AUTH_FRONTEND_PATH.LOGIN);
             });

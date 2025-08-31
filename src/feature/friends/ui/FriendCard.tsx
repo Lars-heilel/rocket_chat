@@ -1,6 +1,5 @@
-import { UsersContainer } from '@/entities/user';
+import { useGetMyProfileQuery, UsersContainer } from '@/entities/user';
 import { Button } from '@/shared/components/ui/button';
-import { useAppSelector } from '@/shared/hooks/use-redux-hooks';
 import { Trash2 } from 'lucide-react';
 import { useDeleteFriendMutation } from '../model/store/friendship-api-slice';
 import type { FriendshipWithUsers } from '../model/schemas/friendship.schema';
@@ -11,8 +10,8 @@ interface FriendCardProps {
 
 export function FriendCard({ friendship }: FriendCardProps) {
     const [deleteFriend, { isLoading }] = useDeleteFriendMutation();
-    const myUser = useAppSelector((state) => state.user.me);
-    const friend = friendship.requesterId === myUser?.id ? friendship.addressee : friendship.requester;
+    const { data } = useGetMyProfileQuery();
+    const friend = friendship.requesterId === data?.id ? friendship.addressee : friendship.requester;
 
     const handleDelete = () => {
         deleteFriend({ friendshipId: friendship.id });

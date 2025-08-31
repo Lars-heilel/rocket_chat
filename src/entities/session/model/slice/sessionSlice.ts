@@ -1,9 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+
 interface SessionSliceState {
     token: string | null;
+    _isInitialized: boolean;
 }
+
 const initialState: SessionSliceState = {
     token: null,
+    _isInitialized: false,
 };
 
 const sessionSlice = createSlice({
@@ -16,8 +20,11 @@ const sessionSlice = createSlice({
         logOut: (state) => {
             state.token = null;
         },
+        finishSessionInit: (state) => {
+            state._isInitialized = true;
+        },
     },
 });
 
-export const { setCredentials, logOut } = sessionSlice.actions;
+export const { setCredentials, logOut, finishSessionInit } = sessionSlice.actions;
 export default sessionSlice.reducer;

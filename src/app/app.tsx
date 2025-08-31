@@ -4,17 +4,15 @@ import { store } from './store/reduxStore';
 import { Provider } from 'react-redux';
 import './styles/index.css';
 import { routerProvider } from './providers/router-provider';
-import { AuthProvider } from './providers/auth-provider';
-import { Toaster } from '@/shared/components/ui/sonner';
+import { SessionProvider } from './providers/SessionProvider';
 
 export function App() {
     return (
         <ThemeProvider>
             <Provider store={store}>
-                <AuthProvider>
+                <SessionProvider>
                     <RouterProvider router={routerProvider} />
-                    <Toaster richColors position="top-center" />
-                </AuthProvider>
+                </SessionProvider>
             </Provider>
         </ThemeProvider>
     );
