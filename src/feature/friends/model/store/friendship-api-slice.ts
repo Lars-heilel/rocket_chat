@@ -4,8 +4,6 @@ import type { FriendshipWithUsers, SendFriendRequestDto, UpdateFriendshipStatusD
 import { socketService } from '@/shared/api/socket';
 import { SOCKET_EVENTS } from '@/shared/api/socket-events.const';
 import { toast } from 'sonner';
-import { Logger } from '@/shared/lib/logger';
-const logger = new Logger('friendshipApiSlice');
 const friendshipApiSlice = apiService.injectEndpoints({
     endpoints: (builder) => ({
         getFriendList: builder.query<FriendshipWithUsers[], void>({
@@ -29,8 +27,7 @@ const friendshipApiSlice = apiService.injectEndpoints({
                     updateCachedData((draft) => {
                         draft.push(newFriendship);
                     });
-                    logger.debug(`Пользователь ${newFriendship.addressee.name} принял заявку `);
-                    toast.success(`Пользователь принял вашу заявку в друзья.`);
+                    toast.success(`You and ${newFriendship.addressee.name} are now friends! 🎉`);
                 };
 
                 const deletedListener = (event: { friendshipId: string }) => {
@@ -69,8 +66,7 @@ const friendshipApiSlice = apiService.injectEndpoints({
                     updateCachedData((draft) => {
                         draft.push(newRequest);
                     });
-                    logger.debug(`у вас новая заявка от пользователя ${newRequest.requester.name}`);
-                    toast.success(`Новая заявка в друзья!`);
+                    toast.info(`You have a new friend request from ${newRequest.requester.name}!`);
                 };
 
                 socket.on(SOCKET_EVENTS.SERVER.FRIENDSHIP_REQUEST_RECEIVED, receivedListener);
