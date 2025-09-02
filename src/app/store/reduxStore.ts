@@ -2,11 +2,13 @@ import { apiService } from '@/shared/api/api-service';
 import { configureStore } from '@reduxjs/toolkit';
 import { sessionReducer } from '@/entities/session';
 import { socketMiddleware } from '@/shared/api/socketMiddleware';
+import { chatReducer } from '@/feature/chat';
 
 export const store = configureStore({
     reducer: {
         [apiService.reducerPath]: apiService.reducer,
         session: sessionReducer,
+        chat: chatReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiService.middleware).concat(socketMiddleware),
 });

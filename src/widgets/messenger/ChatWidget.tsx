@@ -1,4 +1,4 @@
-import { ChatWindow } from '@/feature/messenger/chat/components/chat';
+import { ChatWindow } from '@/feature/chat';
 
 export function ChatWidget() {
     return (

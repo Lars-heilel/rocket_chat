@@ -1,6 +1,6 @@
-import { ChatHeader } from '../ui/chat-header';
-import { ChatInput } from '../ui/chat-input';
-import { ChatMessages } from '../ui/chat-messages';
+import { ChatHeader } from '../chat-header';
+import { ChatInput } from '../chat-input';
+import { ChatMessages } from '../chat-messages';
 
 export function ChatWindow() {
     const selectedChat = {
