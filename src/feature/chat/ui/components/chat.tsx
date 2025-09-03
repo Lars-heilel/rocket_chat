@@ -1,26 +1,31 @@
+import { useAppSelector } from '@/shared/hooks/use-redux-hooks';
 import { ChatHeader } from '../chat-header';
 import { ChatInput } from '../chat-input';
 import { ChatMessages } from '../chat-messages';
+import { useGetMyProfileQuery } from '@/entities/user';
 
 export function ChatWindow() {
-    const selectedChat = {
-        name: 'Иван Иванов',
-        avatar: 'https://github.com/ivan.png',
+    const { selectedChatId, friendData } = useAppSelector((state) => state.chat);
+    const { data: currentUser } = useGetMyProfileQuery();
+    const renderContent = () => {
+        if (!selectedChatId) {
+            return (
+                <div className="flex  h-full flex-col items-center justify-center bg-muted/50">
+                    <p>Выберите чат, чтобы начать общение</p>
+                </div>
+            );
+        }
+        if (currentUser)
+            if (friendData) {
+                return (
+                    <div className="flex h-screen flex-col">
+                        <ChatHeader contactName={friendData?.name} />
+                        <ChatMessages currentUser={currentUser} friend={friendData} />
+                        <ChatInput />
+                    </div>
+                );
+            }
     };
 
-    if (!selectedChat) {
-        return (
-            <div className="flex  h-full flex-col items-center justify-center bg-muted/50">
-                <p>Выберите чат, чтобы начать общение</p>
-            </div>
-        );
-    }
-
-    return (
-        <div className="flex h-screen flex-col">
-            <ChatHeader contactName={selectedChat.name} contactAvatar={selectedChat.avatar} />
-            <ChatMessages />
-            <ChatInput />
-        </div>
-    );
+    return renderContent();
 }

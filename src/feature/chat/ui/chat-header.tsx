@@ -1,18 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@components/avatar';
 import { SidebarTrigger } from '@/shared/components/ui/sidebar';
 
-export function ChatHeader({
-    contactName,
-    contactAvatar,
-}: {
-    contactName: string;
-    contactAvatar: string;
-}) {
+export function ChatHeader({ contactName }: { contactName: string }) {
     return (
         <div className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="md:hidden" />
             <Avatar>
-                <AvatarImage src={contactAvatar} alt={contactName} />
+                <AvatarImage alt={contactName} />
                 <AvatarFallback>{contactName.charAt(0)}</AvatarFallback>
             </Avatar>
             <h2 className="text-lg font-semibold">{contactName}</h2>

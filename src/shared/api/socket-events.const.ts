@@ -10,6 +10,8 @@ export const SOCKET_EVENTS = {
         CONNECTION_ERROR: 'connection_error',
         //chatEvents
         NEW_MESSAGE: 'new_message',
+        NEW_MESSAGE_SENT: 'new_message_sent',
+
         // friendshipEvents
         FRIENDSHIP_REQUEST_RECEIVED: 'friendship_request_received',
         FRIENDSHIP_REQUEST_ACCEPTED: 'friendship_request_accepted',

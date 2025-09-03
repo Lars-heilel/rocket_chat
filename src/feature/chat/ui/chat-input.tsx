@@ -1,16 +1,27 @@
+import { socketService } from '@/shared/api/socket';
+import { useAppSelector } from '@/shared/hooks/use-redux-hooks';
 import { Button } from '@components/button';
 import { Input } from '@components/input';
-import { Paperclip, SendHorizonal } from 'lucide-react';
+import { SendHorizonal } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
 
 export function ChatInput() {
+    const [message, setMessage] = useState<string>('');
+    const friend = useAppSelector((state) => state.chat.friendData);
+    const hundleSubmitMessage = (e: FormEvent) => {
+        e.preventDefault();
+        if (!friend) {
+            return;
+        }
+        socketService.sendMessage({ receiverId: friend?.id, content: message });
+        setMessage('');
+    };
+
     return (
         <div className="border-t p-4">
-            <form className="relative">
-                <Input placeholder="Напишите сообщение..." className="pr-20" />
+            <form onSubmit={hundleSubmitMessage} className="relative">
+                <Input value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Напишите сообщение..." className="pr-20" />
                 <div className="absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-2">
-                    <Button type="button" variant="ghost" size="icon">
-                        <Paperclip className="h-5 w-5" />
-                    </Button>
                     <Button type="submit" size="icon">
                         <SendHorizonal className="h-5 w-5" />
                     </Button>
