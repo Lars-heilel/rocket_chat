@@ -20,10 +20,10 @@ export const socketService = {
         }
 
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+        logger.log(`Connecting to ${VITE_BACKEND_URL}${SOCKET_URL}...`);
 
-        logger.log(`Connecting to ${VITE_BACKEND_URL}chat...`);
-
-        socket = io(`${VITE_BACKEND_URL}chat`, {
+        socket = io(`${VITE_BACKEND_URL}${SOCKET_URL}`, {
             auth: {
                 token: token,
             },

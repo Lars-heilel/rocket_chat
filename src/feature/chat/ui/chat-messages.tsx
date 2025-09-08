@@ -1,47 +1,40 @@
-import { ScrollArea } from '@components/scroll-area';
-import { useChatHistoryQuery } from '../model';
 import { Spiner } from '@/shared/components/ui/spiner';
-import { UsersContainer, type Users } from '@/entities/user';
+import { type Users } from '@/entities/user';
+import { ChatMessageItem, useChatHistoryQuery } from '@/entities/message';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
+
 interface ChatMessageProps {
     currentUser: Users;
     friend: Users;
+    roomId: string;
 }
-export function ChatMessages({ currentUser, friend }: ChatMessageProps) {
-    const {
-        currentData,
-        data: newMessageArray,
-        isLoading,
-        isError,
-    } = useChatHistoryQuery({ userId: currentUser.id, secondUserId: friend.id, limit: 20 });
+
+export function ChatMessages({ currentUser, friend, roomId }: ChatMessageProps) {
+    const { data: messages, isLoading, isError } = useChatHistoryQuery({ chatRoomId: roomId, limit: 20 });
     const renderContent = () => {
         if (isLoading) {
-            return <Spiner />;
-        }
-        if (isError) <div>Ошибка загрузки сообщений</div>;
-        if (newMessageArray) {
-            return newMessageArray.map((message) => {
-                const isMyMessage = message.senderId === currentUser.id;
-                return (
-                    <div key={message.id}>
-                        {isMyMessage ? <UsersContainer userData={currentUser} /> : <UsersContainer userData={friend} />}
-                        <p>{message.content}</p>
-                    </div>
-                );
-            });
-        }
-        return currentData?.map((message) => {
-            const isMyMessage = message.senderId === currentUser.id;
             return (
-                <div key={message.id}>
-                    {isMyMessage ? <UsersContainer userData={currentUser} /> : <UsersContainer userData={friend} />}
-                    <p>{message.content}</p>
+                <div className="flex justify-center items-center h-full">
+                    <Spiner />
                 </div>
             );
-        });
+        }
+        if (isError) {
+            return <div className="flex justify-center items-center h-full text-destructive">Ошибка загрузки сообщений</div>;
+        }
+        if (messages && messages.length > 0) {
+            const sortedMessages = [...messages].sort((a, b) => new Date(a.createAt).getTime() - new Date(b.createAt).getTime());
+
+            return sortedMessages.map((message) => (
+                <ChatMessageItem key={message.id} message={message} currentUser={currentUser} friend={friend} />
+            ));
+        }
+        return <div className="flex justify-center items-center h-full text-muted-foreground">Сообщений пока нет</div>;
     };
+
     return (
-        <ScrollArea className="flex-1">
-            <div className="flex flex-col gap-4 p-4">{renderContent()}</div>
+        <ScrollArea className="flex-1 overflow-auto">
+            <div className="p-4 sm:p-6  space-y-4">{renderContent()}</div>
         </ScrollArea>
     );
 }

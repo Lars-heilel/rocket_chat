@@ -7,7 +7,7 @@ import { useState, type FormEvent } from 'react';
 
 export function ChatInput() {
     const [message, setMessage] = useState<string>('');
-    const friend = useAppSelector((state) => state.chat.friendData);
+    const friend = useAppSelector((state) => state.chatRoom.friendData);
     const hundleSubmitMessage = (e: FormEvent) => {
         e.preventDefault();
         if (!friend) {

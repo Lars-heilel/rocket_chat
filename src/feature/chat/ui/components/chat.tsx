@@ -5,7 +5,7 @@ import { ChatMessages } from '../chat-messages';
 import { useGetMyProfileQuery } from '@/entities/user';
 
 export function ChatWindow() {
-    const { selectedChatId, friendData } = useAppSelector((state) => state.chat);
+    const { selectedChatId, friendData } = useAppSelector((state) => state.chatRoom);
     const { data: currentUser } = useGetMyProfileQuery();
     const renderContent = () => {
         if (!selectedChatId) {
@@ -20,7 +20,7 @@ export function ChatWindow() {
                 return (
                     <div className="flex h-screen flex-col">
                         <ChatHeader contactName={friendData?.name} />
-                        <ChatMessages currentUser={currentUser} friend={friendData} />
+                        <ChatMessages roomId={selectedChatId} currentUser={currentUser} friend={friendData} />
                         <ChatInput />
                     </div>
                 );
