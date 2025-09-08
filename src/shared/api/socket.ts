@@ -2,7 +2,6 @@ import { io, Socket } from 'socket.io-client';
 import type { RootState } from '@/app/store/reduxStore';
 import { Logger } from '../lib/logger';
 import { SOCKET_EVENTS } from './socket-events.const';
-
 const logger = new Logger('SocketService');
 
 let socket: Socket | null = null;
@@ -21,10 +20,10 @@ export const socketService = {
         }
 
         const VITE_BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+        const SOCKET_URL = import.meta.env.VITE_SOCKET_URL;
+        logger.log(`Connecting to ${VITE_BACKEND_URL}${SOCKET_URL}...`);
 
-        logger.log(`Connecting to ${VITE_BACKEND_URL}chat...`);
-
-        socket = io(`${VITE_BACKEND_URL}chat`, {
+        socket = io(`${VITE_BACKEND_URL}${SOCKET_URL}`, {
             auth: {
                 token: token,
             },
@@ -60,6 +59,13 @@ export const socketService = {
             socket.disconnect();
             socket = null;
         }
+    },
+    sendMessage: (payload: { receiverId: string; content: string }) => {
+        if (!socket || !socket.connected) {
+            logger.error('Socket is not connected. Cannot send message.');
+            return;
+        }
+        socket.emit(SOCKET_EVENTS.CLIENT.SEND_MESSAGE, payload);
     },
 
     getSocket: () => socket,

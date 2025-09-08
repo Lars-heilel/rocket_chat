@@ -3,7 +3,7 @@ import type { Users } from '../schemas/userSchema';
 import { USER_PATH_BACKEND } from '../const/userPath';
 import type { FindUsersDto } from '../schemas/findUsersSchema';
 
-const userApi = apiService.injectEndpoints({
+export const userApi = apiService.injectEndpoints({
     endpoints: (builder) => ({
         getMyProfile: builder.query<Users, void>({
             query: () => USER_PATH_BACKEND.MY_PROFILE,
@@ -18,9 +18,4 @@ const userApi = apiService.injectEndpoints({
     }),
 });
 
-export const {
-    useGetMyProfileQuery,
-    useLazyGetMyProfileQuery,
-    useLazySearchUsersQuery,
-    useSearchUsersQuery,
-} = userApi;
+export const { useGetMyProfileQuery, useLazyGetMyProfileQuery, useLazySearchUsersQuery, useSearchUsersQuery } = userApi;
