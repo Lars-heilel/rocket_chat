@@ -4,11 +4,7 @@ import { SearchResultsContainer } from '@/feature/search/users-by-query/ui/searc
 import { useDisclosure } from '@/shared/hooks/use-disclosure';
 
 export function SidebarContentPanelWidget() {
-    const {
-        isOpen: isSearchActive,
-        open: activateSearch,
-        close: deactivateSearch,
-    } = useDisclosure();
+    const { isOpen: isSearchActive, open: activateSearch, close: deactivateSearch } = useDisclosure();
     const { searchQuery, setSearchQuery, queryResult } = useUserSearch();
     const handleCloseAndClearSearch = () => {
         deactivateSearch();
@@ -18,11 +14,7 @@ export function SidebarContentPanelWidget() {
         <>
             <SearchForm value={searchQuery} onChange={setSearchQuery} openSearch={activateSearch} />
             {isSearchActive ? (
-                <SearchResultsContainer
-                    searchQuery={searchQuery}
-                    queryResult={queryResult}
-                    close={handleCloseAndClearSearch}
-                />
+                <SearchResultsContainer searchQuery={searchQuery} queryResult={queryResult} close={handleCloseAndClearSearch} />
             ) : (
                 <FirendsSwitch />
             )}

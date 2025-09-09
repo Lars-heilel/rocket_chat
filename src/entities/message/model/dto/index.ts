@@ -1,1 +1,1 @@
-export * from './hystory.dto';
+export * from './get-hystory.dto';

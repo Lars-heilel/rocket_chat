@@ -1,8 +1,11 @@
 import * as React from 'react';
+
+import { ViewProfile } from '@/feature/profile';
+
 import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider } from '@components/sidebar';
+
 import { ChatWidget } from '../messenger/ChatWidget';
 import { SidebarContentPanelWidget } from '../messenger/SidebarContentPanelWidget';
-import { ViewProfile } from '@/feature/profile';
 export function MessengerLayout({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <SidebarProvider>

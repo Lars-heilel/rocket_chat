@@ -1,0 +1,20 @@
+import { type Middleware } from '@reduxjs/toolkit';
+
+import type { RootState } from '@/app/store/reduxStore';
+import { logOut, setCredentials } from '@/entities/session/model/sessionSlice';
+import { socketService } from '@/shared/api/web-socket/socket';
+import { Logger } from '@/shared/lib/logger';
+
+const logger = new Logger('SocketMiddleware');
+export const socketMiddleware: Middleware = (store) => (next) => (action) => {
+    const result = next(action);
+    if (setCredentials.match(action)) {
+        logger.log('Geted token (setCredentials). connect to WebSocket...');
+        socketService.connect(store.getState as () => RootState);
+    } else if (logOut.match(action)) {
+        logger.warn(' clear session (logOut). disconnect WebSocket...');
+        socketService.disconnect();
+    }
+
+    return result;
+};
