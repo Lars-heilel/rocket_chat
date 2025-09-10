@@ -1,6 +1,6 @@
 import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
 import { Button } from '@/shared/components/ui/button';
-import { useDisclosure } from '@/shared/hooks/use-disclosure';
+import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
 
 import { ProfileSidebar } from '../elements';
 

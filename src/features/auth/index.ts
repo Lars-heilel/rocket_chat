@@ -1,3 +1,3 @@
-export * from './ui/components';
-export { useLogout } from './model/hooks/useLogout';
-export * from './model/const/index';
+export * from './auth-login/index';
+export * from './auth-logout/index';
+export * from './auth-register/index';

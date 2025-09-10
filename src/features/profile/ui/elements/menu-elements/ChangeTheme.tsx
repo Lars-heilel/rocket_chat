@@ -1,6 +1,6 @@
 import { Palette } from 'lucide-react';
 
-import { useTheme } from '@/entities/theme-switcher/ui/theme-provider';
+import { useTheme } from '@/entities/theme/ui/theme-provider';
 import { Button } from '@/shared/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/shared/components/ui/dropdown-menu';
 

@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@/entities/theme-switcher';
+import { ThemeProvider } from '@/entities/theme';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router';
 import { Toaster } from 'sonner';

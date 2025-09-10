@@ -3,12 +3,12 @@ import { Logger } from '@/shared/lib';
 import { apiService } from '@/shared/api';
 import { BACKEND_ROUTES } from '@/shared/config';
 import type { GetPrivateRoomDto } from './dto';
-import { chatRoomSchema, type ChatRoomResponse } from './schemas';
+import { chatRoomSchema, type ChatRoom } from './schemas';
 
 const logger = new Logger('chatRoomApi');
 export const chatRoomApi = apiService.injectEndpoints({
     endpoints: (builder) => ({
-        getPrivateRoom: builder.query<ChatRoomResponse, GetPrivateRoomDto>({
+        getPrivateRoom: builder.query<ChatRoom, GetPrivateRoomDto>({
             query: (dto: GetPrivateRoomDto) => ({ url: BACKEND_ROUTES.CHAT_ROOM_PRIVATE, method: 'GET', params: dto }),
             transformResponse: (response: unknown) => {
                 try {

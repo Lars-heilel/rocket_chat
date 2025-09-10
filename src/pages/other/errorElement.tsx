@@ -1,6 +1,5 @@
+import { Button } from '@/shared/shadcn-ui/ui/button';
 import { useRouteError, isRouteErrorResponse, useNavigate } from 'react-router';
-
-import { Button } from '@/shared/components/ui/button';
 
 export function RouteErrorPage() {
     const error = useRouteError();

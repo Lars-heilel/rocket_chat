@@ -1,9 +1,7 @@
 import { io, Socket } from 'socket.io-client';
-
 import type { RootState } from '@/app/store/reduxStore';
-
 import { SOCKET_EVENTS } from './socket-events.const';
-import { Logger } from '../../lib/logger';
+import { Logger } from '@/shared/lib';
 const logger = new Logger('SocketService');
 
 let socket: Socket | null = null;

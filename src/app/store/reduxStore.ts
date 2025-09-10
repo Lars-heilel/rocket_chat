@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { chatRoomReducer } from '@/entities/chat-room';
-import { sessionReducer } from '@/entities/session';
-import { apiService, socketMiddleware } from '@/shared/api';
+import { sessionReducer, socketMiddleware } from '@/entities/session';
+import { apiService } from '@/shared/api';
 
 export const store = configureStore({
     reducer: {

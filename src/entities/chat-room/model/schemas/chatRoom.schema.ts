@@ -6,4 +6,4 @@ export const chatRoomSchema = z.object({
     updatedAt: z.iso.datetime(),
 });
 
-export type ChatRoomResponse = z.infer<typeof chatRoomSchema>;
+export type ChatRoom = z.infer<typeof chatRoomSchema>;

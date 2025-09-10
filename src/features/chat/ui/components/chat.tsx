@@ -1,5 +1,5 @@
 import { useGetMyProfileQuery } from '@/entities/user';
-import { useAppSelector } from '@/shared/hooks/use-redux-hooks';
+import { useAppSelector } from '@/shared/lib/redux/use-redux-hooks';
 
 import { ChatHeader } from '../chat-header';
 import { ChatInput } from '../chat-input';

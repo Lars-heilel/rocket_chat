@@ -1,11 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-
 import type { Users } from '@/entities/user';
 import { cn } from '@/shared/lib/utils';
-import type { MessageResponse } from '../model';
+import type { Message } from '../model';
 
 interface ChatMessageItemProps {
-    message: MessageResponse;
+    message: Message;
     currentUser: Users;
     friend: Users;
 }
