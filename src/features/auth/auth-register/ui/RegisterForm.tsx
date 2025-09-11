@@ -1,41 +1,34 @@
-import { Link } from 'react-router';
 import { useRegister } from '../model';
-import { registerFormFields, RegisterTxtContent } from '../config';
+import { registerFormFields, RegisterContent } from '../config';
 import { BaseForm, FormCard, SuccessDisplay } from '@/shared/ui';
 export function RegisterForm({ className, ...props }: React.ComponentProps<'div'>) {
     const { form, onSubmit, isSuccess, data, isError, isLoading, errorMessage } = useRegister();
-    const content = RegisterTxtContent;
+    const { success, cardContent } = RegisterContent;
     return (
         <FormCard
             isError={isError}
             errorMessage={errorMessage}
-            title={isSuccess ? content.success.title : content.form.title}
+            title={isSuccess ? success.title : cardContent.title}
             className={className}
             footerContent={
                 isSuccess ? null : (
                     <>
-                        <span>{content.form.footerText}</span>
-                        <Link className="hover:underline" to={content.form.footerLink.to}>
-                            {content.form.footerLink.label}
-                        </Link>
+                        <span>{cardContent.footerText}</span>
+                        {cardContent.footerLink}
                     </>
                 )
             }
             {...props}
         >
             {isSuccess && data?.message ? (
-                <SuccessDisplay
-                    title={content.success.title}
-                    description={content.success.description(data)}
-                    actionLink={content.success.actionLink}
-                />
+                <SuccessDisplay description={success.description} children={success.actionLinks} />
             ) : (
                 <BaseForm
                     isLoading={isLoading}
                     form={form}
                     onSubmit={onSubmit}
                     fields={registerFormFields}
-                    btnTitle={content.form.buttonText}
+                    btnTitle={cardContent.buttonText}
                 />
             )}
         </FormCard>

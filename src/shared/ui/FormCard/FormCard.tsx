@@ -5,7 +5,7 @@ import { ApiErrorAlert } from '../status/ApiErrorAlert';
 interface FormCardProps extends React.ComponentProps<'div'> {
     title: string;
     children: React.ReactNode;
-    footerContent: React.ReactNode;
+    footerContent?: React.ReactNode;
     isError?: boolean;
     errorMessage?: string;
 }
@@ -22,7 +22,7 @@ export function FormCard({ title, isError, errorMessage, children, footerContent
                     )}
                 </CardHeader>
                 <CardContent>{children}</CardContent>
-                {footerContent && <CardFooter className="flex justify-center gap-1 text-sm">{footerContent}</CardFooter>}
+                {footerContent && <CardFooter className="flex justify-center gap-5 text-sm">{footerContent}</CardFooter>}
             </Card>
         </div>
     );

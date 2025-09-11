@@ -1,15 +1,8 @@
 import type { Users } from '@/entities/user';
-import { Button } from '@/shared/components/ui/button';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from '@/shared/components/ui/dialog';
-import { Input } from '@/shared/components/ui/input';
-import { Label } from '@/shared/components/ui/label';
+import { Button } from '@/shared/shadcn-ui/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/shared/shadcn-ui/ui/dialog';
+import { Input } from '@/shared/shadcn-ui/ui/input';
+import { Label } from '@/shared/shadcn-ui/ui/label';
 
 interface EditProfileModalProps {
     isOpen: boolean;

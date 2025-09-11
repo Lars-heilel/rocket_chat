@@ -1,8 +1,7 @@
 import { User } from 'lucide-react';
-
 import type { Users } from '@/entities/user/model/schemas/userSchema';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@components/avatar';
 interface UsersContainerProps {
     userData: Users;
 }
@@ -16,12 +15,8 @@ export function UsersContainer({ userData }: UsersContainerProps) {
                 </AvatarFallback>
             </Avatar>
             <div className="flex flex-1 flex-col items-start min-w-0">
-                <span className="font-bold dark:text-white text-black truncate w-full">
-                    {userData?.name}
-                </span>
-                <span className="text-muted-foreground text-sm truncate w-full">
-                    {userData?.email}
-                </span>
+                <span className="font-bold dark:text-white text-black truncate w-full">{userData?.name}</span>
+                <span className="text-muted-foreground text-sm truncate w-full">{userData?.email}</span>
             </div>
         </div>
     );

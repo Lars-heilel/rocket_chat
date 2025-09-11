@@ -13,3 +13,4 @@ export {
     useResetPasswordMutation,
     useVerifyAccountMutation,
 } from './mails-api';
+export * from './dto/index';

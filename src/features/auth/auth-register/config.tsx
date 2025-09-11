@@ -1,6 +1,6 @@
-import type { FormFieldConfig } from '@/shared/ui';
-import type { RegisterFormData } from './model/schema';
 import { FRONTEND_ROUTES } from '@/shared/config';
+import type { RegisterFormData } from '@/entities/user';
+import { NavButton, type FormFieldConfig } from '@/shared/ui';
 export const registerFormFields: FormFieldConfig<RegisterFormData>[] = [
     {
         name: 'email',
@@ -27,22 +27,16 @@ export const registerFormFields: FormFieldConfig<RegisterFormData>[] = [
         type: 'password',
     },
 ];
-export const RegisterTxtContent = {
-    form: {
+export const RegisterContent = {
+    cardContent: {
         title: 'Sign up new account',
         buttonText: 'Register',
         footerText: 'Return to login?',
-        footerLink: {
-            to: FRONTEND_ROUTES.LOGIN,
-            label: 'Login',
-        },
+        footerLink: <NavButton variant="link" text="login" to={FRONTEND_ROUTES.LOGIN}></NavButton>,
     },
     success: {
-        title: 'Registration was successful!',
-        description: (data: { message: string }) => data.message,
-        actionLink: {
-            to: FRONTEND_ROUTES.LOGIN,
-            label: 'Return to login',
-        },
+        title: 'Account Created!',
+        description: 'A confirmation link has been sent to your email. Please check your inbox to complete the registration.',
+        actionLinks: <NavButton variant="default" size="lg" text="Back to login" to={FRONTEND_ROUTES.LOGIN}></NavButton>,
     },
 };

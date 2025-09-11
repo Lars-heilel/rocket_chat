@@ -1,7 +1,5 @@
-import z from 'zod';
-
 import { FindUserSchema } from '@/entities/user';
-
+import z from 'zod';
 function buildSearchData(query: string) {
     const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(query);
     if (isEmail) return { email: query };

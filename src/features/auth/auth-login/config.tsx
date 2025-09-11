@@ -1,7 +1,6 @@
 import type { LoginFormData } from '@/entities/user';
 import { FRONTEND_ROUTES } from '@/shared/config';
-import type { FormFieldConfig } from '@/shared/ui';
-import { Link } from 'react-router';
+import { NavButton, type FormFieldConfig } from '@/shared/ui';
 
 export const loginFormFields: FormFieldConfig<LoginFormData>[] = [
     {
@@ -15,21 +14,14 @@ export const loginFormFields: FormFieldConfig<LoginFormData>[] = [
         label: 'Password',
         placeholder: '*******',
         type: 'password',
-        formLabelChildren: (
-            <Link className="hover:underline" to={FRONTEND_ROUTES.FORGOT_PASSWORD}>
-                Forgot password?
-            </Link>
-        ),
+        formLabelChildren: <NavButton variant="link" to={FRONTEND_ROUTES.FORGOT_PASSWORD} text="Forgot password?"></NavButton>,
     },
 ];
 export const loginTxtContent = {
-    form: {
+    cardContent: {
         title: 'Sign in to your account',
         buttonText: 'Login',
         footerText: 'Need an account?',
-        footerLink: {
-            to: FRONTEND_ROUTES.REGISTER,
-            label: 'Register',
-        },
+        footerLink: <NavButton variant="link" to={FRONTEND_ROUTES.REGISTER} text="Register"></NavButton>,
     },
 };

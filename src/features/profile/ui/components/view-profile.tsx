@@ -1,8 +1,7 @@
 import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
-import { Button } from '@/shared/components/ui/button';
 import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
-
 import { ProfileSidebar } from '../elements';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 export function ViewProfile() {
     const { data, isLoading, isSuccess } = useGetMyProfileQuery();

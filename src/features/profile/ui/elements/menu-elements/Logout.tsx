@@ -1,10 +1,8 @@
 import { LogOut } from 'lucide-react';
-
-import { useLogout } from '@/feature/auth';
-import { CommandItem } from '@/shared/components/ui/command';
 import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
-
 import { LogoutConfirmDialog } from './LogoutConfirmDialog';
+import { useLogout } from '@/features/auth';
+import { CommandItem } from '@/shared/shadcn-ui/ui/command';
 
 export function Logout() {
     const { hanldeLogout, isLoading } = useLogout();

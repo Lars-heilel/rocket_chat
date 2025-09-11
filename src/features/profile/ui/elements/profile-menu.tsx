@@ -1,9 +1,8 @@
-import { Command, CommandGroup, CommandList, CommandSeparator } from '@components/command';
-import { SidebarContent } from '@components/sidebar';
-
+import { SidebarContent } from '@/shared/shadcn-ui/ui/sidebar';
 import { ChangeTheme } from './menu-elements/ChangeTheme';
 import { ProfileEdit } from './menu-elements/EditProfile';
 import { Logout } from './menu-elements/Logout';
+import { Command, CommandGroup, CommandList, CommandSeparator } from '@/shared/shadcn-ui/ui/command';
 
 export function ProfileMenu() {
     return (

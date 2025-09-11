@@ -1,7 +1,12 @@
-import { JwtTokenSchema, type JwtTokenResponse } from '@/entities/session/model/schema/jwt-token.schema';
 import { apiService } from '@/shared/api/http/api-service';
 import { BACKEND_ROUTES } from '@/shared/config';
-import type { RequestResetPasswordFormData, ResendVerifyEmailFormData, ResetPasswordApiData } from './schemas';
+import {
+    VerifyAccountResponseSchema,
+    type RequestResetPasswordFormData,
+    type ResendVerifyEmailFormData,
+    type ResetPasswordApiData,
+    type VerifyAccountResponse,
+} from './schemas';
 const mailsApi = apiService.injectEndpoints({
     endpoints: (builder) => ({
         RequsetResetPassword: builder.mutation<{ message: string }, RequestResetPasswordFormData>({
@@ -19,21 +24,13 @@ const mailsApi = apiService.injectEndpoints({
                 body: { password: requestData.password },
             }),
         }),
-        verifyAccount: builder.mutation<JwtTokenResponse, { token: string }>({
+        verifyAccount: builder.mutation<VerifyAccountResponse, { token: string }>({
             query: (requestData) => ({
                 url: BACKEND_ROUTES.VERIFY_ACCOUNT,
                 method: 'GET',
                 params: requestData,
             }),
-            transformResponse: (response: JwtTokenResponse) => {
-                const validation = JwtTokenSchema.safeParse(response);
-
-                if (validation.success) {
-                    return validation.data;
-                }
-
-                throw new Error('invalid server response');
-            },
+            responseSchema: VerifyAccountResponseSchema,
         }),
         resendVerifyEmail: builder.mutation<{ message: string }, ResendVerifyEmailFormData>({
             query: (credentials) => ({

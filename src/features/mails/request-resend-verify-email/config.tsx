@@ -1,6 +1,6 @@
 import type { ResendVerifyEmailFormData } from '@/entities/user';
 import { FRONTEND_ROUTES } from '@/shared/config';
-import type { FormFieldConfig } from '@/shared/ui';
+import { NavButton, type FormFieldConfig } from '@/shared/ui';
 
 export const ResendVerifyMailFormFields: FormFieldConfig<ResendVerifyEmailFormData>[] = [
     {
@@ -10,22 +10,16 @@ export const ResendVerifyMailFormFields: FormFieldConfig<ResendVerifyEmailFormDa
         type: 'email',
     },
 ];
-export const ResendVerifyMailTxtContent = {
-    form: {
+export const ResendVerifyMailContent = {
+    cardContent: {
         title: 'Resend confirmation email',
         buttonText: 'Continue',
         footerText: 'Return to login?',
-        footerLink: {
-            to: FRONTEND_ROUTES.LOGIN,
-            label: 'Sign in',
-        },
+        footerLink: <NavButton variant="link" text="Sign in" to={FRONTEND_ROUTES.LOGIN}></NavButton>,
     },
     success: {
         title: 'Success!',
         description: (data: { message: string }) => data.message,
-        actionLink: {
-            to: FRONTEND_ROUTES.LOGIN,
-            label: 'Return to login',
-        },
+        actionLink: <NavButton variant="default" text="Return to login" to={FRONTEND_ROUTES.LOGIN}></NavButton>,
     },
 };

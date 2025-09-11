@@ -1,19 +1,18 @@
 import { Frown, UserPlus, Users } from 'lucide-react';
 
-import { Spiner } from '@/shared/components/ui/spiner';
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@components/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/shadcn-ui/ui/tabs';
 
 import { FriendCard } from './FriendCard';
 import { FriendRequestCard } from './FriendshpRequestCard';
 import { useGetFriendListQuery, useGetIncomingRequestsQuery } from '../model/store/friendship-api-slice';
+import { Spinner } from '@/shared/ui';
 
 export function FirendsSwitch() {
     const { data: friends, isLoading: isLoadingFriends, isError: isFriendsError } = useGetFriendListQuery();
     const { data: requests, isLoading: isLoadingRequests, isError: isRequestsError } = useGetIncomingRequestsQuery();
     const renderFriendListContent = () => {
         if (isLoadingFriends) {
-            return <Spiner />;
+            return <Spinner />;
         }
         if (isFriendsError) {
             return (
@@ -44,7 +43,7 @@ export function FirendsSwitch() {
     };
     const renderRequestListContent = () => {
         if (isLoadingRequests) {
-            return <Spiner />;
+            return <Spinner />;
         }
         if (isRequestsError) {
             return (

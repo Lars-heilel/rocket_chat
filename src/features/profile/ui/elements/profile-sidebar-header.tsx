@@ -1,10 +1,8 @@
 import { ArrowLeft } from 'lucide-react';
-
 import { UsersContainer } from '@/entities/user';
 import type { Users } from '@/entities/user';
-import { Button } from '@/shared/components/ui/button';
-import { SidebarHeader } from '@/shared/components/ui/sidebar';
-
+import { SidebarHeader } from '@/shared/shadcn-ui/ui/sidebar';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 interface ProfileSidebarHeaderProps {
     userData: Users;

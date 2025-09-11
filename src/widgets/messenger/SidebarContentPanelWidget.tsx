@@ -1,6 +1,5 @@
-import { FirendsSwitch } from '@/feature/friends/ui/friends-switch';
-import { SearchForm, useUserSearch } from '@/feature/search';
-import { SearchResultsContainer } from '@/feature/search/users-by-query/ui/search-results-container';
+import { FirendsSwitch } from '@/features/friends/ui/friends-switch';
+import { SearchForm, SearchResultsContainer, useUserSearch } from '@/features/search';
 import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
 
 export function SidebarContentPanelWidget() {

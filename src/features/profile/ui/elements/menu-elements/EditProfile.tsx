@@ -1,10 +1,8 @@
 import { Edit, Loader2 } from 'lucide-react';
-
 import { useGetMyProfileQuery } from '@/entities/user';
-import { CommandItem } from '@/shared/components/ui/command';
 import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
-
 import { EditProfileModal } from '../../components/edit-profile-modal';
+import { CommandItem } from '@/shared/shadcn-ui/ui/command';
 
 export function ProfileEdit() {
     const { data: userData, isLoading } = useGetMyProfileQuery();

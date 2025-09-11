@@ -1,12 +1,9 @@
 import { useState, type FormEvent } from 'react';
-
 import { SendHorizonal } from 'lucide-react';
-
-import { socketService } from '@/shared/api/web-socket/socket';
 import { useAppSelector } from '@/shared/lib/redux/use-redux-hooks';
-
-import { Button } from '@components/button';
-import { Input } from '@components/input';
+import { socketService } from '@/shared/api';
+import { Input } from '@/shared/shadcn-ui/ui/input';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 export function ChatInput() {
     const [message, setMessage] = useState<string>('');

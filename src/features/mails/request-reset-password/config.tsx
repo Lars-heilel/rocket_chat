@@ -1,6 +1,6 @@
 import type { RequestResetPasswordFormData } from '@/entities/user';
 import { FRONTEND_ROUTES } from '@/shared/config';
-import type { FormFieldConfig } from '@/shared/ui';
+import { NavButton, type FormFieldConfig } from '@/shared/ui';
 
 export const RequsetResetPasswordFormFields: FormFieldConfig<RequestResetPasswordFormData>[] = [
     {
@@ -10,22 +10,15 @@ export const RequsetResetPasswordFormFields: FormFieldConfig<RequestResetPasswor
         type: 'email',
     },
 ];
-export const RequsetResetPasswordTxtContent = {
-    form: {
+export const RequsetResetPasswordContent = {
+    cardContent: {
         title: 'Password recovery request',
         buttonText: 'Continue',
         footerText: 'Return to sign in',
-        footerLink: {
-            to: FRONTEND_ROUTES.LOGIN,
-            label: 'Sign in',
-        },
+        footerLink: <NavButton variant="link" text="Back to Login" to={FRONTEND_ROUTES.LOGIN}></NavButton>,
     },
     success: {
         title: 'Success!',
-        description: (data: { message: string }) => data.message,
-        actionLink: {
-            to: FRONTEND_ROUTES.LOGIN,
-            label: 'Return to login',
-        },
+        actionLink: <NavButton variant="default" text="Back to Login" to={FRONTEND_ROUTES.LOGIN}></NavButton>,
     },
 };

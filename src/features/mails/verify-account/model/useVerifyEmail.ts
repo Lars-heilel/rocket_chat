@@ -6,15 +6,15 @@ import { setCredentials } from '@/entities/session';
 
 export function useVerifyAccount() {
     const [searchParams] = useSearchParams();
-    const [tokenError, setTokenError] = useState<boolean>(false);
-    const [tokenErrorMessage, setTokenErrorMessage] = useState<string>('');
+    const [paramsError, setParamsError] = useState<boolean>(false);
+    const [paramsErrorMessage, setParamsErrorMessage] = useState<string>('');
     const token = searchParams.get('token');
 
     useEffect(() => {
         const validate = async () => {
             if (!token) {
-                setTokenErrorMessage('token not found, request not possible');
-                setTokenError(true);
+                setParamsErrorMessage('invalid url, request not possible');
+                setParamsError(true);
                 return;
             }
         };
@@ -37,8 +37,8 @@ export function useVerifyAccount() {
     return {
         ...mutationProps,
         errorMessage,
-        tokenError,
-        tokenErrorMessage,
+        paramsError,
+        paramsErrorMessage,
         handleVerify,
     };
 }

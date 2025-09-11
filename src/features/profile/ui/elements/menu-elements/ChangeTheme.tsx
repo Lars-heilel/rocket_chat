@@ -1,8 +1,7 @@
 import { Palette } from 'lucide-react';
-
 import { useTheme } from '@/entities/theme/ui/theme-provider';
-import { Button } from '@/shared/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/shared/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/shared/shadcn-ui/ui/dropdown-menu';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 export function ChangeTheme() {
     const { setTheme } = useTheme();

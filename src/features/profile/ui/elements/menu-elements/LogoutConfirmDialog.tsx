@@ -1,6 +1,4 @@
-import { BtnLoader } from '@/feature/auth/ui/elements';
-import { Button } from '@/shared/components/ui/button';
-
+import { Button } from '@/shared/shadcn-ui/ui/button';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -10,7 +8,8 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-} from '@components/alert-dialog';
+} from '@/shared/shadcn-ui/ui/alert-dialog';
+import { Loader2 } from 'lucide-react';
 
 interface LogoutConfirmDialogProps {
     isOpen: boolean;
@@ -19,12 +18,7 @@ interface LogoutConfirmDialogProps {
     isLoading: boolean;
 }
 
-export function LogoutConfirmDialog({
-    isOpen,
-    onClose,
-    onConfirm,
-    isLoading,
-}: LogoutConfirmDialogProps) {
+export function LogoutConfirmDialog({ isOpen, onClose, onConfirm, isLoading }: LogoutConfirmDialogProps) {
     const handleOpenChange = (open: boolean) => {
         if (!open) {
             onClose();
@@ -36,9 +30,7 @@ export function LogoutConfirmDialog({
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        To continue, click the button you need
-                    </AlertDialogDescription>
+                    <AlertDialogDescription>To continue, click the button you need</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel asChild>
@@ -48,7 +40,7 @@ export function LogoutConfirmDialog({
                     </AlertDialogCancel>
                     <AlertDialogAction asChild>
                         <Button variant="destructive" onClick={onConfirm} disabled={isLoading}>
-                            {isLoading ? <BtnLoader /> : 'Log Out'}
+                            {isLoading ? <Loader2 /> : 'Log Out'}
                         </Button>
                     </AlertDialogAction>
                 </AlertDialogFooter>

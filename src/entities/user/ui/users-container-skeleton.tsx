@@ -1,4 +1,5 @@
-import { Skeleton } from '@/shared/components/ui/skeleton';
+import { Skeleton } from '@/shared/shadcn-ui/ui/skeleton';
+
 export function UsersContainerSkeleton() {
     return (
         <div className="flex items-center">

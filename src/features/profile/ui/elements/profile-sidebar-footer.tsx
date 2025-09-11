@@ -1,8 +1,6 @@
+import { Button } from '@/shared/shadcn-ui/ui/button';
+import { SidebarFooter } from '@/shared/shadcn-ui/ui/sidebar';
 import { Rocket, Github } from 'lucide-react';
-
-import { Button } from '@/shared/components/ui/button';
-import { SidebarFooter } from '@/shared/components/ui/sidebar';
-
 export function ProfileSidebarFooter() {
     return (
         <SidebarFooter className="border-t p-3">

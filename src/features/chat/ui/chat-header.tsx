@@ -1,6 +1,5 @@
-import { SidebarTrigger } from '@/shared/components/ui/sidebar';
-
-import { Avatar, AvatarFallback, AvatarImage } from '@components/avatar';
+import { SidebarTrigger } from '@/shared/shadcn-ui/ui/sidebar';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 
 export function ChatHeader({ contactName }: { contactName: string }) {
     return (

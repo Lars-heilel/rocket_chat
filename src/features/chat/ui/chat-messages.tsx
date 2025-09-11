@@ -1,9 +1,7 @@
 import { ScrollArea } from '@radix-ui/react-scroll-area';
-
 import { ChatMessageItem, useChatHistoryQuery } from '@/entities/message';
 import { type Users } from '@/entities/user';
-import { Spiner } from '@/shared/components/ui/spiner';
-
+import { Spinner } from '@/shared/ui';
 
 interface ChatMessageProps {
     currentUser: Users;
@@ -17,7 +15,7 @@ export function ChatMessages({ currentUser, friend, roomId }: ChatMessageProps) 
         if (isLoading) {
             return (
                 <div className="flex justify-center items-center h-full">
-                    <Spiner />
+                    <Spinner />
                 </div>
             );
         }

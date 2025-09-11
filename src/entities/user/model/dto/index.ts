@@ -1,1 +1,1 @@
-export * from './findUsers.dto';
+export { FindUserSchema, type FindUsersDto } from './findUsers.dto';

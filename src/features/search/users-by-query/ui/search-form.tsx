@@ -1,6 +1,5 @@
+import { Input } from '@/shared/shadcn-ui/ui/input';
 import { Search } from 'lucide-react';
-
-import { Input } from '@/shared/components/ui/input';
 
 interface SearchFormProps {
     openSearch: () => void;

@@ -1,11 +1,9 @@
 import { UserPlus } from 'lucide-react';
-
-import { useSendFriendRequestMutation } from '@/feature/friends/model/store/friendship-api-slice';
-import { Button } from '@/shared/components/ui/button';
-
 import { UsersContainer } from './users-container';
 
 import type { Users } from '../model';
+import { Button } from '@/shared/shadcn-ui/ui/button';
+import { useSendFriendRequestMutation } from '@/features/friends/model/store/friendship-api-slice';
 
 interface UsersListProps {
     users: Users[];

@@ -1,12 +1,9 @@
 import { toast } from 'sonner';
-
 import { apiService } from '@/shared/api/http/api-service';
-import { socketService } from '@/shared/api/web-socket/socket';
-import { SOCKET_EVENTS } from '@/shared/api/web-socket/socket-events.const';
-
 import { FRIENDSHIP_PATH_BACKEND } from '../const/friendship-path';
 
 import type { FriendshipWithUsers, SendFriendRequestDto, UpdateFriendshipStatusDto } from '../schemas/friendship.schema';
+import { SOCKET_EVENTS, socketService } from '@/shared/api';
 const friendshipApiSlice = apiService.injectEndpoints({
     endpoints: (builder) => ({
         getFriendList: builder.query<FriendshipWithUsers[], void>({

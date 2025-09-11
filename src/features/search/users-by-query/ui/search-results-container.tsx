@@ -1,12 +1,9 @@
 import { Frown, Search, X } from 'lucide-react';
-
 import { UserList } from '@/entities/user';
-import { Button } from '@/shared/components/ui/button';
-import { Card, CardContent } from '@/shared/components/ui/card';
-import { Spiner } from '@/shared/components/ui/spiner';
-
 import type { UseUserSearchResult } from '../model';
-
+import { Spinner } from '@/shared/ui';
+import { Card, CardContent } from '@/shared/shadcn-ui/ui/card';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 interface SearchResultsContainerProps {
     close: () => void;
@@ -14,11 +11,7 @@ interface SearchResultsContainerProps {
     searchQuery: string;
 }
 
-export function SearchResultsContainer({
-    close,
-    queryResult,
-    searchQuery,
-}: SearchResultsContainerProps) {
+export function SearchResultsContainer({ close, queryResult, searchQuery }: SearchResultsContainerProps) {
     const { data: users, isFetching, isSuccess, isError } = queryResult;
 
     const InitialState = () => (
@@ -35,7 +28,7 @@ export function SearchResultsContainer({
         }
 
         if (isFetching) {
-            return <Spiner />;
+            return <Spinner />;
         }
         if (isError) {
             return (
@@ -69,12 +62,7 @@ export function SearchResultsContainer({
 
     return (
         <Card className="relative flex h-full w-full max-w-md flex-col overflow-hidden">
-            <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-3 right-3 h-6 w-6"
-                onClick={close}
-            >
+            <Button variant="ghost" size="icon" className="absolute top-3 right-3 h-6 w-6" onClick={close}>
                 <X className="h-4 w-4" />
             </Button>
             <CardContent className="flex-grow overflow-y-auto">{renderContent()}</CardContent>

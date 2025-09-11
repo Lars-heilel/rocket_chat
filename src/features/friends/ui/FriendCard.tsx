@@ -1,17 +1,13 @@
 import { useMemo } from 'react';
-
 import { Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
-
 import { selectedChatRoom, useLazyGetPrivateRoomQuery } from '@/entities/chat-room';
 import { useGetMyProfileQuery, UsersContainer } from '@/entities/user';
-import { Button } from '@/shared/components/ui/button';
 import { useAppDispatch } from '@/shared/lib/redux/use-redux-hooks';
 import { Logger } from '@/shared/lib/logger';
-
 import { useDeleteFriendMutation } from '../model/store/friendship-api-slice';
-
 import type { FriendshipWithUsers } from '../model/schemas/friendship.schema';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 interface FriendCardProps {
     friendship: FriendshipWithUsers;
