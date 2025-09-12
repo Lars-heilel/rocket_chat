@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider } from '@components/sidebar';
 import { ChatWidget } from '../messenger/ChatWidget';
 import { SidebarContentPanelWidget } from '../messenger/SidebarContentPanelWidget';
-import { ViewProfile } from '@/feature/profile';
+import { Sidebar, SidebarContent, SidebarHeader, SidebarProvider } from '@/shared/shadcn-ui/ui/sidebar';
+import { ViewProfile } from '@/features/profile';
 export function MessengerLayout({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <SidebarProvider>

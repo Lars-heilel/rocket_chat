@@ -1,5 +1,5 @@
+import { Button } from '@/shared/shadcn-ui/ui/button';
 import { useRouteError, isRouteErrorResponse, useNavigate } from 'react-router';
-import { Button } from '@/shared/components/ui/button';
 
 export function RouteErrorPage() {
     const error = useRouteError();
@@ -25,8 +25,7 @@ export function RouteErrorPage() {
                 {errorMessage}
             </p>
             <p className="max-w-md text-sm text-muted-foreground">
-                Мы не смогли загрузить страницу, которую вы искали. Возможно, вы опечатались в
-                адресе или произошла ошибка при загрузке.
+                Мы не смогли загрузить страницу, которую вы искали. Возможно, вы опечатались в адресе или произошла ошибка при загрузке.
             </p>
             <div className="flex gap-4">
                 <Button onClick={() => navigate(-1)}>Вернуться назад</Button>

@@ -1,4 +1,4 @@
-import { ChatWindow } from '@/feature/chat';
+import { ChatWindow } from '@/features/chat';
 
 export function ChatWidget() {
     return (

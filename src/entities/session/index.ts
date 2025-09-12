@@ -1,1 +1,2 @@
-export * from './model';
+export * from './model/index';
+export * from './ui/index';

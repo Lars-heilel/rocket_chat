@@ -1,4 +1,2 @@
-export * from './const/index';
-export * from './dto/index';
-export * from './schema/index';
-export * from './store/index';
+export { useChatHistoryQuery, useLazyChatHistoryQuery } from './api';
+export * from './schemas/index';
