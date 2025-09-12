@@ -1,20 +1,26 @@
 import { toast } from 'sonner';
-import { apiService } from '@/shared/api/http/api-service';
-import { FRIENDSHIP_PATH_BACKEND } from '../const/friendship-path';
-
-import type { FriendshipWithUsers, SendFriendRequestDto, UpdateFriendshipStatusDto } from '../schemas/friendship.schema';
-import { SOCKET_EVENTS, socketService } from '@/shared/api';
+import { apiService, SOCKET_EVENTS, socketService } from '@/shared/api';
+import { BACKEND_ROUTES } from '@/shared/config';
+import {
+    deleteFriendResponseSchema,
+    FriendshipWithUsersArraySchema,
+    FriendshipWithUsersSchema,
+    type DeleteFriendResponse,
+    type FriendshipWithUsers,
+} from './schemas';
+import type { DeleteFriendDto, SendFriendRequestDto, UpdateFriendshipStatusDto } from './dto';
 const friendshipApiSlice = apiService.injectEndpoints({
     endpoints: (builder) => ({
         getFriendList: builder.query<FriendshipWithUsers[], void>({
             query: () => ({
-                url: FRIENDSHIP_PATH_BACKEND.FRIENDLIST,
+                url: BACKEND_ROUTES.FRIEND_LIST,
                 method: 'GET',
             }),
             providesTags: (result) =>
                 result
                     ? [...result.map(({ id }) => ({ type: 'Friends' as const, id })), { type: 'Friends', id: 'LIST' }]
                     : [{ type: 'Friends', id: 'LIST' }],
+            responseSchema: FriendshipWithUsersArraySchema,
             async onCacheEntryAdded(_arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
                 const socket = socketService.getSocket();
                 if (!socket) {
@@ -48,9 +54,10 @@ const friendshipApiSlice = apiService.injectEndpoints({
 
         getIncomingRequests: builder.query<FriendshipWithUsers[], void>({
             query: () => ({
-                url: FRIENDSHIP_PATH_BACKEND.FRIENDSHIP,
+                url: BACKEND_ROUTES.FRIENDSHIP,
                 method: 'GET',
             }),
+            responseSchema: FriendshipWithUsersArraySchema,
             providesTags: (result) =>
                 result
                     ? [...result.map(({ id }) => ({ type: 'Requests' as const, id })), { type: 'Requests', id: 'LIST' }]
@@ -77,28 +84,31 @@ const friendshipApiSlice = apiService.injectEndpoints({
 
         sendFriendRequest: builder.mutation<FriendshipWithUsers, SendFriendRequestDto>({
             query: (body) => ({
-                url: FRIENDSHIP_PATH_BACKEND.FRIENDSHIP,
+                url: BACKEND_ROUTES.FRIENDSHIP,
                 method: 'POST',
                 body,
             }),
+            responseSchema: FriendshipWithUsersSchema,
         }),
 
-        updateFriendshipStatus: builder.mutation<FriendshipWithUsers, { friendshipId: string; body: UpdateFriendshipStatusDto }>({
+        updateFriendshipStatus: builder.mutation<FriendshipWithUsers, UpdateFriendshipStatusDto>({
             query: ({ friendshipId, body }) => ({
-                url: `${FRIENDSHIP_PATH_BACKEND.FRIENDSHIP}/${friendshipId}`,
+                url: `${BACKEND_ROUTES.FRIENDSHIP}/${friendshipId}`,
                 method: 'PATCH',
                 body,
             }),
+            responseSchema: FriendshipWithUsersSchema,
             invalidatesTags: [
                 { type: 'Friends', id: 'LIST' },
                 { type: 'Requests', id: 'LIST' },
             ],
         }),
-        deleteFriend: builder.mutation<{ message: string }, { friendshipId: string }>({
+        deleteFriend: builder.mutation<DeleteFriendResponse, DeleteFriendDto>({
             query: ({ friendshipId }) => ({
-                url: `${FRIENDSHIP_PATH_BACKEND.FRIENDSHIP}/${friendshipId}`,
+                url: `${BACKEND_ROUTES.FRIENDSHIP}/${friendshipId}`,
                 method: 'DELETE',
             }),
+            responseSchema: deleteFriendResponseSchema,
             invalidatesTags: (_result, _error, { friendshipId }) => [
                 { type: 'Friends', id: 'LIST' },
                 { type: 'Friends', id: friendshipId },

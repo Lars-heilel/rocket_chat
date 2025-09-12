@@ -14,13 +14,13 @@ export function useRegister() {
             confirmPassword: '',
         },
     });
-    const [request, { ...mutationProps }] = useRegisterMutation();
-    const errorMessage = rtkErrorParser(mutationProps.error);
+    const [request, { error, data, isError, isSuccess, isLoading }] = useRegisterMutation();
+    const errorMessage = rtkErrorParser(error);
     const onSubmit = useCallback(
         async (data: RegisterFormData) => {
             await request(data).unwrap();
         },
         [request],
     );
-    return { form, onSubmit, ...mutationProps, errorMessage };
+    return { form, onSubmit, data, errorMessage, isError, isLoading, isSuccess };
 }

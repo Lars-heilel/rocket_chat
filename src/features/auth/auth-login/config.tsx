@@ -17,7 +17,7 @@ export const loginFormFields: FormFieldConfig<LoginFormData>[] = [
         formLabelChildren: <NavButton variant="link" to={FRONTEND_ROUTES.FORGOT_PASSWORD} text="Forgot password?"></NavButton>,
     },
 ];
-export const loginTxtContent = {
+export const loginContent = {
     cardContent: {
         title: 'Sign in to your account',
         buttonText: 'Login',

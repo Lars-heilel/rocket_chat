@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { MessageSchema, type MessageResponse } from './schemas';
+import { MessageSchema, type Message } from './schemas';
 import type { GetHistoryDto } from './dto';
 import { BACKEND_ROUTES } from '@/shared/config';
 import { apiService, SOCKET_EVENTS, socketService } from '@/shared/api';
@@ -8,7 +8,7 @@ import type { RootState } from '@/app/store/reduxStore';
 const logger = new Logger('messageApiSlice');
 export const messageApiSlice = apiService.injectEndpoints({
     endpoints: (builder) => ({
-        chatHistory: builder.query<MessageResponse[], GetHistoryDto>({
+        chatHistory: builder.query<Message[], GetHistoryDto>({
             query: (dto) => ({ url: BACKEND_ROUTES.MESSAGE_HISTORY, params: dto }),
             async onCacheEntryAdded(_arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved, getState }) {
                 const socket = socketService.getSocket();
@@ -16,7 +16,7 @@ export const messageApiSlice = apiService.injectEndpoints({
                     return;
                 }
                 await cacheDataLoaded;
-                const messageListener = (newMessageData: MessageResponse) => {
+                const messageListener = (newMessageData: Message) => {
                     const validation = MessageSchema.safeParse(newMessageData);
                     if (!validation.success) {
                         logger.error('Received invalid message structure from WebSocket:', validation.error);

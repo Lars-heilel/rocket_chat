@@ -1,8 +1,8 @@
-import { ArrowLeft } from 'lucide-react';
 import { UsersContainer } from '@/entities/user';
 import type { Users } from '@/entities/user';
 import { SidebarHeader } from '@/shared/shadcn-ui/ui/sidebar';
 import { Button } from '@/shared/shadcn-ui/ui/button';
+import { ArrowLeftCircleIcon } from 'lucide-react';
 
 interface ProfileSidebarHeaderProps {
     userData: Users;
@@ -12,10 +12,12 @@ interface ProfileSidebarHeaderProps {
 export function ProfileSidebarHeader({ userData, onClose }: ProfileSidebarHeaderProps) {
     return (
         <SidebarHeader>
-            <Button variant="ghost" size="icon" onClick={onClose} className="mr-2">
-                <ArrowLeft className="h-4 w-4" />
-            </Button>
-            <UsersContainer userData={userData} />
+            <div className="flex items-center justify-center">
+                <Button variant="secondary" size="lg" onClick={onClose} className="mr-2">
+                    <ArrowLeftCircleIcon></ArrowLeftCircleIcon>
+                </Button>
+                <UsersContainer userData={userData} />
+            </div>
         </SidebarHeader>
     );
 }

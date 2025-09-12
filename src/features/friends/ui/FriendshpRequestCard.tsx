@@ -1,8 +1,10 @@
 import { Check, X } from 'lucide-react';
 import { UsersContainer } from '@/entities/user';
-import { useUpdateFriendshipStatusMutation } from '../model/store/friendship-api-slice';
+import { useUpdateFriendshipStatusMutation } from '../../../entities/friendship/model/api';
 
-import type { FriendshipWithUsers } from '../model/schemas/friendship.schema';
+import type { FriendshipWithUsers } from '../../../entities/friendship/model/schemas/friendship.schema';
+import { Card } from '@/shared/shadcn-ui/ui/card';
+import { Button } from '@/shared/shadcn-ui/ui/button';
 
 interface FriendRequestCardProps {
     request: FriendshipWithUsers;

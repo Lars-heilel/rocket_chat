@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/shadcn-ui/ui/
 
 import { FriendCard } from './FriendCard';
 import { FriendRequestCard } from './FriendshpRequestCard';
-import { useGetFriendListQuery, useGetIncomingRequestsQuery } from '../model/store/friendship-api-slice';
+import { useGetFriendListQuery, useGetIncomingRequestsQuery } from '../../../entities/friendship/model/api';
 import { Spinner } from '@/shared/ui';
 
 export function FirendsSwitch() {

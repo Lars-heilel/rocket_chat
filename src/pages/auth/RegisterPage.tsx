@@ -1,5 +1,7 @@
 import { RegisterForm } from '@/features/auth/auth-register';
+import { useRegister } from '@/features/auth/auth-register/model';
 
 export function Component() {
-    return <RegisterForm />;
+    const registerLogic = useRegister();
+    return <RegisterForm {...registerLogic} />;
 }

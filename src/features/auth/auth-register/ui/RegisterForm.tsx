@@ -1,15 +1,13 @@
-import { useRegister } from '../model';
 import { registerFormFields, RegisterContent } from '../config';
 import { BaseForm, FormCard, SuccessDisplay } from '@/shared/ui';
-export function RegisterForm({ className, ...props }: React.ComponentProps<'div'>) {
-    const { form, onSubmit, isSuccess, data, isError, isLoading, errorMessage } = useRegister();
+import type { RegisterFormProps } from './RegisterForm.props';
+export function RegisterForm({ form, onSubmit, isSuccess, data, isError, isLoading, errorMessage }: RegisterFormProps) {
     const { success, cardContent } = RegisterContent;
     return (
         <FormCard
             isError={isError}
             errorMessage={errorMessage}
             title={isSuccess ? success.title : cardContent.title}
-            className={className}
             footerContent={
                 isSuccess ? null : (
                     <>
@@ -18,7 +16,6 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'div'
                     </>
                 )
             }
-            {...props}
         >
             {isSuccess && data?.message ? (
                 <SuccessDisplay description={success.description} children={success.actionLinks} />

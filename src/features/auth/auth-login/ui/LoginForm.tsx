@@ -1,24 +1,20 @@
-import { loginFormFields, loginTxtContent } from '../config';
 import { BaseForm, FormCard } from '@/shared/ui';
-import { useLogin } from '../model';
+import type { LoginFormProps } from './LoginForm.props';
+import { loginFormFields, loginContent } from '../config';
 
-export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
-    const { form, onSubmit, isLoading, isError, errorMessage } = useLogin();
-    const { cardContent } = loginTxtContent;
-
+export function LoginForm({ form, isError, isLoading, errorMessage, onSubmit }: LoginFormProps) {
+    const { cardContent } = loginContent;
     return (
         <FormCard
             isError={isError}
             errorMessage={errorMessage}
             title={cardContent.title}
-            className={className}
             footerContent={
                 <>
                     <span>{cardContent.footerText}</span>
                     {cardContent.footerLink}
                 </>
             }
-            {...props}
         >
             <BaseForm isLoading={isLoading} form={form} onSubmit={onSubmit} fields={loginFormFields} btnTitle={cardContent.buttonText} />
         </FormCard>

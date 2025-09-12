@@ -1,9 +1,9 @@
 import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
-import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
-import { ProfileSidebar } from '../elements';
+import { useDisclosure } from '@/shared/lib';
 import { Button } from '@/shared/shadcn-ui/ui/button';
+import { ProfilePanel } from './ui/ProfilePanel';
 
-export function ViewProfile() {
+export function ViewProfileWidget() {
     const { data, isLoading, isSuccess } = useGetMyProfileQuery();
     const { toggle: toggleOpen, isOpen } = useDisclosure();
     const renderContent = () => {
@@ -12,11 +12,11 @@ export function ViewProfile() {
         }
         if (isSuccess) {
             return (
-                <div className="flex justify-center items-center mt-2">
+                <div className="flex flex-1 justify-center items-center">
                     <Button onClick={toggleOpen} variant="ghost">
                         <UsersContainer userData={data} />
                     </Button>
-                    {isOpen && <ProfileSidebar onClose={toggleOpen} userData={data} />}
+                    {isOpen && <ProfilePanel />}
                 </div>
             );
         }

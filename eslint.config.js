@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint';
 import { globalIgnores } from 'eslint/config';
 
 export default tseslint.config([
-    globalIgnores(['dist', 'build', 'src/shared/components/**']),
+    globalIgnores(['dist', 'build', 'src/shared/shadcn-ui/**']),
     {
         files: ['**/*.{ts,tsx}'],
         extends: [

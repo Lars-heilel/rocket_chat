@@ -5,8 +5,8 @@ import { selectedChatRoom, useLazyGetPrivateRoomQuery } from '@/entities/chat-ro
 import { useGetMyProfileQuery, UsersContainer } from '@/entities/user';
 import { useAppDispatch } from '@/shared/lib/redux/use-redux-hooks';
 import { Logger } from '@/shared/lib/logger';
-import { useDeleteFriendMutation } from '../model/store/friendship-api-slice';
-import type { FriendshipWithUsers } from '../model/schemas/friendship.schema';
+import { useDeleteFriendMutation } from '../../../entities/friendship/model/api';
+import type { FriendshipWithUsers } from '../../../entities/friendship/model/schemas/friendship.schema';
 import { Button } from '@/shared/shadcn-ui/ui/button';
 
 interface FriendCardProps {
@@ -44,10 +44,16 @@ export function FriendCard({ friendship }: FriendCardProps) {
         }
     };
     return (
-        <div onClick={() => handleSelectChatRoom()} className="flex items-center justify-between rounded-md p-2 hover:bg-muted/50">
-            <UsersContainer userData={friend} />
+        <div
+            onClick={() => handleSelectChatRoom()}
+            className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-muted/50 transition-colors"
+        >
+            <div className="flex items-center gap-3">
+                {/* UsersContainer должен содержать аватар и имя */}
+                <UsersContainer userData={friend} />
+            </div>
             <Button
-                size="icon"
+                size="sm" // Можно попробовать 'sm' вместо 'icon' для большей области клика
                 variant="ghost"
                 onClick={(e) => {
                     e.stopPropagation();
@@ -55,6 +61,7 @@ export function FriendCard({ friendship }: FriendCardProps) {
                 }}
                 disabled={isLoading}
                 aria-label="Delete friend"
+                className="opacity-0 group-hover:opacity-100 transition-opacity" // Появляется при наведении на весь блок
             >
                 <Trash2 className="h-4 w-4 text-destructive" />
             </Button>

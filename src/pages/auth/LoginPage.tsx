@@ -1,5 +1,5 @@
-import { LoginForm } from '@/features/auth/auth-login';
-
+import { LoginForm, useLogin } from '@/features/auth/auth-login';
 export function Component() {
-    return <LoginForm />;
+    const loginLogic = useLogin();
+    return <LoginForm {...loginLogic} />;
 }

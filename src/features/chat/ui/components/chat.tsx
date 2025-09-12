@@ -12,7 +12,7 @@ export function ChatWindow() {
         if (!selectedChatId) {
             return (
                 <div className="flex  h-full flex-col items-center justify-center bg-muted/50">
-                    <p>Выберите чат, чтобы начать общение</p>
+                    <p>Select chat to start chatting</p>
                 </div>
             );
         }
