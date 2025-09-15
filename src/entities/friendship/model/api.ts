@@ -89,7 +89,7 @@ const friendshipApiSlice = apiService.injectEndpoints({
                 body,
             }),
             responseSchema: FriendshipWithUsersSchema,
-            invalidatesTags: (result, error, arg) => [{ type: 'Users', id: arg.userId }],
+            invalidatesTags: (_result, _error, arg) => [{ type: 'Users', id: arg.userId }],
         }),
 
         updateFriendshipStatus: builder.mutation<FriendshipWithUsers, UpdateFriendshipStatusDto>({

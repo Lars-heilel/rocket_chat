@@ -1,9 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
-
 import { useGetMyProfileQuery, useLazySearchUsersQuery, type Users } from '@/entities/user';
 import { useDebounce } from '@/shared/lib/hooks/use-debounce';
 import { Logger } from '@/shared/lib/logger';
-
 import { SearchQuerySchema } from '../schemas/searchQuerySchema';
 export function isNotMe(value: string, me: Users): boolean {
     const logger = new Logger('isNotMe');

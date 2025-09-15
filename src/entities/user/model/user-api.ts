@@ -38,6 +38,10 @@ export const userApi = apiService.injectEndpoints({
                 params: searchDto,
                 method: 'GET',
             }),
+            providesTags: (result) =>
+                result
+                    ? [...result.map(({ id }) => ({ type: 'Users' as const, id })), { type: 'Users', id: 'LIST' }]
+                    : [{ type: 'Users', id: 'LIST' }],
         }),
     }),
 });
