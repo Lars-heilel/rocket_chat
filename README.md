@@ -58,10 +58,6 @@ To get the project running on your local machine, follow these steps:
 3.  **Create the environment file:**
     Copy the contents of `.env.example` to a new file named `.env` in the project root.
 
-    ```bash
-    cp .env.example .env
-    ```
-
 4.  **Configure environment variables:**
     Open the `.env` file and specify the URL of your running backend:
 
