@@ -49,11 +49,10 @@ export function FriendCard({ friendship }: FriendCardProps) {
             className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-muted/50 transition-colors"
         >
             <div className="flex items-center gap-3">
-                {/* UsersContainer должен содержать аватар и имя */}
                 <UsersContainer userData={friend} />
             </div>
             <Button
-                size="sm" // Можно попробовать 'sm' вместо 'icon' для большей области клика
+                size="sm"
                 variant="ghost"
                 onClick={(e) => {
                     e.stopPropagation();
@@ -61,7 +60,7 @@ export function FriendCard({ friendship }: FriendCardProps) {
                 }}
                 disabled={isLoading}
                 aria-label="Delete friend"
-                className="opacity-0 group-hover:opacity-100 transition-opacity" // Появляется при наведении на весь блок
+                className="opacity-0 group-hover:opacity-100 transition-opacity"
             >
                 <Trash2 className="h-4 w-4 text-destructive" />
             </Button>

@@ -3,7 +3,7 @@ import { verifyEmailContent } from '../config';
 import { useVerifyAccount } from '../model';
 import { ErrorDisplay, FormCard, SuccessDisplay } from '@/shared/ui';
 import { Button } from '@/shared/shadcn-ui/ui/button';
-export function VerifyEmailComponent({ className, ...props }: React.ComponentProps<'div'>) {
+export function VerifyEmailComponent() {
     const { isError, isSuccess, errorMessage, paramsError, paramsErrorMessage, isLoading, handleVerify } = useVerifyAccount();
     const { error, success, main } = verifyEmailContent;
 
@@ -28,9 +28,5 @@ export function VerifyEmailComponent({ className, ...props }: React.ComponentPro
         );
     };
 
-    return (
-        <FormCard title={main.title} className={className} {...props}>
-            {renderContent()}
-        </FormCard>
-    );
+    return <FormCard title={main.title}>{renderContent()}</FormCard>;
 }

@@ -18,7 +18,7 @@ export function Spinner({ size = 'md', className, showText = true, text = 'Loadi
     const spinnerSizeClass = sizeClasses[size];
 
     return (
-        <div role="status" className={cn('flex flex-col items-center justify-center gap-2 text-primary', className)}>
+        <div role="status" className={cn('flex min-h-screen flex-col items-center justify-center gap-2 text-primary', className)}>
             <Loader2 className={cn('animate-spin', spinnerSizeClass)} />
             {showText && <span className="sr-only">{text}</span>}
             {showText && <p>{text}</p>}

@@ -7,7 +7,9 @@
         "dev": "vite",
         "build": "NODE_ENV=PROD tsc -b && vite build",
         "lint": "eslint .",
-        "prod": "vite preview"
+        "preview": "vite preview",
+        "docker:prod": "docker compose up --build",
+        "docker:down": "docker compose down"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.2.1",
