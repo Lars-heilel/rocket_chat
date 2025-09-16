@@ -7,7 +7,7 @@ const logger = new Logger('baseQueryWithReauth');
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BACKEND_URL,
+    baseUrl: 'https://backend-lszk.onrender.com',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).session.token;

@@ -79,3 +79,11 @@ To get the project running on your local machine, follow these steps:
     ```bash
     npm run dev
     ```
+6.  **Start the production local server:**
+    ```bash
+    npm run preview
+    ```
+    or run container
+    ```bash
+    npm run docker:prod
+    ```
