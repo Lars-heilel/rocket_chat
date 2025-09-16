@@ -11,7 +11,7 @@ export default defineConfig({
         },
     },
     define: {
-        'import.meta.env.VITE_BACKEND_URL': process.env.VITE_BACKEND_URL,
-        'import.meta.env.VITE_SOCKET_URL': process.env.VITE_SOCKET_URL,
+        VITE_BACKEND_URL: process.env.VERCEL_BACKEND_URL,
+        VITE_SOCKET_URL: process.env.VERCEL_SOCKET_URL,
     },
 });
