@@ -10,8 +10,4 @@ export default defineConfig({
             '@components': path.resolve(__dirname, './src/shared/components/ui'),
         },
     },
-    define: {
-        VITE_BACKEND_URL: process.env.VERCEL_BACKEND_URL,
-        VITE_SOCKET_URL: process.env.VERCEL_SOCKET_URL,
-    },
 });
