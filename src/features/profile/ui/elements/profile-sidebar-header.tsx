@@ -1,23 +1,21 @@
-import { UsersContainer } from '@/entities/user';
-import type { Users } from '@/entities/user';
-import { SidebarHeader } from '@/shared/shadcn-ui/ui/sidebar';
+import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
 import { Button } from '@/shared/shadcn-ui/ui/button';
+import { SidebarHeader } from '@/shared/shadcn-ui/ui/sidebar';
 import { ArrowLeftCircleIcon } from 'lucide-react';
 
 interface ProfileSidebarHeaderProps {
-    userData: Users;
     onClose: () => void;
 }
 
-export function ProfileSidebarHeader({ userData, onClose }: ProfileSidebarHeaderProps) {
+export function ProfileSidebarHeader({ onClose }: ProfileSidebarHeaderProps) {
+    const { data: userData, isSuccess } = useGetMyProfileQuery();
     return (
         <SidebarHeader>
-            <div className="flex items-center justify-center">
-                <Button variant="secondary" size="lg" onClick={onClose} className="mr-2">
-                    <ArrowLeftCircleIcon></ArrowLeftCircleIcon>
-                </Button>
-                <UsersContainer userData={userData} />
-            </div>
+            <Button variant="ghost" size="lg" onClick={onClose}>
+                <ArrowLeftCircleIcon />
+                <p className="font-bold">Return to contacts</p>
+            </Button>
+            {isSuccess ? <UsersContainer userData={userData} /> : <UsersContainerSkeleton />}
         </SidebarHeader>
     );
 }
