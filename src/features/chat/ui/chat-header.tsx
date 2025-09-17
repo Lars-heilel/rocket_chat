@@ -6,10 +6,10 @@ export function ChatHeader({ contactName }: { contactName: string }) {
         <div className="flex justify-between h-16 shrink-0 items-center gap-2 border-b px-4">
             <div className="flex gap-5 items-center">
                 <Avatar>
-                    <AvatarImage alt={contactName} />
-                    <AvatarFallback>{contactName.charAt(0)}</AvatarFallback>
+                    <AvatarImage alt={contactName.slice(0, 20)} />
+                    <AvatarFallback>{contactName.charAt(0).slice(0, 20)}</AvatarFallback>
                 </Avatar>
-                <h2 className="text-lg font-semibold">{contactName}</h2>
+                <h2 className="text-lg font-semibold">{contactName.slice(0, 20)}</h2>
             </div>
             <div>
                 <SidebarTrigger className="md:hidden" />

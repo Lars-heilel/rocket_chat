@@ -1,7 +1,6 @@
 import { Check, X } from 'lucide-react';
 import { UsersContainer } from '@/entities/user';
 import { useUpdateFriendshipStatusMutation } from '../../../entities/friendship/model/api';
-
 import type { FriendshipWithUsers } from '../../../entities/friendship/model/schemas/friendship.schema';
 import { Card } from '@/shared/shadcn-ui/ui/card';
 import { Button } from '@/shared/shadcn-ui/ui/button';
@@ -22,9 +21,9 @@ export function FriendRequestCard({ request }: FriendRequestCardProps) {
     };
 
     return (
-        <Card>
+        <Card className="flex justify-between items-center gap-5 border-2 border-card-foreground">
             <UsersContainer userData={sender} />
-            <div className="flex">
+            <div className="flex justify-between gap-6">
                 <Button
                     size="sm"
                     className="bg-green-400"
@@ -35,7 +34,7 @@ export function FriendRequestCard({ request }: FriendRequestCardProps) {
                 >
                     Accept <Check className="h-4 w-4 text-white" />
                 </Button>
-                <Button size="sm" variant="destructive" onClick={handleReject} disabled={isLoading} aria-label="Reject">
+                <Button size="sm" className="bg-red-400" variant="default" onClick={handleReject} disabled={isLoading} aria-label="Reject">
                     Reject
                     <X className="h-4 w-4 text-white" />
                 </Button>

@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const registerSchema = z
     .object({
         email: z.email('example@email.com'),
-        name: z.string().min(2),
+        name: z.string().min(2).max(20),
         password: z.string().regex(PasswordRegex.REGEX, PasswordRegex.MESSAGE).min(PasswordRegex.MIN_LENGTH),
         confirmPassword: z.string().regex(PasswordRegex.REGEX, PasswordRegex.MESSAGE).min(PasswordRegex.MIN_LENGTH),
     })
