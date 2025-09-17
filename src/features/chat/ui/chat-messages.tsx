@@ -40,11 +40,11 @@ export function ChatMessages({ currentUser, friend, roomId }: ChatMessageProps) 
 
     return (
         <ScrollArea className="flex-1 overflow-auto">
-            <ScrollAreaViewport>
+            
                 <div className="p-4 space-y-4">
                     {renderContent()} <div ref={bottonTriggerRef}></div>
                 </div>
-            </ScrollAreaViewport>
+           
         </ScrollArea>
     );
 }
