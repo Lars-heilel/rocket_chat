@@ -7,8 +7,8 @@ interface UsersContainerProps {
 }
 export function UsersContainer({ userData }: UsersContainerProps) {
     return (
-        <div className="flex items-center flex-1 gap-3">
-            <Avatar>
+        <div className="flex items-center gap-3">
+            <Avatar className="border-2 border-amber-50 rounded-full p-2">
                 <AvatarImage alt={userData?.name.slice(0, 1)} />
                 <AvatarFallback>
                     <User />

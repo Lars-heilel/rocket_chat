@@ -16,7 +16,7 @@ export function EditProfileModal({ isOpen, onClose, userData }: EditProfileModal
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Edit profile</DialogTitle>
-                    <DialogDescription>Work in progress</DialogDescription>
+                    <DialogDescription className="text-2xl text-red-500">Work in progress</DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">

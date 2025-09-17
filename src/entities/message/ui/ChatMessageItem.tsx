@@ -16,7 +16,7 @@ export function ChatMessageItem({ message, currentUser, friend }: ChatMessageIte
 
     return (
         <div className="flex items-end gap-3">
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-8 w-8 border-2 border-amber-50 rounded-full  text-center ">
                 <AvatarImage alt={author.name} />
                 <AvatarFallback>{author.name.substring(0, 1)}</AvatarFallback>
             </Avatar>
@@ -24,6 +24,7 @@ export function ChatMessageItem({ message, currentUser, friend }: ChatMessageIte
                 <div
                     className={cn(
                         'max-w-xs md:max-w-md rounded-lg px-4 py-2 text-sm',
+                        'break-words',
 
                         isMyMessage ? 'bg-primary text-primary-foreground' : 'bg-muted',
                     )}
