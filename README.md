@@ -45,8 +45,8 @@ To get the project running on your local machine, follow these steps:
 1.  **Clone the repository:**
 
     ```bash
-    git clone [https://github.com/Lars-heilel/rocket_chat.git]
-    cd [rocket-chat]
+    git clone https://github.com/Lars-heilel/rocket_chat.git
+    cd rocket-chat
     ```
 
 2.  **Install dependencies:**
