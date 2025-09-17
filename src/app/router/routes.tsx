@@ -1,26 +1,23 @@
 import { createBrowserRouter } from 'react-router';
 import { RouteErrorPage } from '@/pages/other/errorElement';
-import { FRONTEND_ROUTES } from '@/shared/config';
-import { ProtectedRoute } from '@/entities/session';
 import { privateRoutes, publicRoutes } from './config';
 import { Spinner } from '@/shared/ui';
+import { ProtectedRoute } from '@/entities/session';
 export const routerProvider = createBrowserRouter([
+    {
+        path: '/',
+        element: <ProtectedRoute />,
+        errorElement: <RouteErrorPage />,
+        hydrateFallbackElement: <Spinner />,
+        children: [...privateRoutes],
+    },
     {
         path: '/',
         lazy: () => import('@/widgets/layouts/authLayout'),
         children: [...publicRoutes],
-        errorElement: <RouteErrorPage />,
-        hydrateFallbackElement: <Spinner />,
     },
     {
         path: '*',
         lazy: () => import('@/pages/other/notFoundPage'),
-    },
-    {
-        path: FRONTEND_ROUTES.MESSENGER,
-        element: <ProtectedRoute />,
-        children: [...privateRoutes],
-        errorElement: <RouteErrorPage />,
-        hydrateFallbackElement: <Spinner />,
     },
 ]);

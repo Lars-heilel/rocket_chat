@@ -35,9 +35,9 @@ export const messageApiSlice = apiService.injectEndpoints({
                         toast.info(`new message from ${newMessage.sender.name}:${newMessage.content}`);
                     }
                 };
-                socket.on(SOCKET_EVENTS.SERVER.NEW_MESSAGE, messageListener);
+                socket.on(SOCKET_EVENTS.NEW_MESSAGE, messageListener);
                 await cacheEntryRemoved;
-                socket.off(SOCKET_EVENTS.SERVER.NEW_MESSAGE, messageListener);
+                socket.off(SOCKET_EVENTS.NEW_MESSAGE, messageListener);
             },
         }),
     }),

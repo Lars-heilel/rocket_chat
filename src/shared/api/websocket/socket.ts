@@ -35,19 +35,19 @@ export const socketService = {
                 },
             },
         });
-        socket.on(SOCKET_EVENTS.SERVER.CONNECT, () => {
+        socket.on(SOCKET_EVENTS.CONNECT, () => {
             logger.log(`Socket connected with id: ${socket?.id}`);
         });
 
-        socket.on(SOCKET_EVENTS.SERVER.DISCONNECT, (reason) => {
+        socket.on(SOCKET_EVENTS.DISCONNECT, (reason) => {
             logger.warn(`Socket disconnected: ${reason}`);
         });
 
-        socket.on(SOCKET_EVENTS.SERVER.CONNECTION_ERROR, (error) => {
+        socket.on(SOCKET_EVENTS.CONNECTION_ERROR, (error) => {
             logger.error('Connection error:', error.message, error.data);
         });
 
-        socket.on(SOCKET_EVENTS.SERVER.CONNECTION_SUCCESS, (data) => {
+        socket.on(SOCKET_EVENTS.CONNECTION_SUCCESS, (data) => {
             logger.log('Connection successful:', data);
         });
 
@@ -65,8 +65,14 @@ export const socketService = {
             logger.error('Socket is not connected. Cannot send message.');
             return;
         }
-        socket.emit(SOCKET_EVENTS.CLIENT.SEND_MESSAGE, payload);
+        socket.emit(SOCKET_EVENTS.SEND_MESSAGE, payload);
     },
-
+    joinRoom(roomId: string) {
+        if (!socket || !socket.connected) {
+            logger.error('Socket is not connected. Cannot join room.');
+            return;
+        }
+        socket.emit(SOCKET_EVENTS.JOIN_ROOM, { roomId });
+    },
     getSocket: () => socket,
 };

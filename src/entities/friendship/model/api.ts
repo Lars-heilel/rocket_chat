@@ -42,13 +42,13 @@ const friendshipApiSlice = apiService.injectEndpoints({
                     });
                 };
 
-                socket.on(SOCKET_EVENTS.SERVER.FRIENDSHIP_REQUEST_ACCEPTED, acceptedListener);
-                socket.on(SOCKET_EVENTS.SERVER.FRIENDSHIP_DELETED, deletedListener);
+                socket.on(SOCKET_EVENTS.FRIENDSHIP_REQUEST_ACCEPTED, acceptedListener);
+                socket.on(SOCKET_EVENTS.FRIENDSHIP_DELETED, deletedListener);
 
                 await cacheEntryRemoved;
 
-                socket.off(SOCKET_EVENTS.SERVER.FRIENDSHIP_REQUEST_ACCEPTED, acceptedListener);
-                socket.off(SOCKET_EVENTS.SERVER.FRIENDSHIP_DELETED, deletedListener);
+                socket.off(SOCKET_EVENTS.FRIENDSHIP_REQUEST_ACCEPTED, acceptedListener);
+                socket.off(SOCKET_EVENTS.FRIENDSHIP_DELETED, deletedListener);
             },
         }),
 
@@ -76,9 +76,9 @@ const friendshipApiSlice = apiService.injectEndpoints({
                     toast.info(`You have a new friend request from ${newRequest.requester.name}!`);
                 };
 
-                socket.on(SOCKET_EVENTS.SERVER.FRIENDSHIP_REQUEST_RECEIVED, receivedListener);
+                socket.on(SOCKET_EVENTS.FRIENDSHIP_REQUEST_RECEIVED, receivedListener);
                 await cacheEntryRemoved;
-                socket.off(SOCKET_EVENTS.SERVER.FRIENDSHIP_REQUEST_RECEIVED, receivedListener);
+                socket.off(SOCKET_EVENTS.FRIENDSHIP_REQUEST_RECEIVED, receivedListener);
             },
         }),
 
@@ -89,7 +89,7 @@ const friendshipApiSlice = apiService.injectEndpoints({
                 body,
             }),
             responseSchema: FriendshipWithUsersSchema,
-            invalidatesTags: (_result, _error, arg) => [{ type: 'Users', id: arg.userId }],
+            invalidatesTags: [{ type: 'Users', id: 'LIST' }],
         }),
 
         updateFriendshipStatus: builder.mutation<FriendshipWithUsers, UpdateFriendshipStatusDto>({

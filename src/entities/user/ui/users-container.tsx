@@ -15,7 +15,7 @@ export function UsersContainer({ userData }: UsersContainerProps) {
                 </AvatarFallback>
             </Avatar>
             <div>
-                <span className="font-bold text-lg">{userData.name}</span>
+                <span className="font-bold text-lg">{userData.name.slice(0, 15)}</span>
             </div>
         </div>
     );

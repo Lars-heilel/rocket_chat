@@ -1,6 +1,6 @@
 export const FRONTEND_ROUTES = {
     // --- Public routes ---
-    LOGIN: '/',
+    LOGIN: '/login',
     REGISTER: '/register',
     FORGOT_PASSWORD: '/forgot-password',
     RESET_PASSWORD: '/reset-password',
@@ -8,7 +8,7 @@ export const FRONTEND_ROUTES = {
     RESEND_CONFIRMATION: '/resend-confirmation',
 
     // --- Private routes ---
-    MESSENGER: '/messenger',
+    MESSENGER: '/',
 
     // --- Other ---
     NOT_FOUND: '*',

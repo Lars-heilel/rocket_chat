@@ -3,7 +3,7 @@ import type { RouteObject } from 'react-router';
 
 export const publicRoutes: RouteObject[] = [
     {
-        index: true,
+        path: FRONTEND_ROUTES.LOGIN,
         lazy: () => import('@/pages/auth/LoginPage'),
     },
     {

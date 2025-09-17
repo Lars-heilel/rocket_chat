@@ -8,6 +8,7 @@ import { Logger } from '@/shared/lib/logger';
 import { useDeleteFriendMutation } from '../../../entities/friendship/model/api';
 import type { FriendshipWithUsers } from '../../../entities/friendship/model/schemas/friendship.schema';
 import { Button } from '@/shared/shadcn-ui/ui/button';
+import { socketService } from '@/shared/api';
 
 interface FriendCardProps {
     friendship: FriendshipWithUsers;
@@ -36,7 +37,7 @@ export function FriendCard({ friendship }: FriendCardProps) {
             logger.log(
                 `Id комнаты ${JSON.stringify(roomId)} Мои данные ${JSON.stringify(currentUser)},данные друга:${JSON.stringify(friend)}`,
             );
-
+            socketService.joinRoom(roomId.id);
             dispatch(selectedChatRoom({ roomId: roomId.id, friend }));
         } catch (error) {
             toast.error('Could not open chat. Please try again.');
