@@ -1,6 +1,6 @@
-import { ScrollArea, ScrollAreaViewport } from '@radix-ui/react-scroll-area';
 import { ChatMessageItem, useChatHistoryQuery } from '@/entities/message';
 import { type Users } from '@/entities/user';
+import { ScrollArea } from '@/shared/shadcn-ui/ui/scroll-area';
 import { Spinner } from '@/shared/ui';
 import { useEffect, useRef } from 'react';
 interface ChatMessageProps {
@@ -40,11 +40,9 @@ export function ChatMessages({ currentUser, friend, roomId }: ChatMessageProps) 
 
     return (
         <ScrollArea className="flex-1 overflow-auto">
-            <ScrollAreaViewport>
-                <div className="p-4 space-y-4">
-                    {renderContent()} <div ref={bottonTriggerRef}></div>
-                </div>
-            </ScrollAreaViewport>
+            <div className="p-4 space-y-4">
+                {renderContent()} <div ref={bottonTriggerRef}></div>
+            </div>
         </ScrollArea>
     );
 }

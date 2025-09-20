@@ -1,5 +1,4 @@
 import { Frown, Search, X } from 'lucide-react';
-import { UserList } from '@/entities/user';
 import type { UseUserSearchResult } from '../model';
 import { Spinner } from '@/shared/ui';
 import { Card, CardContent } from '@/shared/shadcn-ui/ui/card';

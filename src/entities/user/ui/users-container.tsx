@@ -4,8 +4,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 
 interface UsersContainerProps {
     userData: Users;
+    children?: React.ReactNode;
 }
-export function UsersContainer({ userData }: UsersContainerProps) {
+export function UsersContainer({ userData, children }: UsersContainerProps) {
     return (
         <div className="flex items-center gap-3">
             <Avatar className="border-2 border-amber-50 rounded-full p-2">
@@ -17,6 +18,7 @@ export function UsersContainer({ userData }: UsersContainerProps) {
             <div>
                 <span className="font-bold text-lg">{userData.name.slice(0, 15)}</span>
             </div>
+            {children}
         </div>
     );
 }
