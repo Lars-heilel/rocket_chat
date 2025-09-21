@@ -1,19 +1,37 @@
 import type { FieldValues, UseFormReturn } from 'react-hook-form';
 import type { FormFieldConfig } from './types';
-import { Button } from '@/shared/shadcn-ui/ui/button';
+import { Button, type buttonVariants } from '@/shared/shadcn-ui/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/shadcn-ui/ui/form';
 import { Input } from '@/shared/shadcn-ui/ui/input';
 import { Loader2 } from 'lucide-react';
+import type { VariantProps } from 'class-variance-authority';
+import { cn } from '@/shared/lib/utils';
+import { Textarea } from '@/shared/shadcn-ui/ui/textarea';
+type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
 interface BaseFormProps<T extends FieldValues> {
     form: UseFormReturn<T>;
     onSubmit: (values: T) => void;
-    btnTitle: string;
+    btnTitle?: string;
+    btnChildren?: React.ReactNode;
+    btnVariant?: ButtonVariantProps['variant'];
+    btnSize?: ButtonVariantProps['size'];
     fields: FormFieldConfig<T>[];
     isLoading: boolean;
+    variant?: 'textarea' | 'input';
 }
 
-export function BaseForm<T extends FieldValues>({ form, onSubmit, btnTitle, fields, isLoading }: BaseFormProps<T>) {
+export function BaseForm<T extends FieldValues>({
+    variant = 'input',
+    form,
+    onSubmit,
+    btnTitle,
+    fields,
+    isLoading,
+    btnChildren,
+    btnVariant,
+    btnSize,
+}: BaseFormProps<T>) {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -29,21 +47,28 @@ export function BaseForm<T extends FieldValues>({ form, onSubmit, btnTitle, fiel
                                     {fieldConfig.formLabelChildren}
                                 </FormLabel>
                                 <FormControl>
-                                    <Input placeholder={fieldConfig.placeholder} type={fieldConfig.type} {...field} />
+                                    {variant === 'input' ? (
+                                        <Input placeholder={fieldConfig.placeholder} type={fieldConfig.type} {...field} />
+                                    ) : (
+                                        <Textarea placeholder={fieldConfig.placeholder} className="resize-none" {...field} />
+                                    )}
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
                 ))}
-                <Button disabled={isLoading} size={'lg'} className="w-full" type="submit">
+                <Button variant={btnVariant} size={btnSize} disabled={isLoading} type="submit" className={cn('w-full')}>
                     {isLoading ? (
                         <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                             Please wait
                         </>
                     ) : (
-                        btnTitle
+                        <>
+                            {btnTitle}
+                            {btnChildren}
+                        </>
                     )}
                 </Button>
             </form>
