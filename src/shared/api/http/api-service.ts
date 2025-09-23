@@ -4,5 +4,5 @@ export const apiService = createApi({
     reducerPath: 'apiService',
     baseQuery: reauthBaseQueryWrapper,
     endpoints: () => ({}),
-    tagTypes: ['Friends', 'Requests', 'Users', 'Message'],
+    tagTypes: ['Friends', 'Requests', 'Users', 'Message', 'Rooms'],
 });

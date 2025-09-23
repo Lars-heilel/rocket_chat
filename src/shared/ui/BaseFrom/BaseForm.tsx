@@ -42,15 +42,17 @@ export function BaseForm<T extends FieldValues>({
                         name={fieldConfig.name}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="flex justify-between">
-                                    <span>{fieldConfig.label}</span>
-                                    {fieldConfig.formLabelChildren}
-                                </FormLabel>
+                                {variant === 'textarea' ? null : (
+                                    <FormLabel className="flex justify-between">
+                                        <span>{fieldConfig.label}</span>
+                                        {fieldConfig.formLabelChildren}
+                                    </FormLabel>
+                                )}
                                 <FormControl>
                                     {variant === 'input' ? (
                                         <Input placeholder={fieldConfig.placeholder} type={fieldConfig.type} {...field} />
                                     ) : (
-                                        <Textarea placeholder={fieldConfig.placeholder} className="resize-none" {...field} />
+                                        <Textarea placeholder={fieldConfig.placeholder} {...field} />
                                     )}
                                 </FormControl>
                                 <FormMessage />

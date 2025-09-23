@@ -5,7 +5,6 @@ export const MessageSchema = z.object({
     content: z.string().min(1, 'Content is required').max(256),
     createAt: z.iso.datetime(),
     updatedAt: z.iso.datetime(),
-
     senderId: z.uuid(),
     chatRoomId: z.uuid(),
     read: z.boolean(),

@@ -37,6 +37,7 @@ export const BACKEND_ROUTES = {
 
     // --- Chat ---
     CHAT_ROOM_PRIVATE: '/chat-room/private',
+    ALL_CHAT_ROOMS: '/chat-room/list',
 
     // --- Message ---
     MESSAGE_HISTORY: '/message/history',

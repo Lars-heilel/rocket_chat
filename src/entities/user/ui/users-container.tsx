@@ -5,18 +5,19 @@ import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 interface UsersContainerProps {
     userData: Users;
     children?: React.ReactNode;
+    nameHidden?: boolean;
 }
-export function UsersContainer({ userData, children }: UsersContainerProps) {
+export function UsersContainer({ userData, children, nameHidden = false }: UsersContainerProps) {
     return (
-        <div className="flex items-center gap-3">
-            <Avatar className="border-2 border-amber-50 rounded-full p-2">
-                <AvatarImage alt={userData?.name.slice(0, 1)} />
-                <AvatarFallback>
-                    <User />
-                </AvatarFallback>
-            </Avatar>
-            <div>
-                <span className="font-bold text-lg">{userData.name.slice(0, 15)}</span>
+        <div className="flex  flex-col items-center gap-3">
+            <div className="flex justify-center items-center gap-6">
+                <Avatar className="border-2 border-amber-50 rounded-full p-2">
+                    <AvatarImage alt={userData?.name.slice(0, 1)} />
+                    <AvatarFallback>
+                        <User />
+                    </AvatarFallback>
+                </Avatar>
+                {nameHidden ? null : <span className="font-bold text-lg">{userData.name.slice(0, 15)}</span>}
             </div>
             {children}
         </div>

@@ -1,6 +1,6 @@
 import { SearchForm, SearchResultsContainer, useUserSearch } from '@/features/search';
 import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
-import { FriendManagementWidget } from '../friendship-widget/ui/FriendManagementWidget';
+import { TabsManagementWidget } from '../tabs-manager/ui/FriendManagementWidget';
 
 export function SidebarContentPanelWidget() {
     const { isOpen: isSearchActive, open: activateSearch, close: deactivateSearch } = useDisclosure();
@@ -15,7 +15,7 @@ export function SidebarContentPanelWidget() {
             {isSearchActive ? (
                 <SearchResultsContainer searchQuery={searchQuery} queryResult={queryResult} close={handleCloseAndClearSearch} />
             ) : (
-                <FriendManagementWidget />
+                <TabsManagementWidget />
             )}
         </>
     );
