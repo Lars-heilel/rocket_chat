@@ -17,7 +17,7 @@ export function SendMessageForm({ form, onSubmit, isLoading }: SendMessageFormPr
                 fields={sendMessageFormFields}
                 isLoading={isLoading}
                 variant="textarea"
-                btnSize="icon"
+                btnSize="default"
                 btnVariant="default"
                 btnChildren={<SendHorizonal />}
             />

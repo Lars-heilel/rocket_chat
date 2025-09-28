@@ -1,10 +1,10 @@
 {
     "name": "rocket_chat",
     "private": true,
-    "version": "0.0.0",
+    "version": "2.28",
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "start:dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
@@ -19,6 +19,7 @@
         "@radix-ui/react-dialog": "^1.1.15",
         "@radix-ui/react-dropdown-menu": "^2.1.16",
         "@radix-ui/react-label": "^2.1.7",
+        "@radix-ui/react-popover": "^1.1.15",
         "@radix-ui/react-scroll-area": "^1.2.10",
         "@radix-ui/react-separator": "^1.1.7",
         "@radix-ui/react-slot": "^1.2.3",

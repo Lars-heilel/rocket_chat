@@ -17,7 +17,7 @@ export function TabsManagementWidget() {
     const { rooms, isError: roomsError, isLoading: roomsLoading } = useViewChatRoomList();
     const { data: currentUser } = useGetMyProfileQuery();
     return (
-        <Tabs defaultValue="tabs_manager" className="flex h-full flex-col">
+        <Tabs defaultValue="chats" className="flex h-full flex-col">
             <TabsList className="flex w-full">
                 <TabsTrigger value="chats">
                     <MessageSquare className="mr-2 h-4 w-4" />
@@ -31,7 +31,7 @@ export function TabsManagementWidget() {
             <TabsContent className="flex-1" value="chats">
                 <ChatRoomlist currentUser={currentUser!} isError={roomsError} isLoading={roomsLoading} chatRooms={rooms} />
             </TabsContent>
-            <TabsContent className="flex-1" value="friends-management">
+            <TabsContent value="friends-management">
                 <Tabs defaultValue="friend-list" className="flex h-full  flex-col">
                     <TabsList className="flex w-full">
                         <TabsTrigger value="friend-list">
@@ -43,10 +43,10 @@ export function TabsManagementWidget() {
                             Requests ({requestsData?.length || 0})
                         </TabsTrigger>
                     </TabsList>
-                    <TabsContent className=" overflow-y-auto" value="friend-list">
+                    <TabsContent value="friend-list">
                         <Friendlist isError={friendsError} friendshipData={friends} isLoading={friendsLoading} />
                     </TabsContent>
-                    <TabsContent className="flex-1" value="requests">
+                    <TabsContent value="requests">
                         <IncomingRequestList
                             isError={requestsError}
                             requestData={requestsData}

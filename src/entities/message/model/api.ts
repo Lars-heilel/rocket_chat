@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { MessageSchema, type Message } from './schemas';
+import { MessagesArraySchema, type Message } from './schemas';
 import type { GetHistoryDto } from './dto';
 import { BACKEND_ROUTES } from '@/shared/config';
 import { apiService, SOCKET_EVENTS, socketService } from '@/shared/api';
@@ -10,6 +10,15 @@ export const messageApiSlice = apiService.injectEndpoints({
     endpoints: (builder) => ({
         chatHistory: builder.query<Message[], GetHistoryDto>({
             query: (dto) => ({ url: BACKEND_ROUTES.MESSAGE_HISTORY, params: dto }),
+            serializeQueryArgs: ({ queryArgs }) => {
+                return { chatRoomId: queryArgs.chatRoomId };
+            },
+            responseSchema: MessagesArraySchema,
+            merge: (currentCache, newItems) => {
+                const existingMessageIds = new Set(currentCache.map((msg) => msg.id));
+                const filterUnique = newItems.filter((item) => !existingMessageIds.has(item.id));
+                currentCache.unshift(...filterUnique);
+            },
             async onCacheEntryAdded(_arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved, getState }) {
                 const socket = socketService.getSocket();
                 if (!socket) {
@@ -17,22 +26,16 @@ export const messageApiSlice = apiService.injectEndpoints({
                 }
                 await cacheDataLoaded;
                 const messageListener = (newMessageData: Message) => {
-                    const validation = MessageSchema.safeParse(newMessageData);
-                    if (!validation.success) {
-                        logger.error('Received invalid message structure from WebSocket:', validation.error);
-                        return;
-                    }
-                    const newMessage = validation.data;
                     const selectedRoomId = (getState() as RootState).chatRoom.selectedChatId;
                     logger.debug(` id выбраной комнаты ${selectedRoomId}`);
-                    if (newMessage.chatRoomId === selectedRoomId) {
+                    if (newMessageData.chatRoomId === selectedRoomId) {
                         updateCachedData((draft) => {
-                            if (!draft.some((msg) => msg.id === newMessage.id)) {
-                                draft.push(newMessage);
+                            if (!draft.some((msg) => msg.id === newMessageData.id)) {
+                                draft.push(newMessageData);
                             }
                         });
                     } else {
-                        toast.info(`new message from ${newMessage.sender.name}:${newMessage.content}`);
+                        toast.info(`new message from ${newMessageData.sender.name}:${newMessageData.content}`);
                     }
                 };
                 socket.on(SOCKET_EVENTS.NEW_MESSAGE, messageListener);

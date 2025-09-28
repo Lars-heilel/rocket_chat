@@ -1,19 +1,29 @@
-import type { RefObject } from 'react';
 import { ChatMessageItem, type Message } from '@/entities/message';
 import type { Users } from '@/entities/user';
-import { ScrollArea } from '@/shared/shadcn-ui/ui/scroll-area';
 import { Spinner } from '@/shared/ui';
+import type { RefObject } from 'react';
 
 interface ChatMessagesProps {
-    messages: Message[];
+    messages: Message[] | undefined;
     isLoading: boolean;
     isError: boolean;
     currentUser: Users;
     friend: Users;
-    bottomTriggerRef: RefObject<HTMLDivElement | null>;
+    newMessageAnchorRef: RefObject<HTMLDivElement | null>;
+    paginationTriggerRef: (node?: Element | null | undefined) => void;
+    scrollContainerRef: RefObject<HTMLDivElement | null>;
 }
 
-export function ChatHistory({ messages, isLoading, isError, currentUser, friend, bottomTriggerRef }: ChatMessagesProps) {
+export function ChatHistory({
+    messages,
+    isLoading,
+    isError,
+    currentUser,
+    friend,
+    paginationTriggerRef,
+    scrollContainerRef,
+    newMessageAnchorRef,
+}: ChatMessagesProps) {
     const renderContent = () => {
         if (isLoading) {
             return (
@@ -25,20 +35,24 @@ export function ChatHistory({ messages, isLoading, isError, currentUser, friend,
         if (isError) {
             return <div className="flex justify-center items-center h-full text-destructive">Error loading messages</div>;
         }
-        if (messages.length > 0) {
-            return messages.map((message) => (
-                <ChatMessageItem key={message.id} message={message} currentUser={currentUser} friend={friend} />
+        if (messages && messages.length > 0) {
+            return messages.map((message, index) => (
+                <ChatMessageItem
+                    ref={index === 0 ? paginationTriggerRef : null}
+                    key={message.id}
+                    message={message}
+                    currentUser={currentUser}
+                    friend={friend}
+                />
             ));
         }
         return <div className="flex justify-center items-center h-full text-muted-foreground">No messages yet</div>;
     };
 
     return (
-        <ScrollArea className="flex-1 overflow-auto">
-            <div className="p-4 space-y-4">
-                {renderContent()}
-                <div ref={bottomTriggerRef} />
-            </div>
-        </ScrollArea>
+        <div ref={scrollContainerRef} className=" overflow-auto p-4 space-y-4">
+            {renderContent()}
+            <div ref={newMessageAnchorRef} />
+        </div>
     );
 }

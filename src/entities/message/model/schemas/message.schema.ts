@@ -2,7 +2,7 @@ import z from 'zod';
 import { UsersSchema } from '@/entities/user';
 export const MessageSchema = z.object({
     id: z.uuid(),
-    content: z.string().min(1, 'Content is required').max(256),
+    content: z.string().min(1, 'Content is required').max(2000),
     createAt: z.iso.datetime(),
     updatedAt: z.iso.datetime(),
     senderId: z.uuid(),
@@ -11,4 +11,5 @@ export const MessageSchema = z.object({
     sender: UsersSchema,
 });
 export type Message = z.infer<typeof MessageSchema>;
+export const MessagesArraySchema = z.array(MessageSchema);
 export const messageContentSchema = z.string();

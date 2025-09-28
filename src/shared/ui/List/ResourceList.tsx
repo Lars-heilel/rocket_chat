@@ -25,5 +25,5 @@ export function ResourceList<T>({ isLoading, isError, data, errorState, emptySta
         return emptyState;
     }
 
-    return <div className={cn('flex h-full flex-col', className)}>{data.map(renderItem)}</div>;
+    return <div className={cn('flex  h-full flex-col', className)}>{data.map(renderItem)}</div>;
 }

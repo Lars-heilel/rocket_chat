@@ -3,6 +3,8 @@ import type { UseUserSearchResult } from '../model';
 import { Spinner } from '@/shared/ui';
 import { Card, CardContent } from '@/shared/shadcn-ui/ui/card';
 import { Button } from '@/shared/shadcn-ui/ui/button';
+import { ListItemWrapper } from '@/shared/ui/List';
+import { UsersContainer } from '@/entities/user';
 
 interface SearchResultsContainerProps {
     close: () => void;
@@ -41,11 +43,13 @@ export function SearchResultsContainer({ close, queryResult, searchQuery }: Sear
 
         if (isSuccess) {
             if (users && users.length > 0) {
-                return (
-                    <div className="p-1">
-                        <UserList users={users} />
+                return users.map((user) => (
+                    <div key={user.id} className="p-1">
+                        <ListItemWrapper>
+                            <UsersContainer userData={user} />
+                        </ListItemWrapper>
                     </div>
-                );
+                ));
             }
             return (
                 <div className="flex h-full flex-col items-center justify-center p-4 text-center text-muted-foreground">

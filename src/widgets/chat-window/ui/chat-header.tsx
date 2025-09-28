@@ -6,7 +6,7 @@ interface ChatHeaderProps {
 }
 export function ChatHeader({ userData }: ChatHeaderProps) {
     return (
-        <div className="flex justify-start h-16  items-center gap-2 border-b px-4">
+        <div className="flex justify-start h-16 p-6  items-center gap-2 border-b px-4">
             <SidebarTrigger />
             {userData ? <UsersContainer userData={userData}></UsersContainer> : null}
         </div>

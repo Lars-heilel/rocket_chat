@@ -25,7 +25,7 @@ export function ChatRoomItem({ chatRoomData, currentUser }: ChatRoomItemProp) {
             </div>
 
             <div className="flex items-center gap-2">
-                <p className="text-xm  text-center">{lastMessageSender ? 'me:' : `${participant.name}:`}</p>
+                <p className="text-xm  text-center">{lastMessageSender ? 'me:' : `${participant.name.slice(0, 4)}:`}</p>
                 <p className="text-sm text-muted-foreground truncate">{`${lastMessage?.content.slice(0, 19)}...`}</p>
             </div>
         </ListItemWrapper>
