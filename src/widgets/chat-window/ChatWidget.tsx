@@ -33,10 +33,16 @@ export function ChatWidget() {
                 friend={friendData}
                 paginationTriggerRef={history.paginationAnchorRef}
             />
-            <Button variant="default" size="icon" className="rounded-full absolute right-1.5 bottom-1/4 w-10 h-10 mr-10 ">
-                <MoveDownIcon></MoveDownIcon>
-            </Button>
-
+            {!history.newMessageAnchorInView ? (
+                <Button
+                    onClick={history.scrollToBottom}
+                    variant="default"
+                    size="icon"
+                    className="rounded-full absolute right-1.5 bottom-1/4 w-10 h-10 mr-10 "
+                >
+                    <MoveDownIcon></MoveDownIcon>
+                </Button>
+            ) : null}
             <SendMessageForm form={form} onSubmit={handleSubmitMessage} isLoading={isSubmitting} />
         </div>
     );

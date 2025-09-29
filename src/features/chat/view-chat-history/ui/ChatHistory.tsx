@@ -9,7 +9,7 @@ interface ChatMessagesProps {
     isError: boolean;
     currentUser: Users;
     friend: Users;
-    newMessageAnchorRef: RefObject<HTMLDivElement | null>;
+    newMessageAnchorRef: (node?: Element | null | undefined) => void;
     paginationTriggerRef: (node?: Element | null | undefined) => void;
     scrollContainerRef: RefObject<HTMLDivElement | null>;
 }

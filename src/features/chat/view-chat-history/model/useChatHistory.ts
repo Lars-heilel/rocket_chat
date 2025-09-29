@@ -7,9 +7,16 @@ export function useChatHistory(chatRoomId: string | null) {
     const PAGINATION_LIMIT = 50;
     const [trigger, { isLoading, isFetching, isError, error, data: historyData }] = useLazyChatHistoryQuery();
     const [canLoadMore, setCanLoadMore] = useState(true);
+    const [firstLoadingDone, setFirstLoadingDone] = useState(false);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const prevScrollHeightRef = useRef<number | null>(null);
-    const newMessageAnchorRef = useRef<HTMLDivElement | null>(null);
+    const {
+        ref: newMessageAnchorRef,
+        inView: newMessageAnchorInView,
+        entry: newMessageAnchorEntry,
+    } = useInView({
+        threshold: 0,
+    });
     //first loading
     useEffect(() => {
         const firstLoadingHystory = async () => {
@@ -17,9 +24,11 @@ export function useChatHistory(chatRoomId: string | null) {
                 if (chatRoomId) {
                     logger.debug(`try first loading history for chatRoom №:${chatRoomId}`);
                     const response = await trigger({ chatRoomId, limit: PAGINATION_LIMIT }).unwrap();
+                    setFirstLoadingDone(true);
                     if (response.length < PAGINATION_LIMIT) {
                         logger.warn(`the received message history is too short for another request ${response.length}<${PAGINATION_LIMIT}`);
                         setCanLoadMore(false);
+                        setFirstLoadingDone(false);
                     }
                 }
             } catch (err) {
@@ -29,8 +38,11 @@ export function useChatHistory(chatRoomId: string | null) {
         firstLoadingHystory();
     }, [chatRoomId, logger, trigger]);
     useLayoutEffect(() => {
-        newMessageAnchorRef.current?.scrollIntoView();
-    }, [isLoading]);
+        if (firstLoadingDone) {
+            newMessageAnchorEntry?.target.scrollIntoView();
+            setFirstLoadingDone(false);
+        }
+    }, [firstLoadingDone, newMessageAnchorEntry]);
     const sortedMessage = useMemo(() => {
         if (historyData) {
             return [...historyData].sort((a, b) => new Date(a.createAt).getTime() - new Date(b.createAt).getTime());
@@ -84,8 +96,13 @@ export function useChatHistory(chatRoomId: string | null) {
         return null;
     }, [isError, error]);
     const scrollToBottom = useCallback(() => {
-        newMessageAnchorRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, []);
+        newMessageAnchorEntry?.target.scrollIntoView();
+    }, [newMessageAnchorEntry]);
+    useLayoutEffect(() => {
+        if (!isFetching && sortedMessage && newMessageAnchorInView) {
+            newMessageAnchorEntry?.target.scrollIntoView();
+        }
+    }, [newMessageAnchorEntry, newMessageAnchorInView, isFetching, sortedMessage]);
 
     return {
         errorMessage,
@@ -99,5 +116,6 @@ export function useChatHistory(chatRoomId: string | null) {
         newMessageAnchorRef,
         scrollContainerRef,
         scrollToBottom,
+        newMessageAnchorInView,
     };
 }
