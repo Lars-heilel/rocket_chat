@@ -3,9 +3,9 @@ import { useGetMyProfileQuery } from '@/entities/user';
 import { useDisclosure } from '@/shared/lib/hooks/use-disclosure';
 
 import { CommandItem } from '@/shared/shadcn-ui/ui/command';
-import { EditProfileModal } from './edit-profile-modal';
+import { EditProfileDialog } from './EditProfileDialog';
 
-export function ProfileEdit() {
+export function ProfileEditButton() {
     const { data: userData, isLoading } = useGetMyProfileQuery();
     const { isOpen, open, close } = useDisclosure();
 
@@ -28,7 +28,7 @@ export function ProfileEdit() {
                 <span>Edit profile</span>
             </CommandItem>
 
-            <EditProfileModal isOpen={isOpen} onClose={close} userData={userData} />
+            <EditProfileDialog isOpen={isOpen} onClose={close} userData={userData} />
         </>
     );
 }

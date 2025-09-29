@@ -1,7 +1,6 @@
 import { useGetMyProfileQuery } from '@/entities/user';
 import { useViewChatRoomList } from '@/features/chat/view-chat-room-list/model/useVievChatRoomList';
 import ChatRoomlist from '@/features/chat/view-chat-room-list/ui/ChatRoomList';
-import { UpdateFriendsStatusButtons, useAcceptOrRejectRequest } from '@/features/friends/accept-or-reject-request';
 import { useFriendList } from '@/features/friends/friendlist';
 import Friendlist from '@/features/friends/friendlist/ui/Friendlist';
 import { useGetIncomingRequestList } from '@/features/friends/incoming-requests';
@@ -13,12 +12,32 @@ import { MessageSquare, UserPlus, Users } from 'lucide-react';
 export function TabsManagementWidget() {
     const { friends, isError: friendsError, isLoading: friendsLoading } = useFriendList();
     const { requestsData, isError: requestsError, isLoading: requestsLoading } = useGetIncomingRequestList();
-    const { handleAccept, handleReject, isLoading } = useAcceptOrRejectRequest();
     const { rooms, isError: roomsError, isLoading: roomsLoading } = useViewChatRoomList();
     const { data: currentUser } = useGetMyProfileQuery();
+    const renderChatRoomList = () => {
+        return (
+            <TabsContent value="chats">
+                <ChatRoomlist currentUser={currentUser!} isError={roomsError} isLoading={roomsLoading} chatRooms={rooms} />
+            </TabsContent>
+        );
+    };
+    const renderFriendList = () => {
+        return (
+            <TabsContent value="friend-list">
+                <Friendlist isError={friendsError} friendData={friends} isLoading={friendsLoading} />
+            </TabsContent>
+        );
+    };
+    const renderIncomingRequestList = () => {
+        return (
+            <TabsContent value="requests">
+                <IncomingRequestList isError={requestsError} requestData={requestsData} isLoading={requestsLoading}></IncomingRequestList>
+            </TabsContent>
+        );
+    };
     return (
-        <Tabs defaultValue="chats" className="flex h-full flex-col">
-            <TabsList className="flex w-full">
+        <Tabs className="w-full p-2" defaultValue="chats">
+            <TabsList className="w-full">
                 <TabsTrigger value="chats">
                     <MessageSquare className="mr-2 h-4 w-4" />
                     Chats ({friends.length || 0})
@@ -28,40 +47,21 @@ export function TabsManagementWidget() {
                     Friends
                 </TabsTrigger>
             </TabsList>
-            <TabsContent className="flex-1" value="chats">
-                <ChatRoomlist currentUser={currentUser!} isError={roomsError} isLoading={roomsLoading} chatRooms={rooms} />
-            </TabsContent>
+            {renderChatRoomList()}
             <TabsContent value="friends-management">
-                <Tabs defaultValue="friend-list" className="flex h-full  flex-col">
-                    <TabsList className="flex w-full">
+                <Tabs defaultValue="friend-list">
+                    <TabsList>
                         <TabsTrigger value="friend-list">
-                            <Users className="mr-2 h-4 w-4" />
+                            <Users className=" h-4 w-4" />
                             Friendlist ({friends.length || 0})
                         </TabsTrigger>
                         <TabsTrigger value="requests">
-                            <UserPlus className="mr-2 h-4 w-4" />
-                            Requests ({requestsData?.length || 0})
+                            <UserPlus className=" h-4 w-4" />
+                            Request ({requestsData?.length || 0})
                         </TabsTrigger>
                     </TabsList>
-                    <TabsContent value="friend-list">
-                        <Friendlist isError={friendsError} friendshipData={friends} isLoading={friendsLoading} />
-                    </TabsContent>
-                    <TabsContent value="requests">
-                        <IncomingRequestList
-                            isError={requestsError}
-                            requestData={requestsData}
-                            isLoading={requestsLoading}
-                            updateStatusButtons={requestsData.map((request) => (
-                                <UpdateFriendsStatusButtons
-                                    handleAccept={handleAccept}
-                                    handleReject={handleReject}
-                                    friendshipId={request.id}
-                                    isLoading={isLoading}
-                                    key={request.id}
-                                />
-                            ))}
-                        />
-                    </TabsContent>
+                    {renderFriendList()}
+                    {renderIncomingRequestList()}
                 </Tabs>
             </TabsContent>
         </Tabs>

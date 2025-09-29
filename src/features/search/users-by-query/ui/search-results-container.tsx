@@ -29,11 +29,10 @@ export function SearchResultsContainer({ queryResult }: SearchResultsContainerPr
                 }
                 renderItem={(users) => (
                     <ListItemWrapper key={users.id}>
-                        <UsersContainer userData={users}>
-                            <Button variant="default" size="lg" onClick={() => handleAddFriend({ userId: users.id })}>
-                                <Plus></Plus> add friend
-                            </Button>
-                        </UsersContainer>
+                        <UsersContainer userData={users}></UsersContainer>
+                        <Button variant="default" size="lg" onClick={() => handleAddFriend({ userId: users.id })}>
+                            <Plus></Plus> add friend
+                        </Button>
                     </ListItemWrapper>
                 )}
             />

@@ -1,8 +1,8 @@
-import { LogOut } from 'lucide-react';
-import { Command, CommandGroup, CommandItem, CommandList } from '@/shared/shadcn-ui/ui/command';
 import { UsersContainer, type Users } from '@/entities/user';
-import { ProfileEdit } from '@/features/profile/edit-profile/EditProfile';
-import { ChangeTheme } from '@/features/setting/change-theme/ChangeTheme';
+import { Logout } from '@/features/auth/logout';
+import { ChangeTheme } from '@/features/profile-action/change-theme';
+import { ProfileEditButton } from '@/features/profile-action/edit-profile';
+import { Command, CommandList, CommandGroup } from '@/shared/shadcn-ui';
 
 interface CurrentUserProfileContentProps {
     userData: Users;
@@ -17,14 +17,9 @@ export function CurrentUserProfileContent({ userData }: CurrentUserProfileConten
             <Command>
                 <CommandList>
                     <CommandGroup heading="Settings">
-                        <ProfileEdit />
-                        <CommandItem>
-                            <ChangeTheme />
-                        </CommandItem>
-                        <CommandItem className="text-red-500">
-                            <LogOut className="mr-2 h-4 w-4" />
-                            <span>Log out</span>
-                        </CommandItem>
+                        <ProfileEditButton />
+                        <ChangeTheme />
+                        <Logout />
                     </CommandGroup>
                 </CommandList>
             </Command>

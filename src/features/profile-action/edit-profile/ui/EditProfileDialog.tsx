@@ -10,7 +10,7 @@ interface EditProfileModalProps {
     userData: Users;
 }
 
-export function EditProfileModal({ isOpen, onClose, userData }: EditProfileModalProps) {
+export function EditProfileDialog({ isOpen, onClose, userData }: EditProfileModalProps) {
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="sm:max-w-[425px]">
