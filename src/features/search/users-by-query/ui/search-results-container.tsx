@@ -1,71 +1,42 @@
-import { Frown, Search, X } from 'lucide-react';
-import { UserList } from '@/entities/user';
+import { Frown, Plus, Search } from 'lucide-react';
 import type { UseUserSearchResult } from '../model';
-import { Spinner } from '@/shared/ui';
-import { Card, CardContent } from '@/shared/shadcn-ui/ui/card';
-import { Button } from '@/shared/shadcn-ui/ui/button';
-
+import { EmptyStateList, ListItemWrapper, ResourceList } from '@/shared/ui/List';
+import { UsersContainer } from '@/entities/user';
+import { Button } from '@/shared/shadcn-ui';
+import { useAddFriend } from '@/features/friends/add';
 interface SearchResultsContainerProps {
-    close: () => void;
     queryResult: UseUserSearchResult['queryResult'];
     searchQuery: string;
 }
 
-export function SearchResultsContainer({ close, queryResult, searchQuery }: SearchResultsContainerProps) {
-    const { data: users, isFetching, isSuccess, isError } = queryResult;
-
-    const InitialState = () => (
-        <div className="flex h-full flex-col items-center justify-center p-4 text-center text-muted-foreground">
-            <Search className="h-10 w-10 mb-4" />
-            <h3 className="font-semibold text-lg">Find new friends</h3>
-            <p className="text-sm">Use the search to find users and start a conversation.</p>
-        </div>
-    );
-
-    const renderContent = () => {
-        if (!searchQuery) {
-            return <InitialState />;
-        }
-
-        if (isFetching) {
-            return <Spinner />;
-        }
-        if (isError) {
-            return (
-                <div className="flex flex-col items-center justify-center text-center text-destructive p-4">
-                    <Frown className="h-10 w-10 mb-4" />
-                    <h3 className="font-semibold text-lg">Something went wrong</h3>
-                    <p className="text-sm">Failed to perform the search. Please try again.</p>
-                </div>
-            );
-        }
-
-        if (isSuccess) {
-            if (users && users.length > 0) {
-                return (
-                    <div className="p-1">
-                        <UserList users={users} />
-                    </div>
-                );
-            }
-            return (
-                <div className="flex h-full flex-col items-center justify-center p-4 text-center text-muted-foreground">
-                    <Frown className="h-10 w-10 mb-4" />
-                    <h3 className="font-semibold text-lg">No users found</h3>
-                    <p className="text-sm">Try changing your search query.</p>
-                </div>
-            );
-        }
-
-        return <InitialState />;
-    };
-
+export function SearchResultsContainer({ queryResult }: SearchResultsContainerProps) {
+    const { data: users, isFetching, isError } = queryResult;
+    const { handleAddFriend } = useAddFriend();
     return (
-        <Card className="relative flex h-full w-full max-w-md flex-col overflow-hidden">
-            <Button variant="ghost" size="icon" className="absolute top-3 right-3 h-6 w-6" onClick={close}>
-                <X className="h-4 w-4" />
-            </Button>
-            <CardContent className="flex-grow overflow-y-auto">{renderContent()}</CardContent>
-        </Card>
+        <>
+            <ResourceList
+                isLoading={isFetching}
+                isError={isError}
+                data={users || []}
+                errorState={
+                    <EmptyStateList icon={<Frown />} title="Failed to perform the search. Please try again." className="text-destructive" />
+                }
+                emptyState={
+                    <EmptyStateList
+                        icon={<Search className="h-10 w-10 mb-4" />}
+                        title="Use the search to find users and start a conversation."
+                    />
+                }
+                renderItem={(users) => (
+                    <ListItemWrapper key={users.id}>
+                        <UsersContainer userData={users}>
+                            <Button variant="default" size="lg" onClick={() => handleAddFriend({ userId: users.id })}>
+                                <Plus></Plus> add friend
+                            </Button>
+                        </UsersContainer>
+                    </ListItemWrapper>
+                )}
+            />
+        </>
     );
 }

@@ -13,7 +13,7 @@ export const routerProvider = createBrowserRouter([
     },
     {
         path: '/',
-        lazy: () => import('@/widgets/layouts/authLayout'),
+        lazy: () => import('@/app/layout/AuthLayout'),
         children: [...publicRoutes],
     },
     {

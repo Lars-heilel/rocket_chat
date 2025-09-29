@@ -14,23 +14,25 @@ export function RouteErrorPage() {
     } else if (error instanceof Error) {
         errorMessage = error.message;
     } else {
-        errorMessage = 'Произошла неизвестная ошибка';
+        errorMessage = 'An unknown error occurred';
     }
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-center gap-4 text-center">
-            <h1 className="text-4xl font-bold">Ой! Что-то пошло не так.</h1>
+            <h1 className="text-4xl font-bold">Oops! Something went wrong.</h1>
             <p className="text-muted-foreground">
                 {errorStatus && <span className="font-bold">{errorStatus}: </span>}
                 {errorMessage}
             </p>
+
             <p className="max-w-md text-sm text-muted-foreground">
-                Мы не смогли загрузить страницу, которую вы искали. Возможно, вы опечатались в адресе или произошла ошибка при загрузке.
+                We couldn't load the page you were looking for. You may have mistyped the address, or an error occurred during loading.
             </p>
             <div className="flex gap-4">
-                <Button onClick={() => navigate(-1)}>Вернуться назад</Button>
+                <Button onClick={() => navigate(-1)}>Go Back</Button>
+
                 <Button variant="outline" onClick={() => navigate('/')}>
-                    На главную
+                    Back to Home
                 </Button>
             </div>
         </div>

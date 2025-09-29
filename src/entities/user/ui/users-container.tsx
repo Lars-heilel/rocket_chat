@@ -2,21 +2,24 @@ import { User } from 'lucide-react';
 import type { Users } from '@/entities/user/model/schemas/userSchema';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 
-interface UsersContainerProps {
+interface UsersContainerProps extends React.ComponentProps<'div'> {
     userData: Users;
+    children?: React.ReactNode;
+    nameHidden?: boolean;
 }
-export function UsersContainer({ userData }: UsersContainerProps) {
+export function UsersContainer({ userData, children, nameHidden = false, ...props }: UsersContainerProps) {
     return (
-        <div className="flex items-center gap-3">
-            <Avatar className="border-2 border-amber-50 rounded-full p-2">
-                <AvatarImage alt={userData?.name.slice(0, 1)} />
-                <AvatarFallback>
-                    <User />
-                </AvatarFallback>
-            </Avatar>
-            <div>
-                <span className="font-bold text-lg">{userData.name.slice(0, 15)}</span>
+        <div {...props} className="flex  flex-col  gap-3">
+            <div className="flex justify-center items-center gap-6">
+                <Avatar className="border-2 border-amber-50 rounded-full p-2">
+                    <AvatarImage alt={userData?.name.slice(0, 1)} />
+                    <AvatarFallback>
+                        <User />
+                    </AvatarFallback>
+                </Avatar>
+                {nameHidden ? null : <span className="font-bold text-lg">{userData.name.slice(0, 15)}</span>}
             </div>
+            {children}
         </div>
     );
 }
