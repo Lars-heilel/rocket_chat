@@ -8,7 +8,7 @@ interface ListItemWrapperProps extends React.ComponentProps<'div'> {
 
 export function ListItemWrapper({ children, className, ...props }: ListItemWrapperProps) {
     return (
-        <div {...props} className={cn('flex flex-col items-start gap-2 border-b-2 border-t-2 p-5 hover:bg-amber-50/5', className)}>
+        <div {...props} className={cn('flex flex-col items-center gap-2 border-b-2 border-t-2 p-5 hover:bg-amber-50/5', className)}>
             {children}
         </div>
     );

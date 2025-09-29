@@ -10,10 +10,7 @@ import { AppInfo } from '@/shared/ui';
 export function MessengerLayout({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { isOpen: isSearchActive, open: activateSearch, close: deactivateSearch } = useDisclosure();
     const { searchQuery, setSearchQuery, queryResult } = useUserSearch();
-    const handleCloseAndClearSearch = () => {
-        deactivateSearch();
-        setSearchQuery('');
-    };
+
     return (
         <SidebarProvider>
             <div className="flex h-screen w-screen overflow-hidden bg-background">
@@ -22,9 +19,15 @@ export function MessengerLayout({ ...props }: React.ComponentProps<typeof Sideba
                         <ProfileWidget />
                     </SidebarHeader>
                     <SidebarContent>
-                        <SearchForm value={searchQuery} onChange={setSearchQuery} openSearch={activateSearch} />
+                        <SearchForm
+                            isActive={isSearchActive}
+                            close={deactivateSearch}
+                            value={searchQuery}
+                            onChange={setSearchQuery}
+                            openSearch={activateSearch}
+                        />
                         {isSearchActive ? (
-                            <SearchResultsContainer searchQuery={searchQuery} queryResult={queryResult} close={handleCloseAndClearSearch} />
+                            <SearchResultsContainer searchQuery={searchQuery} queryResult={queryResult} />
                         ) : (
                             <TabsManagementWidget />
                         )}
