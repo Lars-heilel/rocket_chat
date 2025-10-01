@@ -20,8 +20,8 @@ export function ChatRoomItem({ chatRoomData, currentUser }: ChatRoomItemProp) {
             <div className=" flex gap-5 items-center">
                 <UsersContainer userData={participant} />
                 {/* <p className="h-6 w-6 rounded-full bg-gray-500 dark:bg-white dark:text-black flex justify-center items-center">
-                    {unreadCount}
-                </p> */}
+                        {unreadCount}
+                    </p> */}
             </div>
 
             <div className="flex items-center gap-2">
