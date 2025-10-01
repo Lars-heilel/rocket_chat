@@ -1,23 +1,20 @@
-import { UsersContainer, UsersContainerSkeleton, type Users } from '@/entities/user';
+import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/shared/shadcn-ui/ui/dialog';
 import { DialogTitle } from '@radix-ui/react-dialog';
 import React from 'react';
-interface ProfileWidgetProps {
-    currentUser: Users | undefined;
-    isLoading: boolean;
-    isSuccess: boolean;
-}
+
 const LazyCurrentUserProfileContent = React.lazy(() =>
     import('./ui/CurrentUserProfileContent').then((module) => ({ default: module.CurrentUserProfileContent })),
 );
 // import { FriendProfileContent } from './ui/FriendProfileContent';
-export function ProfileWidget({ isLoading, isSuccess, currentUser }: ProfileWidgetProps) {
+export function ProfileWidget() {
+    const { data: currentUser, isLoading, isSuccess } = useGetMyProfileQuery();
     return (
         <Dialog>
             <DialogTrigger>
                 <DialogTitle></DialogTitle>
                 <div className="border-b-2 p-2.5 hover:bg-gray-400/20">
-                    {isLoading ? <UsersContainerSkeleton /> : <UsersContainer userData={currentUser!} />}
+                    {isLoading ? <UsersContainerSkeleton /> : isSuccess && currentUser && <UsersContainer userData={currentUser} />}
                 </div>
             </DialogTrigger>
             <DialogContent>

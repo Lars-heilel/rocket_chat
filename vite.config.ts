@@ -15,7 +15,23 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.resolve(__dirname, './src'),
-            '@components': path.resolve(__dirname, './src/shared/components/ui'),
+            '@shadcn-ui': path.resolve(__dirname, './src/shared/shadcn-ui'),
+            '@ui': path.resolve(__dirname, './src/shared/ui'),
+        },
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: (id) => {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('zod')) {
+                            return 'zod';
+                        }
+                        return 'vendor';
+                    }
+                    return null;
+                },
+            },
         },
     },
 });

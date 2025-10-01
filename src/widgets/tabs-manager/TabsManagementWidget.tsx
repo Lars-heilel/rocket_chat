@@ -2,18 +2,27 @@ import { useGetMyProfileQuery } from '@/entities/user';
 import { useViewChatRoomList } from '@/features/chat/view-chat-room-list/model/useVievChatRoomList';
 import ChatRoomlist from '@/features/chat/view-chat-room-list/ui/ChatRoomList';
 import { useFriendList } from '@/features/friends/friendlist';
-import Friendlist from '@/features/friends/friendlist/ui/Friendlist';
 import { useGetIncomingRequestList } from '@/features/friends/incoming-requests';
-import IncomingRequestList from '@/features/friends/incoming-requests/ui/IncomingRequestList';
 import { Tabs, TabsList, TabsTrigger } from '@/shared/shadcn-ui/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { MessageSquare, UserPlus, Users } from 'lucide-react';
+import React from 'react';
 
 export function TabsManagementWidget() {
     const { friends, isError: friendsError, isLoading: friendsLoading } = useFriendList();
     const { requestsData, isError: requestsError, isLoading: requestsLoading } = useGetIncomingRequestList();
     const { rooms, isError: roomsError, isLoading: roomsLoading } = useViewChatRoomList();
     const { data: currentUser } = useGetMyProfileQuery();
+    const LazyFriendlist = React.lazy(() =>
+        import('@/features/friends/friendlist/ui/Friendlist').then((module) => ({
+            default: module.default,
+        })),
+    );
+    const LazyIncomingRequestList = React.lazy(() =>
+        import('@/features/friends/incoming-requests/ui/IncomingRequestList').then((module) => ({
+            default: module.default,
+        })),
+    );
     const renderChatRoomList = () => {
         return (
             <TabsContent value="chats">
@@ -24,14 +33,18 @@ export function TabsManagementWidget() {
     const renderFriendList = () => {
         return (
             <TabsContent value="friend-list">
-                <Friendlist isError={friendsError} friendData={friends} isLoading={friendsLoading} />
+                <LazyFriendlist isError={friendsError} friendData={friends} isLoading={friendsLoading} />
             </TabsContent>
         );
     };
     const renderIncomingRequestList = () => {
         return (
             <TabsContent value="requests">
-                <IncomingRequestList isError={requestsError} requestData={requestsData} isLoading={requestsLoading}></IncomingRequestList>
+                <LazyIncomingRequestList
+                    isError={requestsError}
+                    requestData={requestsData}
+                    isLoading={requestsLoading}
+                ></LazyIncomingRequestList>
             </TabsContent>
         );
     };
