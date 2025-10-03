@@ -1,6 +1,6 @@
 import { SearchForm, useUserSearch } from '@/features/search';
 import { useDisclosure } from '@/shared/lib';
-import { TabsManagementWidget } from '../tabs-manager';
+import { Spinner } from '@/shared/ui';
 import React from 'react';
 
 export function SidebarContentWidget() {
@@ -11,6 +11,9 @@ export function SidebarContentWidget() {
             default: module.SearchResultsContainer,
         })),
     );
+    const LazyTabsManagementWidget = React.lazy(() =>
+        import('@/widgets/tabs-manager/TabsManagementWidget').then((module) => ({ default: module.TabsManagementWidget })),
+    );
     return (
         <>
             <SearchForm
@@ -20,7 +23,13 @@ export function SidebarContentWidget() {
                 onChange={setSearchQuery}
                 openSearch={activateSearch}
             />
-            {isSearchActive ? <LazySearchResultsContainer searchQuery={searchQuery} queryResult={queryResult} /> : <TabsManagementWidget />}
+            {isSearchActive ? (
+                <LazySearchResultsContainer searchQuery={searchQuery} queryResult={queryResult} />
+            ) : (
+                <React.Suspense fallback={<Spinner />}>
+                    <LazyTabsManagementWidget />
+                </React.Suspense>
+            )}
         </>
     );
 }

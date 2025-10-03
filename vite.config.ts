@@ -22,16 +22,16 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                manualChunks: (id) => {
-                    if (id.includes('node_modules')) {
-                        if (id.includes('zod')) {
-                            return 'zod';
-                        }
-                        return 'vendor';
-                    }
-                    return null;
+                manualChunks: {
+                    react: ['react', 'react-dom', 'react-router', '@vercel/react-router'],
+                    redux: ['@reduxjs/toolkit', '@reduxjs/toolkit/query/react'],
+                    zod: ['zod'],
+                    socketio: ['socket.io-client'],
+                    radix: ['@radix-ui/react-slot'],
+                    lucide: ['lucide-react'],
                 },
             },
         },
     },
+    preview: { port: 5173 },
 });

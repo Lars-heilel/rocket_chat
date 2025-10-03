@@ -1,7 +1,6 @@
 import { apiService } from '@/shared/api';
 import { BACKEND_ROUTES } from '@/shared/config';
 import { JwtTokenSchema, logoutResponseSchema, type JwtTokenResponse, type LogoutResponse } from './schema';
-import { zodResponseValidator } from '@/shared/lib';
 
 const sessionApi = apiService.injectEndpoints({
     endpoints: (builder) => ({
@@ -18,9 +17,7 @@ const sessionApi = apiService.injectEndpoints({
                 url: BACKEND_ROUTES.REFRESH,
                 method: 'POST',
             }),
-            transformResponse: (response: JwtTokenResponse) => {
-                return zodResponseValidator(response, JwtTokenSchema, 'authApi/refresh', 'error');
-            },
+            responseSchema: JwtTokenSchema,
         }),
     }),
 });
