@@ -12,7 +12,7 @@ export function ProfileWidget() {
     return (
         <Dialog>
             <DialogTrigger>
-                <DialogTitle></DialogTitle>
+                <DialogTitle aria-describedby="user"></DialogTitle>
                 <div className="border-b-2 p-2.5 hover:bg-gray-400/20">
                     {isLoading ? <UsersContainerSkeleton /> : isSuccess && currentUser && <UsersContainer userData={currentUser} />}
                 </div>
