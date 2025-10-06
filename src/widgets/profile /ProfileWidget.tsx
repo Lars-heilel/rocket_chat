@@ -1,6 +1,6 @@
 import { useGetMyProfileQuery, UsersContainer, UsersContainerSkeleton } from '@/entities/user';
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/shared/shadcn-ui/ui/dialog';
-import { DialogTitle } from '@radix-ui/react-dialog';
+import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import React from 'react';
 
 const LazyCurrentUserProfileContent = React.lazy(() =>
@@ -12,7 +12,8 @@ export function ProfileWidget() {
     return (
         <Dialog>
             <DialogTrigger>
-                <DialogTitle aria-describedby="user"></DialogTitle>
+                <DialogTitle></DialogTitle>
+                <DialogDescription></DialogDescription>
                 <div className="border-b-2 p-2.5 hover:bg-gray-400/20">
                     {isLoading ? <UsersContainerSkeleton /> : isSuccess && currentUser && <UsersContainer userData={currentUser} />}
                 </div>

@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router';
 import { Toaster } from 'sonner';
 import { store } from '../store/reduxStore';
-import { SessionProvider } from '@/entities/session';
 import { routerProvider } from '../router/routes';
 
 export function AppProvider() {
@@ -11,9 +10,7 @@ export function AppProvider() {
         <ThemeProvider>
             <Provider store={store}>
                 <Toaster position="top-center" richColors />
-                <SessionProvider>
-                    <RouterProvider router={routerProvider} />
-                </SessionProvider>
+                <RouterProvider router={routerProvider} />
             </Provider>
         </ThemeProvider>
     );

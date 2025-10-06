@@ -26,7 +26,7 @@ export function TabsManagementWidget() {
     const renderChatRoomList = () => {
         return (
             <TabsContent value="chats">
-                <ChatRoomlist currentUser={currentUser!} isError={roomsError} isLoading={roomsLoading} chatRooms={rooms} />
+                {currentUser && <ChatRoomlist currentUser={currentUser} isError={roomsError} isLoading={roomsLoading} chatRooms={rooms} />}
             </TabsContent>
         );
     };
