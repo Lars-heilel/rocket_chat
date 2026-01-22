@@ -83,7 +83,6 @@ To get the project running on your local machine, follow these steps:
     ```bash
     npm run docker:prod
     ```
-### 📱 Галерея проекта
 
 ### 📱 App Screenshots
 
