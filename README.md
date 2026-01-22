@@ -83,3 +83,22 @@ To get the project running on your local machine, follow these steps:
     ```bash
     npm run docker:prod
     ```
+### 📱 Галерея проекта
+
+### 📱 App Screenshots
+
+| Login | Registration | Confirmation |
+|:---:|:---:|:---:|
+| <img src="assets/Login.png" width="300" /> | <img src="assets/Reg.png" width="300" /> | <img src="assets/Confirmation.png" width="300" /> |
+
+| Notification | Account Confirmed | Account Confirmed 2 |
+|:---:|:---:|:---:|
+| <img src="assets/PostRegNotification.png" width="300" /> | <img src="assets/AccountConfirmed.png" width="300" /> | <img src="assets/AccountConfirmed2.png" width="300" /> |
+
+| User Menu | Change Password | Search |
+|:---:|:---:|:---:|
+| <img src="assets/UserMenu.png" width="300" /> | <img src="assets/ChangePassword.png" width="300" /> | <img src="assets/Search.png" width="300" /> |
+
+| Chat | Mobile Chat | Incoming Request |
+|:---:|:---:|:---:|
+| <img src="assets/Chat.png" width="300" /> | <img src="assets/MobileChat.png" width="300" /> | <img src="assets/IncommingRequest.png" width="300" /> |
